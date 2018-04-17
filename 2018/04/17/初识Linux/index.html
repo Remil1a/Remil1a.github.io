@@ -82,19 +82,19 @@
 <meta name="description" content="写在前面的话个人所用的是虚拟机环境,使用的是RHEL7。大体上应该没有什么太大的关系。机器是两张网卡，一张VMNET10一张VMNET1都是仅主机模式。使用SecureCRT进行连接操作。环境的搭建就不写了。 必须掌握的几个Linux命令我们为什么要学习Linux的命令？初学者上手Linux系统会很懵。不管你是否安装了图形化界面，或者去网上找一些教程。或者一些Linux的应用 总会看到密密麻麻的命">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linuxday1">
-<meta property="og:url" content="http://yoursite.com/2018/04/17/Linuxday1/index.html">
+<meta property="og:title" content="初识Linux">
+<meta property="og:url" content="http://yoursite.com/2018/04/17/初识Linux/index.html">
 <meta property="og:site_name" content="Take Your Heart">
 <meta property="og:description" content="写在前面的话个人所用的是虚拟机环境,使用的是RHEL7。大体上应该没有什么太大的关系。机器是两张网卡，一张VMNET10一张VMNET1都是仅主机模式。使用SecureCRT进行连接操作。环境的搭建就不写了。 必须掌握的几个Linux命令我们为什么要学习Linux的命令？初学者上手Linux系统会很懵。不管你是否安装了图形化界面，或者去网上找一些教程。或者一些Linux的应用 总会看到密密麻麻的命">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/04/17/Linuxday1/1.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/17/Linuxday1/2.PNG">
-<meta property="og:image" content="http://yoursite.com/2018/04/17/Linuxday1/3.PNG">
-<meta property="og:updated_time" content="2018-04-17T08:46:58.872Z">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/初识Linux/1.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/初识Linux/2.PNG">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/初识Linux/3.PNG">
+<meta property="og:updated_time" content="2018-04-17T10:05:58.281Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linuxday1">
+<meta name="twitter:title" content="初识Linux">
 <meta name="twitter:description" content="写在前面的话个人所用的是虚拟机环境,使用的是RHEL7。大体上应该没有什么太大的关系。机器是两张网卡，一张VMNET10一张VMNET1都是仅主机模式。使用SecureCRT进行连接操作。环境的搭建就不写了。 必须掌握的几个Linux命令我们为什么要学习Linux的命令？初学者上手Linux系统会很懵。不管你是否安装了图形化界面，或者去网上找一些教程。或者一些Linux的应用 总会看到密密麻麻的命">
-<meta name="twitter:image" content="http://yoursite.com/2018/04/17/Linuxday1/1.PNG">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/17/初识Linux/1.PNG">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/04/17/Linuxday1/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/04/17/初识Linux/"/>
 
 
 
 
 
-  <title>Linuxday1 | Take Your Heart</title>
+  <title>初识Linux | Take Your Heart</title>
   
 
 
@@ -267,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/Linuxday1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/17/初识Linux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Remilia">
@@ -284,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Linuxday1</h1>
+          <h1 class="post-title" itemprop="name headline">初识Linux</h1>
         
 
         <div class="post-meta">
@@ -360,13 +360,13 @@
 <h1 id="必须掌握的几个Linux命令"><a href="#必须掌握的几个Linux命令" class="headerlink" title="必须掌握的几个Linux命令"></a>必须掌握的几个Linux命令</h1><h2 id="我们为什么要学习Linux的命令？"><a href="#我们为什么要学习Linux的命令？" class="headerlink" title="我们为什么要学习Linux的命令？"></a>我们为什么要学习Linux的命令？</h2><p>初学者上手Linux系统会很懵。不管你是否安装了图形化界面，或者去网上找一些教程。或者一些Linux的应用 总会看到密密麻麻的命令。很难得看懂，直接导致一些人放弃学习。这边简单用Windows举个例子吧。</p>
 <a id="more"></a>
 <p>​    例如在Windows中，我们总会打开<strong>我的电脑</strong>或者一些文件夹，能看到这样一种界面：</p>
-<p><img src="/2018/04/17/Linuxday1/1.PNG" alt="1"></p>
+<p><img src="/2018/04/17/初识Linux/1.PNG" alt="1"></p>
 <p>这是windows比较友好的地方。这整个叫做<strong>图形化用户接口</strong>，简称<strong>GUI</strong>。我们可以通过双击某个分区来浏览里面的数据 比方说到D盘的VIDEO里找到Charlotte文件夹,能够看到我下好的动漫 直接双击就可以观看了。</p>
-<p><img src="/2018/04/17/Linuxday1/2.PNG" alt="2"></p>
+<p><img src="/2018/04/17/初识Linux/2.PNG" alt="2"></p>
 <p>这整过过程可以理解为<strong>“你”</strong>在和<strong>“电脑”</strong>交互。你的鼠标双击告诉电脑要切换目录，于是电脑切换到该目录然后显示文件夹里的内容。</p>
 <p>其实在Windows执行这些命令，也是一样的。我们来看一下。</p>
 <p>打开CMD。一个黑乎乎的框框。在这里面我们可以输入命令 来达到同样的效果。</p>
-<p><img src="/2018/04/17/Linuxday1/3.PNG" alt="3"></p>
+<p><img src="/2018/04/17/初识Linux/3.PNG" alt="3"></p>
 <p>没有任何区别 只是通过文字的方法显示出来 让人难免感觉有些别扭。</p>
 <p>直接输入文件名回车就可以运行了。在很久以前的DOS系统想要玩仙剑奇侠传1就是这么弄的。只不过后来逐渐有了图形化界面。</p>
 <p>而Linux系统其实也有很多版本是有桌面环境的。像国产的DEEPIN。国外的UBUNTU。我所用的RHEL其实也可以有桌面环境。但是对于服务器系统来说，桌面环境毕竟还是比较消耗资源的。而且真正用起来，大部分时候命令行还是比图形化界面方便。（前提是你用的比较熟）所以掌握Linux中的命令就显得尤为重要了。就像我们第一次使用电脑的时候，会先学着<strong>打开“我的电脑”</strong> 然后是<strong>安装软件</strong>，<strong>打开浏览器</strong>，<strong>下载软件</strong> 等等等等。在我们初学Linux的时候也是要学习一些基本操作。而这些基本操作都是用命令去完成的。</p>
