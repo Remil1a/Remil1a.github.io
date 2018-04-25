@@ -19,11 +19,11 @@ tags: Linux
 
 ​	例如在Windows中，我们总会打开**我的电脑**或者一些文件夹，能看到这样一种界面：
 
-![1](Linuxday1/1.PNG)
+![1](初识Linux/1.PNG)
 
 这是windows比较友好的地方。这整个叫做**图形化用户接口**，简称**GUI**。我们可以通过双击某个分区来浏览里面的数据 比方说到D盘的VIDEO里找到Charlotte文件夹,能够看到我下好的动漫 直接双击就可以观看了。
 
-![2](Linuxday1/2.PNG)
+![2](初识Linux/2.PNG)
 
 
 
@@ -41,7 +41,7 @@ tags: Linux
 
 
 
-![3](Linuxday1/3.PNG)
+![3](初识Linux/3.PNG)
 
 没有任何区别 只是通过文字的方法显示出来 让人难免感觉有些别扭。
 
@@ -432,7 +432,7 @@ ps命令用于查看系统中的进程状态，格式为**ps** [参数]
 
 ps命令一般和管道符一起使用,用来抓取某个服务进程对应的PID值。在windows中可以使用`ctrl+shift+esc`呼出任务管理器。直接查看某个进程的PID。如图：
 
-![](Linuxday1/4.PNG)
+![](初识Linux/4.PNG)
 
 
 
@@ -712,7 +712,230 @@ killall命令用于终止某个指定名称的服务所对应的全部进程，�
 
 ## ifconfig命令
 
+ifconfig命令用于获取网卡配置与网络状态等信息，格式为“**ifconfig** [网络设备]\[参数]”。
+
+使用ifconfig命令来查看本机当前的网卡配置与网络状态等信息时，其实主要查看的就是网卡名称、inet参数后面的IP地址、ether参数后面的网卡物理地址（又称为MAC地址），以及RX、TX的接收数据包与发送数据包的个数及累计流量：
+
+
+```bash
+[root@remilia ~]# ifconfig
+
+eno16777728: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+
+        inet 192.168.10.10  netmask 255.255.255.0  broadcast 192.168.10.255
+
+        inet6 fe80::20c:29ff:fec4:a409  prefixlen 64  scopeid 0x20<link>
+
+        ether 00:0c:29:c4:a4:09  txqueuelen 1000  (Ethernet)
+
+        RX packets 36  bytes 3176 (3.1 KiB)
+
+        RX errors 0  dropped 0  overruns 0  frame 0
+
+        TX packets 38  bytes 4757 (4.6 KiB)
+
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+ 
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+
+        inet 127.0.0.1  netmask 255.0.0.0
+
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+
+        loop  txqueuelen 0  (Local Loopback)
+
+        RX packets 386  bytes 32780 (32.0 KiB)
+
+        RX errors 0  dropped 0  overruns 0  frame 0
+
+        TX packets 386  bytes 32780 (32.0 KiB)
+
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+```
 
 
 
+## uname命令
+
+uname命令用于查看系统内核与系统版本等信息，格式为“**uname** [-a]”。
+
+在使用uname命令时，一般会固定搭配上-a参数来完整地查看当前系统的内核名称、主机名、内核发行版本、节点名、系统时间、硬件名称、硬件平台、处理器类型以及操作系统名称等信息。
+
+ 
+
+ ```bash
+[root@remilia ~]# uname -a
+Linux remilia.com 3.10.0-123.el7.x86_64 #1 SMP Mon May 5 11:16:57 EDT 2017 
+x86_64 x86_64 x86_64 GNU/Linux
+ ```
+
+
+顺带一提，如果要查看当前系统版本的详细信息，则需要查看redhat-release文件，其命令以及相应的结果如下：
+
+```bash 
+[root@remilia ~]# cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 7.0 (Maipo)
+```
+
+## free命令
+
+free用于显示当前系统中内存的使用量信息，格式为“**free** [-h]”。
+
+为了保证Linux系统不会因资源耗尽而突然宕机，运维人员需要时刻关注内存的使用量。在使用free命令时，可以结合使用-h参数以更人性化的方式输出当前内存的实时使用量信息。表2-8所示为在的电脑上执行free -h命令之后的输出信息。需要注意的是，输出信息中的中文注释是额外添加的内容，实际输出时没有相应的参数解释。
+
+|                   | 内存总量 | 已用量 | 可用量 | 进程共享的内存量 | 磁盘缓存的内存量 | 缓存的  内存量 |
+| ----------------- | -------- | ------ | ------ | ---------------- | ---------------- | -------------- |
+|                   | total    | used   | free   | shared           | buffers          | cached         |
+| Mem               | 1.8GB    | 1.3GB  | 542MB  | 9.8MB            | 1.6MB            | 413MB          |
+| -/+ buffers/cache |          | 869MB  | 957MB  |                  |                  |                |
+| Swap              | 2.0GB    | 0      | 2.0GB  |                  |                  |                |
+
+## who命令
+
+who用于查看当前登入主机的用户终端信息，格式为“**who** [参数]”。
+
+这三个简单的字母可以快速显示出所有正在登录本机的用户的名称以及他们正在开启的终端信息。
+
+```bash
+[root@remilia ~]# who
+```
+
+
+
+​                                                     执行who命令的结果
+
+| 登录的用户名 | 终端设备 | 登录到系统的时间       |
+| ------------ | -------- | ---------------------- |
+| root         | :0       | 2018-04-24 17:52  (:0) |
+| root         | pts/0    | 2018-04-24 17:52  (:0) |
+
+## last命令
+
+last命令用于查看所有系统的登录记录，格式为“**last** [参数]”。
+
+使用last命令可以查看本机的登录记录。但是，由于这些信息都是以日志文件的形式保存在系统中，因此入侵者可以很容易地对内容进行篡改。千万不要单纯以该命令的输出信息而判断系统有无被恶意入侵！
+
+
+
+```bash
+[root@remilia ~]# last
+root       pts/0       :0               Mon Aug  24 17:52   still  logged in
+root       :0          :0               Mon Aug  24 17:52   still  logged in
+(unknown   :0          :0               Mon Aug  24 17:50 - 17:52   (00:02)
+reboot     system boot 3.10.0-123.el7.x Tue Aug  25 01:49 - 18:17   (-7:-32)
+root       pts/0       :0               Mon Aug  24 15:40 - 08:54   (7+17:14)
+root       pts/0       :0               Fri Jul  10 10:49 - 15:37   (45+04:47)
+………………省略部分登录信息………………
+
+```
+
+## history命令
+
+history命令用于显示历史执行过的命令，格式为“**history** [-c]”。
+
+执行history命令能显示出当前用户在本地计算机中执行过的最近1000条命令记录。如果觉得1000不够用，还可以自定义/etc/profile文件中的HISTSIZE变量值。在使用history命令时，如果使用-c参数则会清空所有的命令历史记录。还可以使用“!编码数字”的方式来重复执行某一次的命令。
+
+
+
+```bash
+[root@remilia ~]# history
+1 tar xzvf VMwareTools-9.9.0-2304977.tar.gz
+2 cd vmware-tools-distrib/
+3 ls
+4 ./vmware-install.pl -d
+5 reboot
+6 df -h
+7 cd /run/media/
+8 ls
+9 cd root/
+10 ls
+11 cd VMware\ Tools/
+12 ls
+13 cp VMwareTools-9.9.0-2304977.tar.gz /home
+14 cd /home
+15 ls
+16 tar xzvf VMwareTools-9.9.0-2304977.tar.gz
+17 cd vmware-tools-distrib/
+18 ls
+19 ./vmware-install.pl -d
+20 reboot
+21 history
+[root@remilia ~]# !15
+anaconda-ks.cfg  Documents  initial-setup-ks.cfg  Pictures  Templates
+Desktop          Downloads  Music                 Public    Videos
+```
+
+历史命令会被保存到用户家目录中的.bash_history文件中。Linux系统中以点（.）开头的文件均代表隐藏文件，这些文件大多数为系统服务文件，可以用cat命令查看其文件内容。
+
+```bash
+[root@remilia ~]# cat ~/.bash_history
+```
+
+要清空当前用户在本机上执行的Linux命令历史记录信息，可执行如下命令：
+
+```bash
+[root@remilia ~]# history -c	
+```
+
+## sosreport命令
+
+sosreport命令用于收集系统配置及架构信息并输出诊断文档，格式为sosreport。
+
+当
+
+Linux
+
+系统出现故障需要联系技术支持人员时，大多数时候都要先使用这个命令来简单收集系统的运行状态和服务配置信息，以便让技术支持人员能够远程解决一些小问题，亦或让他们能提前了解某些复杂问题。在下面的输出信息中，加粗的部分是收集好的资料压缩文件以及校验码，将其发送给技术支持人员即可：
+
+```bash
+[root@remilia ~]# sosreport
+sosreport (version 3.0)
+This command will collect diagnostic and configuration information from
+this Red Hat Enterprise Linux system and installed applications.
+
+An archive containing the collected information will be generated in
+/var/tmp and may be provided to a Red Hat support representative.
+Any information provided to Red Hat will be treated in accordance with
+the published support policies at:
+https://access.redhat.com/support/
+The generated archive may contain data considered sensitive and its
+content should be reviewed by the originating organization before being
+passed to any third party.
+
+No changes will be made to system configuration.
+Press ENTER to continue, or CTRL-C to quit. 此处敲击回车来确认收集信息
+
+Please enter your first initial and last name [remilia.com]: 此处敲击回车来确认主机编号
+Please enter the case number that you are generating this report for: 此处敲击回车来确认主机编号
+
+Running plugins. Please wait ...
+Running 70/70: yum...
+Creating compressed archive...
+Your sosreport has been generated and saved in:
+
+/var/tmp/sosreport-remilia.com-20170905230631.tar.xz
+The checksum is: 79436cdf791327040efde48c452c6322
+Please send this file to your support representative.
+
+```
+
+# 工作目录切换命令
+
+工作目录指的是用户当前在系统中所处的位置。由于工作目录会牵涉系统存储结构相关的知识，因此后面将详细讲解这部分内容。现在只需简单了解一下这里的操作实验即可，如果不能完全掌握也没有关系，毕竟Linux系统的知识体系太过庞大，每一位初学人员都需要经历这么一段时期。
+
+
+
+## pwd命令
+
+pwd命令用于显示用户当前所处的工作目录，格式为“**pwd** [选项]”。
+
+
+
+```bash
+[root@remilia etc]# pwd
+/etc
+```
 
