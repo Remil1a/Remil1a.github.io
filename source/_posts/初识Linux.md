@@ -939,3 +939,144 @@ pwd命令用于显示用户当前所处的工作目录，格式为“**pwd** [�
 /etc
 ```
 
+## cd命令
+
+cd命令用于切换工作路径，格式为**cd** \[目录名称]
+
+
+
+这个命令应该是最常用的一个Linux命令了。可以通过cd命令迅速、灵活地切换到不同的工作目录。除了常见的切换目录方式，还可以使用“cd -”命令返回到上一次所处的目录，使用“cd..”命令进入上级目录，以及使用“cd ~”命令切换到当前用户的家目录，亦或使用“cd ~username”切换到其他用户的家目录。例如，可以使用“cd 路径”的方式切换进**/etc**目录中和**/bin**目录中,如果想返回上次切换的目录还可以通过**“cd -”**来实现。若想快速切换到当前用户家目录 可以通过**cd ~**实现
+
+```shell
+[root@remilia bin]# cd /etc/
+[root@remilia etc]# cd /bin
+[root@remilia bin]# cd -
+/etc
+[root@remilia etc]# cd ~
+[root@remilia ~]# 
+```
+
+## ls命令
+
+ls命令用于显示目录中的文件信息，格式为**"ls [选项] \[文件] "**
+
+所处的工作目录不同，当前工作目录的文件也不同。使用**-a**参数可以看到所有文件（包括隐藏的文件）。使用**"-l"**参数可以查看文件属性，大小等详细信息。将这两个结合起来就像这样
+
+```shell
+[root@remilia ~]# ls -al
+total 556
+dr-xr-x---.  3 root root   4096 May  2 03:09 .
+drwxr-xr-x. 19 root root   4096 May  2 03:05 ..
+-rw-------.  1 root root    871 Mar  1 19:49 anaconda-ks.cfg
+-rw-------.  1 root root   7158 May  2 03:56 .bash_history
+-rw-r--r--.  1 root root     18 Dec 28  2013 .bash_logout
+-rw-r--r--.  1 root root    176 Dec 28  2013 .bash_profile
+-rw-r--r--.  1 root root    176 Dec 28  2013 .bashrc
+-rw-r--r--.  1 root root    100 Dec 28  2013 .cshrc
+-rwxr--r--.  1 root root     60 May  2 03:09 example.sh
+-rw-r--r--.  1 root root 513076 Feb 28 04:36 GitPython-1.0.1-5.el7.noarch.rpm
+-rw-------.  1 root root     46 Mar  1 21:07 .lesshst
+drwxr-xr-x.  3 root root     36 Apr 17 06:01 mirrors.163.com
+-rw-r--r--.  1 root root    129 Dec 28  2013 .tcshrc
+-rw-------.  1 root root    808 Mar  1 21:24 .viminfo
+```
+
+如果想查看某个目录的属性信息。就要加上-d参数。例如查看/etc的目录权限和属性信息:
+
+```shell
+[root@remilia ~]# ls -ld /etc/
+drwxr-xr-x. 77 root root 8192 May  2 03:05 /etc/
+```
+
+# 文件文本编辑命令
+
+在Linux中，有着著名的**"一切皆文件"**的说法。而对服务程序进行配置自然也就是编辑程序的配置文件。本节将讲解几条用于查看文本文件内容的命令。至于编辑器使用起来比较复杂，因此将放到第4章与Shell脚本内容一起讲解。
+
+## cat命令
+
+cat命令用于查看纯文本文件（内容较少的），格式为“**cat** \[选项] {文件}”。
+
+Linux系统中有多个用于查看文本内容的命令，每个命令都有自己的特点，比如这个cat命令就是用于查看内容较少的纯文本文件的。
+
+
+
+如果在查看文本的时候顺便还想显示行号的话。可以加上-n参数
+
+```shell
+[root@remilia ~]# cat -n anaconda-ks.cfg 
+     1  #version=RHEL7
+     2  # System authorization information
+     3  auth --enableshadow --passalgo=sha512
+     4
+     5  # Use CDROM installation media
+     6  cdrom
+     7  # Run the Setup Agent on first boot
+     8  firstboot --enable
+     9  ignoredisk --only-use=sda
+    10  # Keyboard layouts
+    11  keyboard --vckeymap=us --xlayouts='us'
+    12  # System language
+    13  lang en_US.UTF-8
+    14
+    15  # Network information
+    16  network  --bootproto=dhcp --device=eno16777736 --ipv6=auto --activate
+    17  network  --bootproto=dhcp --device=eno33554960 --onboot=off --ipv6=auto
+    18  network  --hostname=remilia
+    19  # Root password
+    20  rootpw --iscrypted $6$4nqD7ZOlxIeZbUyb$K6./B9FtCU4481YL713K50c40xuHJlglpsv2zFfF7YKY6dXYMoYiDr4blyjNl0Kqekxa6rkonWIT7MxFYPxJL.
+    21  # System timezone
+    22  timezone America/New_York --isUtc
+    23  # System bootloader configuration
+    24  bootloader --location=mbr --boot-drive=sda
+    25  autopart --type=lvm
+    26  # Partition clearing information
+    27  clearpart --none --initlabel 
+    28
+    29  %packages
+    30  @core
+    31
+    32  %end
+    33
+```
+
+## more命令
+
+more命令用于查看纯文本文件（内容较多的），格式为“**more** [选项] {文件}”。
+
+如果需要阅读长篇小说或者非常长的配置文件，那么cat就真的不适合了。因为一旦使用cat命令阅读长篇的文本内容，信息就会在屏幕上快速翻滚，导致自己还没有来得及看到，内容就已经翻篇了。因此对于长篇的文本内容，推荐使用more命令来查看。more命令会在最下面使用百分比的形式来提示你已经阅读了多少内容。你还可以使用空格键或回车键向下翻页：
+
+```shell
+[root@remilia ~]# more anaconda-ks.cfg 
+#version=RHEL7
+# System authorization information
+auth --enableshadow --passalgo=sha512
+
+# Use CDROM installation media
+cdrom
+# Run the Setup Agent on first boot
+firstboot --enable
+ignoredisk --only-use=sda
+# Keyboard layouts
+keyboard --vckeymap=us --xlayouts='us'
+# System language
+lang en_US.UTF-8
+--More--(34%)
+```
+
+## head命令
+
+head命令用于查看格式为“**head**[选项] \{文件}。
+
+在阅读文本内容时，谁也难以保证会按照从头到尾的顺序往下看完整个文件。如果只想查看文本中前5行的内容，该怎么办呢？head命令可以派上用场了：
+
+```shell
+[root@remilia ~]# head -n 5 anaconda-ks.cfg 
+#version=RHEL7
+# System authorization information
+auth --enableshadow --passalgo=sha512
+
+# Use CDROM installation media
+```
+
+
+
