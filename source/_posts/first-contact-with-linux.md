@@ -19,11 +19,11 @@ tags: Linux
 
 ​	例如在Windows中，我们总会打开**我的电脑**或者一些文件夹，能看到这样一种界面：
 
-![1](初识Linux/1.PNG)
+![1](first-contact-with-linux/1.PNG)
 
 这是windows比较友好的地方。这整个叫做**图形化用户接口**，简称**GUI**。我们可以通过双击某个分区来浏览里面的数据 比方说到D盘的VIDEO里找到Charlotte文件夹,能够看到我下好的动漫 直接双击就可以观看了。
 
-![2](初识Linux/2.PNG)
+![2](first-contact-with-linux/2.PNG)
 
 
 
@@ -41,7 +41,7 @@ tags: Linux
 
 
 
-![3](初识Linux/3.PNG)
+![3](first-contact-with-linux/3.PNG)
 
 没有任何区别 只是通过文字的方法显示出来 让人难免感觉有些别扭。
 
@@ -432,7 +432,7 @@ ps命令用于查看系统中的进程状态，格式为**ps** [参数]
 
 ps命令一般和管道符一起使用,用来抓取某个服务进程对应的PID值。在windows中可以使用`ctrl+shift+esc`呼出任务管理器。直接查看某个进程的PID。如图：
 
-![](初识Linux/4.PNG)
+![](first-contact-with-linux/4.PNG)
 
 
 

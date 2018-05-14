@@ -1,5 +1,5 @@
 ---
-title: Basic Of Shell Script
+title: Basic Shell Script
 date: 2018-04-25 14:40:57
 categories: Linux
 tags: Linux
