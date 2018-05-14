@@ -1,5 +1,5 @@
 ---
-title: 初识Linux
+title: First contact with linux
 date: 2018-04-17 16:45:35
 categories: Linux
 tags: Linux
