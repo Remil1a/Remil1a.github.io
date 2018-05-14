@@ -403,10 +403,10 @@ valine:
 # Introduction: https://imsun.net/posts/gitment-introduction/
 # You can get your Github ID from https://api.github.com/users/<Github username>
 gitment:
-  enable: true
+  enable: false
   mint: true # RECOMMEND, A mint on Gitment, to support count, language and proxy_gateway
   count: false # Show comments count in post meta area
-  lazy: true # Comments lazy loading with a button
+  lazy: false # Comments lazy loading with a button
   cleanly: true # Hide 'Powered by ...' on footer, and more
   language: # Force language, or auto switch by theme
   github_user: remil1a # MUST HAVE, Your Github ID
@@ -813,3 +813,12 @@ images: images
 
 # Theme version
 version: 5.1.4
+
+gitalk:
+  enable: true
+  githubID: remil1a     
+  repo: git-comments
+  ClientID: 0bdc0d6f49bfb51e5834
+  ClientSecret: 9306599f43db3af1e58268b660f8fb11fe4771ec
+  adminUser: remil1a
+  distractionFreeMode: true
