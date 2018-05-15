@@ -1080,3 +1080,273 @@ auth --enableshadow --passalgo=sha512
 
 
 
+## tail命令
+
+tail命令用于查看纯文本文档的后N行或持续刷新内容，格式为“**tai**l [选项] \{文件}”。
+
+我们可能还会遇到另外一种情况，比如需要查看文本内容的最后20行，这时就需要用到tail命令了。tail命令的操作方法与head命令非常相似，只需要执行“tail -n 20 文件名”命令就可以达到这样的效果。tail命令最强悍的功能是可以持续刷新一个文件的内容，当想要实时查看最新日志文件时，这特别有用，此时的命令格式为“**tail** -f {文件名}”：
+
+```shell
+[root@Remilia ~]# tail -f /var/log/messages 
+May 15 09:34:30 Remilia chronyd[969]: System clock wrong by 0.777201 seconds, adjustment started
+May 15 09:34:30 Remilia chronyd[969]: Out of order sample detected, discarding history for 5.79.108.34
+May 15 09:34:30 Remilia chronyd[969]: Can't synchronise: no reachable sources
+May 15 09:34:30 Remilia chronyd[969]: Selected source 85.199.214.101
+May 15 09:34:30 Remilia chronyd[969]: Out of order sample detected, discarding history for 85.199.214.101
+May 15 09:34:30 Remilia chronyd[969]: Can't synchronise: no reachable sources
+May 15 09:34:33 Remilia chronyd[969]: Selected source 108.59.2.24
+May 15 09:34:42 Remilia systemd-logind: New session 2 of user root.
+May 15 09:34:42 Remilia systemd: Starting Session 2 of user root.
+May 15 09:34:42 Remilia systemd: Started Session 2 of user root.
+```
+
+##tr命令
+
+
+
+tr命令用于替换文本文件中的字符，格式为“**tr** {原始字符} \{目标字符}”。
+
+在很多时候，我们想要快速地替换文本中的一些词汇，又或者把整个文本内容都进行替换，如果进行手工替换，难免工作量太大，尤其是需要处理大批量的内容时，进行手工替换更是不现实。这时，就可以先使用cat命令读取待处理的文本，然后通过管道符把这些文本内容传递给tr命令进行替换操作即可。例如，把某个文本内容中的英文全部替换为大写：
+
+```shell
+[root@Remilia ~]# cat anaconda-ks.cfg | tr [a-z] [A-Z]
+#VERSION=RHEL7
+# SYSTEM AUTHORIZATION INFORMATION
+AUTH --ENABLESHADOW --PASSALGO=SHA512
+
+# USE CDROM INSTALLATION MEDIA
+CDROM
+# RUN THE SETUP AGENT ON FIRST BOOT
+FIRSTBOOT --ENABLE
+IGNOREDISK --ONLY-USE=SDA
+# KEYBOARD LAYOUTS
+KEYBOARD --VCKEYMAP=US --XLAYOUTS='US'
+# SYSTEM LANGUAGE
+LANG EN_US.UTF-8
+
+# NETWORK INFORMATION
+NETWORK --BOOTPROTO=DHCP --DEVICE=ENO16777728 --ONBOOT=OFF --IPV6=AUTO
+NETWORK --HOSTNAME=LOCALHOST.LOCALDOMAIN
+# ROOT PASSWORD
+ROOTPW --ISCRYPTED $6$PDJJF42G8C6PL069$II.PX/YFAQPO0ENW2PA7MOMKJLYOAE2ZJMZ2UZJ7
+BH3UO4OWTR1.WK/HXZ3XIGMZGJPCS/MGPYSSOI8HPCT8B/
+# SYSTEM TIMEZONE
+TIMEZONE AMERICA/NEW_YORK --ISUTC
+USER --NAME=LINUXPROBE --PASSWORD=$6$A9V3INSTNBWEIR7D$JEGFYWBCDOOOKJ9SODECCDO.
+ZLF4OSH2AZ2SS2R05B6LZ2A0V2K.RJWSBALL2FEKQVGF640OA/TOK6J.7GUTO/ --ISCRYPTED --
+GECOS="LINUXPROBE"
+# X WINDOW SYSTEM CONFIGURATION INFORMATION
+XCONFIG --STARTXONBOOT
+# SYSTEM BOOTLOADER CONFIGURATION
+BOOTLOADER --LOCATION=MBR --BOOT-DRIVE=SDA
+AUTOPART --TYPE=LVM
+# PARTITION CLEARING INFORMATION
+CLEARPART --NONE --INITLABEL 
+
+%PACKAGES
+@BASE
+@CORE
+@DESKTOP-DEBUGGING
+@DIAL-UP
+@FONTS
+@GNOME-DESKTOP
+@GUEST-AGENTS
+@GUEST-DESKTOP-AGENTS
+@INPUT-METHODS
+@INTERNET-BROWSER
+@MULTIMEDIA
+@PRINT-CLIENT
+@X11
+
+%END
+
+```
+
+## wc命令
+
+wc命令用于统计指定文本的行数、字数、字节数，格式为“**wc** [参数] {文本}”。
+
+wc的参数以及作用:
+
+| 参数 | 作用         |
+| ---- | ------------ |
+| -l   | 只显示行数   |
+| -w   | 只显示单词数 |
+| -c   | 只显示字节数 |
+
+在Linux系统中，passwd是用于保存系统账户信息的文件，要统计当前系统中有多少个用户，可以使用下面的命令来进行查询
+
+```shell
+[root@Remilia ~]# wc -l /etc/passwd
+38 /etc/passwd
+
+```
+
+
+
+## stat命令
+
+
+
+stat命令用于查看文件的具体存储信息和时间等信息，格式为“**stat** {文件名称}”。
+
+stat命令可以用于查看文件的存储信息和时间等信息，命令`stat anaconda-ks.cfg`会显示出文件的三种时间状态：Access、Modify、Change。这三种时间的区别将在下面的touch命令中详细详解：
+
+```shell
+[root@Remilia ~]# stat anaconda-ks.cfg 
+  File: ‘anaconda-ks.cfg’
+  Size: 922             Blocks: 8          IO Block: 4096   regular file
+Device: fd00h/64768d    Inode: 67919995    Links: 1
+Access: (0600/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)
+Context: system_u:object_r:admin_home_t:s0
+Access: 2018-02-27 09:06:00.730409939 +0800
+Modify: 2018-02-27 09:06:00.731424138 +0800
+Change: 2018-02-27 09:06:00.732438336 +0800
+ Birth: -
+[root@Remilia ~]# 
+```
+
+## cut命令
+
+cut命令用于按“列”提取文本字符，格式为“**cut** [参数] {文本}”。
+
+在Linux系统中，如何准确地提取出最想要的数据，这也是我们应该重点学习的内容。一般而言，按基于**“行”**的方式来提取数据是比较简单的，只需要设置好要搜索的关键词即可。但是如果按列搜索，不仅要使用**-f**参数来设置需要看的列数，还需要使用**-d**参数来设置间隔符号。passwd在保存用户数据信息时，用户信息的每一项值之间是采用冒号来间隔的，接下来我们使用下述命令尝试提取出passwd文件中的用户名信息，即提取以冒号（：）为间隔符号的第一列内容：
+
+
+
+```shell
+[root@Remilia ~]# cut -d: -f1 /etc/passwd
+root
+bin
+daemon
+adm
+lp
+sync
+shutdown
+halt
+mail
+operator
+games
+ftp
+nobody
+dbus
+polkitd
+avahi
+avahi-autoipd
+postfix
+sshd
+chrony
+[root@Remilia ~]# 
+```
+
+## diff命令
+
+diff命令用于比较多个文本文件的差异，格式为“**diff** [参数] {文件}”。
+
+在使用diff命令时，不仅可以使用**--brief**参数来确认两个文件是否不同，还可以使用**-c**参数来详细比较出多个文件的差异之处，这绝对是判断文件是否被篡改的有力神器。例如，先使用cat命令分别查看diffa和diffb文件的内容，然后进行比较：
+
+```shell
+[root@Remilia ~]# echo welcom > diffa
+[root@Remilia ~]# echo welcome > diffb
+
+[root@Remilia ~]# cat diffa
+welcom
+[root@Remilia ~]# cat diffb
+welcome
+[root@Remilia ~]# 
+```
+
+接下来使用diff --brief命令显示比较后的结果，判断文件是否相同： 
+
+```shell
+[root@Remilia ~]# diff --brief diffa diffb
+Files diffa and diffb differ
+```
+
+最后使用带有-c参数的diff命令来描述文件内容具体的不同： 
+
+```shell
+[root@Remilia ~]# diff -c diffa diffb
+*** diffa       2018-05-15 09:44:14.941323235 +0800
+--- diffb       2018-05-15 09:44:29.308260323 +0800
+***************
+*** 1 ****
+! welcom
+--- 1 ----
+! welcome
+[root@Remilia ~]# 
+```
+
+# 文件目录管理命令
+
+在Linux系统的日常运维工作中，还需要掌握对文件的创建、修改、复制、剪切、更名与删除等操作。 
+
+
+
+## touch命令
+
+touch命令用于创建空白文件或设置文件的时间，格式为“**touch** [选项] \{文件}”。
+在创建空白的文本文件方面，这个touch命令相当简捷，简捷到没有必要特别去研究。比如，touch test命令可以创建出一个名为test的空白文本文件。对touch命令来讲，有难度的操作主要是体现在设置文件内容的修改时间（mtime）、文件权限或属性的更改时间（ctime）与文件的读取时间（atime）上面。touch命令的参数及其作用如下
+
+| 参数 | 作用                      |
+| ---- | ------------------------- |
+| -a   | 仅修改“读取时间”（atime） |
+| -m   | 仅修改“修改时间”（mtime） |
+| -d   | 同时修改atime与mtime      |
+
+接下来，我们先使用ls命令查看一个文件的修改时间，然后修改这个文件，最后再通过touch命令把修改后的文件时间设置成修改之前的时间 :
+
+```shell
+[root@Remilia ~]# ls -l anaconda-ks.cfg 
+-rw-------. 1 root root 922 Feb 27 09:06 anaconda-ks.cfg
+[root@Remilia ~]# echo `test` >> anaconda-ks.cfg 
+[root@Remilia ~]# ls -l anaconda-ks.cfg 
+-rw-------. 1 root root 923 May 15 09:49 anaconda-ks.cfg
+[root@Remilia ~]# touch -d "2012-05-15 9:50" anaconda-ks.cfg 
+[root@Remilia ~]# ls -l anaconda-ks.cfg 
+-rw-------. 1 root root 923 May 15  2012 anaconda-ks.cfg
+```
+
+## mkdir命令
+
+mkdir命令用于创建空白的目录，格式为“**mkdir** [选项] {目录}”。
+
+在Linux系统中，文件夹是最常见的文件类型之一。除了能创建单个空白目录外，mkdir命令还可以结合**-p**参数来递归创建出具有嵌套叠层关系的文件目录。
+
+
+
+```shell
+[root@Remilia ~]# mkdir -p a/b/c/d
+[root@Remilia ~]# cd a
+[root@Remilia a]# cd b
+[root@Remilia b]# cd c
+[root@Remilia c]# cd d
+[root@Remilia d]# pwd
+/root/a/b/c/d
+[root@Remilia d]# 
+```
+
+## cp命令
+
+cp命令用于复制文件或目录，格式为“**cp** [选项] {源文件} {目标文件}”。
+
+大家对文件复制操作应该不陌生，在Linux系统中，复制操作具体分为3种情况：
+
+- 如果目标文件是目录，则会把源文件复制到该目录中；
+
+- 如果目标文件也是普通文件，则会询问是否要覆盖它；
+
+- 如果目标文件不存在，则执行正常的复制操作。
+
+   cp命令常用参数如下:
+
+   
+
+| 参数 | 作用                                         |
+| ---- | -------------------------------------------- |
+| -p   | 保留原始文件的属性                           |
+| -d   | 若对象为“链接文件”，则保留该“链接文件”的属性 |
+| -r   | 递归持续复制（用于目录）                     |
+| -i   | 若目标文件存在则询问是否覆盖                 |
+| -a   | 相当于-pdr（p、d、r为上述参数）              |
+
