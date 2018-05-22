@@ -89,3 +89,15 @@ deploy:
   type: git
   repo: ssh://git@github.com/Remil1a/Remil1a.github.io
   branch: master
+
+algolia:
+ applicationID: 'MZHO1QE4VC'
+ apiKey: '5b325f33b8f05a26bfa99cfd1141439d'
+ adminApiKey: 'fc81310383de5da3aabbc1b3d3b29af4'
+ indexName: 'hexo_search'
+ chunkSize: 5000
+ fields:
+ - title
+ - slug
+ - path
+ - content:strip
