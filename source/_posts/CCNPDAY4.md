@@ -2,7 +2,7 @@
 title: CCNPDAY4
 date: 2018-05-29 19:38:44
 categories: Cisco
-tags: Cisco
+tags: [Cisco,EIGRP]
 ---
 
 EIGRP query和reply报文
