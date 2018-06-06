@@ -17,7 +17,7 @@ tags: [Cisco,OSPF]
 
 `Show ip ospf database`
 
-![](D:/remil1a.github.io/source/_posts/CCNPDAY7/fdb0c84b84ddc86c7f45be3985e48f6c.png)
+![](CCNPDAY7/fdb0c84b84ddc86c7f45be3985e48f6c.png)
 
 图 1‑1 OSPF数据库信息截图
 
@@ -59,7 +59,7 @@ refresh）。每隔30min始发这条LSA的路由器将泛洪扩散这条LSA的�
 
 `Show ip ospf database router`查看：
 
-![](D:/remil1a.github.io/source/_posts/CCNPDAY7/952334caa50ae4e3efe7a19b97aaccca.png)
+![](CCNPDAY7/952334caa50ae4e3efe7a19b97aaccca.png)
 
 图 2‑1 OSPF路由器LSA信息
 
@@ -86,7 +86,7 @@ refresh）。每隔30min始发这条LSA的路由器将泛洪扩散这条LSA的�
 
 `Show ip ospf database network` 查看：
 
-![](D:/remil1a.github.io/source/_posts/CCNPDAY7/12090e5dd7b032d3b1ae43091891a47d.png)
+![](CCNPDAY7/12090e5dd7b032d3b1ae43091891a47d.png)
 
 图 2‑2 OSPF网络LSA信息
 
@@ -112,7 +112,7 @@ refresh）。每隔30min始发这条LSA的路由器将泛洪扩散这条LSA的�
 
 `Show ip ospf database summary` 查看
 
-![](D:/remil1a.github.io/source/_posts/CCNPDAY7/051124e241e9020dcb5ca360a1801cf1.png)
+![](CCNPDAY7/051124e241e9020dcb5ca360a1801cf1.png)
 
 图 2‑3 OSPF网络汇总LSA信息
 
@@ -137,7 +137,7 @@ ASBR汇总LSA也是由ABR路由器始发的。用于在网络中通告ASBR所在
 
 `Show ip ospf database asbr-summary` 查看
 
-![](D:/remil1a.github.io/source/_posts/CCNPDAY7/068fd087945ca70f3553e0c7f55e82e1.png)
+![](CCNPDAY7/068fd087945ca70f3553e0c7f55e82e1.png)
 
 图 2‑4 OSPF ASBR汇总LSA信息
 
@@ -162,7 +162,7 @@ ASBR汇总LSA也是由ABR路由器始发的。用于在网络中通告ASBR所在
 
 `Show ip ospf database external` 查看
 
-![](D:/remil1a.github.io/source/_posts/CCNPDAY7/e5ccf0994a06ab45b26d3bcd34d9b681.png)
+![](CCNPDAY7/e5ccf0994a06ab45b26d3bcd34d9b681.png)
 
 图 2‑5 OSPF外部LSA信息
 
