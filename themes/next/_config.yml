@@ -98,6 +98,9 @@ menu:
   Linux: /categories/Linux || th
   Cisco: /categories/Cisco || th
   Huawei: /categories/Huawei || th
+  Be a lecturer: /categories/Be-a-lecturer || th
+  H3C: /categories/H3C || th
+  SANGFOR: /categories/SANGFOR || th
   #archives: /archives/ || archive
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap

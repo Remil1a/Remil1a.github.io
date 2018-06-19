@@ -59,6 +59,9 @@ category_map:
   Linux: Linux
   华为: HuaWei
   思科: Cisco
+  华三: H3C
+  深信服: SANGFOR
+  讲师: Be a lecturer
 #tag_map:
 #     Linux: Linux
 #     华为: 华为
