@@ -1,5 +1,5 @@
 ---
-title: CCNPDAY7
+title: OSPF LSDB
 date: 2018-06-06 14:38:25
 categories: Cisco
 tags: [Cisco,OSPF]

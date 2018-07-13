@@ -1,5 +1,5 @@
 ---
-title: CCNPDAY4
+title: EIGRP ADVANCED
 date: 2018-05-29 19:38:44
 categories: Cisco
 tags: [Cisco,EIGRP]

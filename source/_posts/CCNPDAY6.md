@@ -1,5 +1,5 @@
 ---
-title: CCNPDAY6
+title: OSPF Neighbor State
 date: 2018-06-06 14:29:04
 categories: Cisco
 tags: [Cisco,OSPF]

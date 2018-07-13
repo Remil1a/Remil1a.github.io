@@ -1,5 +1,5 @@
 ---
-title: CCNPDAY5
+title: OSPF BASIC
 date: 2018-06-06 14:12:03
 categories: Cisco
 tags: [Cisco,OSPF]

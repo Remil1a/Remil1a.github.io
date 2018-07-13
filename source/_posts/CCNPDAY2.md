@@ -1,5 +1,5 @@
 ---
-title: CCNPDAY2
+title: RIP
 date: 2018-04-11 22:34:05
 categories: Cisco
 tags: [Cisco,CCNP]

@@ -1,5 +1,5 @@
 ---
-title: CCNPDAY1
+title: Static Route DHCP FR
 date: 2018-04-11 22:09:58
 categories: Cisco
 tags: [Cisco,CCNP]

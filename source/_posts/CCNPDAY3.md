@@ -1,5 +1,5 @@
 ---
-title: CCNPDAY3
+title: EIGRP BASIC
 date: 2018-04-12 19:05:07
 categories: Cisco
 tags: [Cisco,EIGRP]
