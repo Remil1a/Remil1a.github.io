@@ -95,12 +95,15 @@ menu:
   home: / || home
   #about: /about/ || user
   tags: /tags/ || tags
-  Linux: /categories/Linux || th
-  Cisco: /categories/Cisco || th
-  Huawei: /categories/Huawei || th
-  Be a lecturer: /categories/Be-a-lecturer || th
-  H3C: /categories/H3C || th
-  SANGFOR: /categories/SANGFOR || th
+  Linux: /tags/Linux || tags
+  Cisco: /tags/Cisco || tags
+  Huawei: /tags/Huawei || tags
+  H3C: /tags/H3C || tags
+  #Linux: /categories/Linux || th
+  #Cisco: /categories/Cisco || th
+  #Huawei: /categories/Huawei || th
+  #H3C: /categories/H3C || th
+  #SANGFOR: /categories/SANGFOR || th
   #archives: /archives/ || archive
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
@@ -819,7 +822,7 @@ version: 5.1.4
 
 gitalk:
   enable: true
-  githubID: remil1a     
+  githubID: remil1a
   repo: git-comments
   ClientID: 0bdc0d6f49bfb51e5834
   ClientSecret: 9306599f43db3af1e58268b660f8fb11fe4771ec

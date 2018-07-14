@@ -55,17 +55,19 @@ index_generator:
   
 # Category & Tag
 default_category: uncategorized
-category_map: 
-  Linux: Linux
-  华为: HuaWei
-  思科: Cisco
-  华三: H3C
-  深信服: SANGFOR
-  讲师: Be a lecturer
-#tag_map:
-#     Linux: Linux
-#     华为: 华为
-#     思科: 思科
+#category_map:
+#  Linux: Linux
+#  华为: HuaWei
+#  思科: Cisco
+#  华三: H3C
+#  深信服: SANGFOR
+tag_map:
+     Linux: Linux
+     华为: Huawei
+     思科: Cisco
+     华三: H3C
+     深信服: SANGFOR
+
 
 
 # Date / Time format

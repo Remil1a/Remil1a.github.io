@@ -2,7 +2,7 @@
 title: OSI and TCP/IP protocol stacks
 date: 2018-07-13 14:10:39
 categories: H3C
-tags: [H3C]
+tags: [H3C,Cisco,Huawei]
 ---
 
 # OSI参考模型
