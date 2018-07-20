@@ -43,3 +43,99 @@ tags: [Cisco,Huawei,H3C]
 
 ![4](Basic-switching\4.png)
 
+# VLAN
+
+由于交换机在不做任何配置的情况下，收到广播会往所有接口转发，这样一来，广播域的范围便是整个交换机本身。会带来不便与管理和安全隐患。所以人们希望能够通过某种技术在交换机上逻辑地分隔广播范围。VLAN技术便应运而生了。
+
+- 一个VLAN中的所有设备都是在同一广播域内，不同VLAN为不同的广播域。
+- VLAN之间相互隔离，广播不能跨越VLAN传播，所以不同的VLAN之间的设备一般需要通过三层设备实现互相通信
+- 一个VLAN一般就是一个子网。
+- VLAN的成员大多数是基于端口划分的。划分VLAN就是对交换机的端口划分。
+- VLAN工作在二层
+
+
+
+## VLAN工作原理
+
+交换机内部的数据一律带有VLAN Tag，当一个数据进入交换机端口时，如果没有带VLAN Tag，且该端口配置了PVID（Port VLAN ID）那么该数据就会被标记上端口的PVID。如果该数据已经带了VLAN Tag，那么即使该端口已经配置了PVID，交换机也不会再给数据帧标记VLAN Tag.PVID是指“端口缺省ID”的意思。
+
+
+
+交换机端口类型一共有三种，由于端口类型不同所以对帧的处理过程也不同。
+
+1. Access端口处理帧的流程：
+
+   1） 收到一个二层帧
+
+   2） 判断该帧有没有VLAN tag
+
+   - 没有，则标记上Access端口的PVID，进行第三步
+   - 有Tag，则比较该Tag和端口的PVID是否一致。若一致，进行第三步，否则丢弃。
+
+   3） 根据帧的目标MAC地址和VLAN ID查找VLAN配置信息，决定从哪个端口把帧发送出去。
+
+   4） 交换机根据查到的出接口发送帧。
+
+   - 当数据从access接口发出时，交换机先剥离VLAN Tag。然后再发送出去。
+   - 当数据帧从Trunk接口发出时，直接发送帧。
+   - 当数据从Hybrid接口发出时，交换机先判断VLAN在本端口的属性时Untag还是Tag。如果是Untag，则剥离VLAN Tag之后再发送，如果是Tag，则直接发送帧。
+
+2. Trunk端口处理帧的过程
+
+   1） 收到一个二层帧。
+
+   2） 判断帧是否有VLAN Tag。
+
+   - 没有Tag，则标记上Trunk端口的PVID，进行下一步处理。
+   - 有Tag，则判断该trunk接口是否允许该Tag通过，允许则进行下一步处理，否则丢弃。
+
+   3） 二层交换机根据目标MAC和VLAN ID，查找VLAN信息并把帧转发出去。
+
+   4） 交换机根据查到的出接口转发数据帧。
+
+   - 当数据从access接口发出时，先剥离VLAN tag 再发送出去。
+   - 当数据从trunk接口发出时，直接发送帧。
+   - 当数据从hybird接口发出时，交换机先判断该接口的属性时tag还是untag。如果是tag则直接发送，如果是untag则剥离标签后再发送。
+
+# Native Vlan
+
+在802.1q中，Native Vlan是不打标签的Vlan。默认的Native Vlan是Vlan1。建议将一个生僻的Vlan设置为Native Vlan。两个互联的交换机的Native Vlan必须一致。否则将会出现流量互串的问题。
+
+![5](Basic-Switching\5.png)
+
+如上图，首先两边的vlan2互相通信肯定是没有问题的，但是当vlan3，vlan4通信时就会出现问题了。首先假设vlan3的用户发送一个数据，到了左边交换机的trunk接口，发现vlan3时native vlan 不打标签，就直接出去了。到了右边的交换机，由于native vlan为4，右边的交换机会认为这个流量属于vlan4。
+
+
+
+# 私有VLAN（PVLAN）
+
+1. 私有VLAN的概念
+
+   - 将一个vlan划分为几个单独的vlan，这些vlan都是用同一个ip段
+   - 尽管网络设备都处于同一子网中，但是它们属于不同的pvlan，pvlan之间的通信还是需要通过默认网关实现。
+   - 每个pvlan包括一个**主vlan**和多个**辅助vlan**。所有辅助vlan都映射到主vlan。
+   - 辅助vlan分为**团体vlan**和**隔离vlan**。
+   - 相同团体vlan能够互通，但是团体vlan之间必须通过设置SVI或者Vlan-if或者路由器接口才能通信。
+   - 相同vlan内部以及隔离vlan之间都是不能互通的，只能与混杂接口通信。
+   - **一个主vlan只能有一个isolate vlan**
+
+2. PVLAN端口类型
+
+   - isolate（隔离）
+
+     只能和混杂模式的端口通信
+
+   - promiscuous（混杂）
+
+     可以和任意其他端口通信
+
+   - community（团体）
+
+     只能和混杂端口和属于同一团体的端口通信
+
+3. 配置实例
+
+   ![6](Basic-switching\6.png)
+
+   如图，DNS WWW SMTP服务器属于同一子网，两台DNS服务器属于同一个community vlan，所以能够互通。www和smtp属于isolate vlan。因此彼此无法互访。只能和混杂模式的路由器通信。
+
