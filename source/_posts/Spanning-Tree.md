@@ -3,6 +3,7 @@ title: Spanning Tree
 date: 2018-07-17 16:38:38
 categories: Cisco
 tags: [H3C,Cisco,Huawei]
+mathjax: true
 ---
 
 # 生成树概览
@@ -92,4 +93,3 @@ tags: [H3C,Cisco,Huawei]
 3. TCN BPDU
 
    1. TCP BPDU在网络拓扑发生变化时产生。TYPE字段为0x80，FLAG字段LSB和MSB位均置位。
-
