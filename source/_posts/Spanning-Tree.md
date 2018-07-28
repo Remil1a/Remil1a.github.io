@@ -93,3 +93,55 @@ mathjax: true
 3. TCN BPDU
 
    1. TCP BPDU在网络拓扑发生变化时产生。TYPE字段为0x80，FLAG字段LSB和MSB位均置位。
+
+   当网络拓扑发生变化的时候，最先意识到变化的交换机会从根端口发送TCN到上一层交换机，一直到根交换机，上层交换机除了接着向其上层发送TCN之外，也会回一个TCA的确认信息给前一个交换机。当根接受到TC后发送TCA回最开始的交换机并向所有交换机发送TC。交换机收到ROOT发来的TC后，会将MAC地址表的老化时间缩减为15S（一个转发延迟），这个TC会一直持续35S（20+15）。
+
+4. STP的运行
+
+   1. STP采用四个步骤来解决二层环路：
+
+      1. 在一个交换网络中选举一个root bridge
+      2. 在每个非根交换机上选举一个根端口（RP）
+      3. 为每个segment选举一个指定端口（DP）
+      4. 阻塞非指定端口
+
+   2. 比较原则
+
+      1. STP需要网络设备相互交换消息来检测桥接环路，这个消息就叫**BPDU（桥协议数据单元）**即使是阻塞的端口也会不断收到BPDU。
+
+      2. 生成树总是按照以下步骤来生成一个无环的拓扑：
+
+         - 最低的桥ID
+         - 到根桥最低的路径开销
+         - 最低的发送者桥ID
+         - 最低的发送者端口ID
+
+         交换机使用这四个步骤分别选举出根交换机，根端口和指定端口。并且会保存各个端口收到的最好的BPDU。每收到一个新的BPDU，都会和这个最优的BPDU进行比较。如果收到的BPDU比保存的BPDU更优，则更新。反之则不做任何操作。
+
+      > 注意：
+      >
+      > 根桥的角色是可以抢占的。桥ID中的MAC地址指的是交换机的背板MAC地址 使用show version | in Base查看。
+      >
+      > sw1-huiju#show version | in Base
+      > Base ethernet MAC Address       : 00:23:5E:26:D9:80
+      >
+      > 
+      >
+      > 
+      >
+      > 端口ID中的MAC是指端口的MAC地址。思科交换机上可使用show interfaces | in bia查看
+      >
+      > sw1-huiju#show interfaces | in bia
+      >   Hardware is EtherSVI, address is 0023.5e26.d9c0 (bia 0023.5e26.d9c0)
+      >   Hardware is EtherSVI, address is 0023.5e26.d9c1 (bia 0023.5e26.d9c1)
+      >   Hardware is EtherSVI, address is 0023.5e26.d9c2 (bia 0023.5e26.d9c2)
+      >   Hardware is EtherSVI, address is 0023.5e26.d9c3 (bia 0023.5e26.d9c3)
+      >   Hardware is EtherSVI, address is 0023.5e26.d9c4 (bia 0023.5e26.d9c4)
+      >   Hardware is EtherSVI, address is 0023.5e26.d9c5 (bia 0023.5e26.d9c5)
+      >   Hardware is EtherSVI, address is 0023.5e26.d9c6 (bia 0023.5e26.d9c6)
+
+      接下来看几组802.1d的选举实例：
+
+      ![2](Spanning-Tree\2.png)
+
+      如图所示，交换机X和Y的优先级分别是1111和2222，拓扑中存在冗余链路。BPDU在经过交换后，会进行两个参数的比较来选出根桥。一是优先级。在不手动进行更改的情况下。两台交换机的优先级都为32768。所以优先级这一块是比较不出来的。这种情况下会去比较MAC地址。MAC地址是比小的。所以交换机X胜出。
