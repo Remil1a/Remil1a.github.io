@@ -388,11 +388,7 @@ D:\World of Warcraft\test\WoW64.exe
 
 计算机数数都是从0开始的。所以Playstation4对应的位置就是
 
-0	1	2	3	4	5	6	7	8	9	10	11
-
-P	l	a	y	s	t	a	t	i	o	n	4
-
-
+![2](Python-Basic\2.png)
 
 ### 什么叫可变类型
 
@@ -530,3 +526,43 @@ Cisco>>>
 >>> 
 ```
 
+
+
+### 字符串的拼接格式问题
+
+例如我们想把字符串拼一起
+
+
+
+```python
+>>> 'Play' + 'Station'
+'PlayStation'
+```
+
+字符串之间的拼接是没问题的。
+
+
+
+如果再来一个4呢
+
+```python
+>>> 'Play' + 'Station' + 4
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate str (not "int") to str
+>>> 
+```
+
+你会发现报错 并且提示字符串不能和数字相加。这个时候需要做转换
+
+
+
+```python
+>>> 'Play' + 'Station' + str(4)
+'PlayStation4'
+>>> 
+```
+
+
+
+`str(4)`代表将括号里的内容转换成字符串。这样就可以拼接了。
