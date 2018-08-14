@@ -1,7 +1,7 @@
 ---
 title: RIP
 date: 2018-04-11 22:34:05
-categories: Cisco
+categories: Network
 tags: [Cisco,CCNP]
 ---
 

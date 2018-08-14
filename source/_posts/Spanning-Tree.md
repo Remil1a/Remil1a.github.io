@@ -1,7 +1,7 @@
 ---
 title: Spanning Tree
 date: 2018-07-17 16:38:38
-categories: Cisco
+categories: Network
 tags: [H3C,Cisco,Huawei]
 mathjax: true
 ---

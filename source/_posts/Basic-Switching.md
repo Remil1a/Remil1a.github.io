@@ -1,7 +1,7 @@
 ---
 title: Basic Switching
 date: 2018-07-17 14:50:58
-categories: Cisco
+categories: Network
 tags: [Cisco,Huawei,H3C]
 ---
 

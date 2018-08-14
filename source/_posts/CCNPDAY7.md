@@ -1,7 +1,7 @@
 ---
 title: OSPF LSDB
 date: 2018-06-06 14:38:25
-categories: Cisco
+categories: Network
 tags: [Cisco,OSPF]
 ---
 

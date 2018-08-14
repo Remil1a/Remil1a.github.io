@@ -1,7 +1,7 @@
 ---
 title: OSPF Neighbor State
 date: 2018-06-06 14:29:04
-categories: Cisco
+categories: Network
 tags: [Cisco,OSPF]
 ---
 

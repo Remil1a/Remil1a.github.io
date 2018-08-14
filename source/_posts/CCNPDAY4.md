@@ -1,7 +1,7 @@
 ---
 title: EIGRP ADVANCED
 date: 2018-05-29 19:38:44
-categories: Cisco
+categories: Network
 tags: [Cisco,EIGRP]
 ---
 

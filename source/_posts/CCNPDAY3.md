@@ -1,7 +1,7 @@
 ---
 title: EIGRP BASIC
 date: 2018-04-12 19:05:07
-categories: Cisco
+categories: Network
 tags: [Cisco,EIGRP]
 ---
 
