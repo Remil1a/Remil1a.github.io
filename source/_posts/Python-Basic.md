@@ -6,7 +6,7 @@ tags: Python
 mathjax: true
 ---
 
-# Python为何这么火
+## Python为何这么火
 
 Python的定位非常明确，它是一种**简单易用**但又**专业严谨**的语言。或者说叫胶水语言。普通人也很容易入门。Python可以把各个基本程序拼接在一起协同运作。任何一个人只要愿意学习，可以在几天的时间内学会Python的基础部分。然后做很多很多事情，这种投入产出比是任何其他语言无法具备的。
 
@@ -83,7 +83,7 @@ Python的安装就不去说了。Windows版在官网上的都能找到。MacOS�
 
 - 表达式操作符
 
-+(加)，-(减)，*(乘)，/(除)，**(乘方)，>> 移位
++(加)，-(减)，\*(乘)，/(除)，\*\*(乘方)，>> 移位
 
 
 
@@ -566,3 +566,426 @@ TypeError: can only concatenate str (not "int") to str
 
 
 `str(4)`代表将括号里的内容转换成字符串。这样就可以拼接了。
+
+
+
+## 字符串格式化表达式和方法
+
+在输出字符串的时候我们希望能够把字符串做格式化，显示出来干净整齐，格式统一。这就是字符串格式表达式的目的。
+
+
+
+字符串格式化有两种方法。第一种是传统表达式方法，第二种是新方法。来体验一下
+
+
+
+### 传统方法（表达式）
+
+String formatting expressions: '...%s...'(values)
+
+%左边是一个格式化的字符串，包含一个或多个嵌套的转换目标，每个目标用%开始。
+
+%右边提供一个或者多个对象(多个对象需要放在元组中)，这些对象用来替换%左边的转换对象
+
+```python
+'Playstation%d is %s'%(4,'belong to sony')
+'Playstation4 is belong to sony'
+```
+
+能够看到。整个语句用%分隔开，分成左边和右边。左边是已经格式化了的字符串，右边是用来替换%d和%s的内容。
+
+其中%d这个地方要替换的是整数
+
+%s代表这个地方要替换的是字符串。
+
+要替换的值放在元组里，元组在后面会介绍。其实就是用小括号括起来的东西。
+
+
+
+一般%后面就会用到三个
+
+%d---整数
+
+%s---字符串
+
+%f---浮点
+
+#### 完整表达式语法
+
+%[(keyname)]\[flags][width]\[.precision]typecode
+
+- keyname代表%后面其实还可以放一个字典的键值，由于字典还没有涉及到，这边先放着
+- flags可以指明字符串是左对齐(-)还是右对齐还是用0补齐,默认右对齐。
+- width代表整体宽度
+- 如果是小数还可以用.后面跟数字来表示小数点位数 例如.2f表示保留小数点后2位的浮点数
+
+还是来实操感受一下
+
+```python
+>>> example = '...%d....%-10d....%10d...%010d'%(int,int,int,int)
+>>> print(example)
+...98765....98765     ....     98765...0000098765
+```
+
+
+
+第一个%d代表直接输出
+
+第二个%-10d代表左对齐输出，宽度10
+
+第三个%10d代表右对齐输出，宽度10
+
+%010d代表右对齐输出，宽度10，不足的位置用0补齐
+
+得出的结果就如上所示了。
+
+
+
+接下来看看关于浮点数的输出
+
+```python
+>>> float = 6.123151253464567
+>>> example = '%f|%.2f|%010.3f|%5.2f'%(float,float,float,float)
+>>> print(example)
+6.123151|6.12|000006.123| 6.12
+```
+
+第一个%f啥也不做
+
+第二个%.2f代表保留小数点后2位
+
+第三个%010.3f代表右对齐，长度10位，不够的用0补齐
+
+第四个%5.2f代表右对齐，保留小数点后2位并且占5位长度
+
+
+
+### 新方法
+
+String formatting method calls:'...{}...'.format(values)
+
+刚才讲的是传统的方法。现在来看一下新方法。
+
+#### 完整语法
+
+{fieldname component !conversionflag :formatspec}
+
+- Filename是指定参数的关键字或数字，后面跟可选的'.name'(属性)或者'[index]'(键值)成分引用
+- conversionflag可以是r,s或者a分别是该值上对repr，str，ascii内置函数的一次调用
+- formatspec指定如何表示该值，包括宽度，对齐方式，补零，小数点精确度等。
+
+还是来实操一下吧
+
+```python
+'{0},{1},and {2}'.format('Playstation','Nintendo','Mircosoft')
+'Playstation,Nintendo,and Mircosoft'
+```
+
+这是基于位置的方法，意思是0号位置是playstation，1号位置是nintendo，2号位置是microsoft。还有基于名字的。
+
+```python
+str = '{Playstation4},{Switch},{XboxOne}'
+str.format(Playstation4=Sony,Switch=Nintendo,XboxOne=Microsoft)
+str.format(Playstation4='Sony',Switch='Nintendo',XboxOne='Microsoft')
+'Sony,Nintendo,Microsoft'
+```
+
+这就相当于有Playstation位，Switch位和XboxOne位。
+
+当然 这两种方法可以混合起来用。
+
+刚才提到了老方法可以控制宽度，小数点位数等。新方法当然也可以。
+
+```python
+str='{Sony:10},{Microsoft:10},{Nintendo:10}'
+str.format(Sony='Playstation4',Microsoft='XboxOne',Nintendo='Switch')
+'Playstation4,XboxOne   ,Switch    '
+```
+
+跟老方法一样，:10代表宽度。
+
+```python
+str='{Sony:10},{Microsoft:^10},{Nintendo:<10}'
+str.format(Sony='Playstation4',Microsoft='XboxOne',Nintendo='Switch')
+'Playstation4, XboxOne  ,Switch    '
+```
+
+^代表居中。
+
+<代表左对齐
+
+\>代表右对齐
+
+关于小数的操作方法和老方法一样，就不再赘述了。
+
+
+
+## 正则表达式
+
+正则表达式较为复杂。我参考了
+
+[这里]( http://www.regexlab.com/zh/regref.htm )和[这里](https://zh.wikipedia.org/wiki/正则表达式 )来写。
+
+正则表达式可以用来匹配一些特定的字符串。其实在BGP就有用到正则表达式。BGP的AS-PATH就是使用正则表达式来匹配AS号。
+
+### 如何匹配各种字符
+
+在Python中想使用正则表达式需要引入re模块。使用`import re`来引入。
+
+```python
+>>> import re
+>>> re.match('explorer.exe','explorereexe')
+<re.Match object; span=(0, 12), match='explorereexe'>
+>>> re.match('explorer.exe','fjdlskajlf')
+>>> 
+```
+
+最简单的使用方法就像上面这样。
+
+re.match代表使用re模块里面的match动作，括号中左边的就是正则表达式，用逗号隔开之后右边就是要匹配的东西。如果有匹配上，程序就会返回值。这边能看到确实匹配上了，匹配上的内容是0到12位。如果匹配不上就不会返回任何值。
+
+这边能匹配上可能会有问题。我匹配的条件是**explorer.exe**给他匹配的东西是**explorereexe**。但是还是匹配上了。明明有个点不一样，为什么还是能匹配上？这边就需要了解正则表达式中符号的特殊意义。
+
+
+
+| 表达式 | 能匹配的东西                                 |
+| ------ | -------------------------------------------- |
+| \d     | 任意数字，即0～9                             |
+| \w     | 任意字母，下划线或者数字就是A~Z,a-z,0~9以及_ |
+| \s     | 包括空格、制表符、回车换行等空字符           |
+| .      | 除了换行符号\n以外的所有字符                 |
+
+所以难怪上面能匹配上了。点可以匹配除了换行以外的任意字符。
+
+
+
+那如果只想匹配explorer.exe怎么办？这边就需要用到转意符。
+
+```python
+>>> re.match('explorer\.exe','explorer.exe')
+<re.Match object; span=(0, 12), match='explorer.exe'>
+>>> re.match('explorer\.exe','exploreraexe')
+```
+
+
+
+### 匹配多种字符的表达式
+
+使用方括号\[]扩起来一些字符，能够匹配其中的任意一个字符；用\[^]扩起来一些字符，能够匹配除了其中这些字符之外的任意字符。只能匹配其中的一个或者除开其中的一个，不能是多个。下面看一些例子。
+
+| 表达式    | 可匹配                      |
+| --------- | --------------------------- |
+| [abc5@]   | a,b,c,5,@                   |
+| [^abc]    | 除了a，b，c之外的任意字符   |
+| [a-k]     | a-k之间的任意字母           |
+| [^A-F0-3] | 除了A到F和0-3之间的任意字符 |
+
+下面来看几个实例
+
+```python
+>>> re.match('[bcd][bcd]','bc123')
+<re.Match object; span=(0, 2), match='bc'> \\匹配上的是bc
+>>> re.match('[^abc]','123')
+<re.Match object; span=(0, 1), match='1'> \\匹配上的是1
+```
+
+
+
+### 修饰匹配次数
+
+ 前面章节中讲到的表达式，无论是只能匹配一种字符的表达式，还是可以匹配多种字符其中任意一个的表达式，都只能匹配一次。如果使用表达式再加上修饰匹配次数的特殊符号，那么不用重复书写表达式就可以重复匹配。
+
+
+
+使用方法是："次数修饰"放在"被修饰的表达式"后边。比如："\[bcd]\[bcd]" 可以写成 "[bcd]{2}"。
+
+
+
+| 表达式 | 作用                           |
+| ------ | ------------------------------ |
+| {n}    | 表达式重复n次                  |
+| {m,n}  | 表达式至少重复m次，最多重复n次 |
+| {m,}   | 表达式至少重复m次              |
+| ?      | 匹配表达式至少出现0或者1次     |
+| +      | 表达式至少出现1次              |
+| *      | 表达式不出现或者出现任意次     |
+
+下面来看一组例子
+
+```python
+>>> re.match('[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}','192.168.1.100')
+<re.Match object; span=(0, 13), match='192.168.1.100'>
+```
+
+可以用上述的表达式匹配IPv4地址。
+
+IPv4的地址每8位都用点来分隔，数字的范围是0到9则用\[0-9]匹配。 出现至少一次，最多三次，就用{1,3}匹配。小数点本身需要有\\.来匹配。当然 这样写非常长。也不太好看。有没有简单方法呢。
+
+### 表示抽象意义的符号
+
+| 表达式 | 作用                                                     |
+| ------ | -------------------------------------------------------- |
+| ^      | 于字符串开始的地方匹配，本身无意义                       |
+| $      | 于字符串结束的地方匹配，本身无意义                       |
+| ()     | 在被修饰匹配次数的时候，括号中的表达式可以作为整体被修饰 |
+| \|     | 左右表达式之间是或的关系，匹配左边或者右边。             |
+
+来看两组例子：
+
+```python
+re.match('([0-9]{1,3}\.){3}[0-9]{1,3}','192.168.1.1')
+<re.Match object; span=(0, 11), match='192.168.1.1'>
+
+>>> re.match('^aaa','aaafdafadfawfa')
+<re.Match object; span=(0, 3), match='aaa'>
+```
+
+
+
+第一个例子是将上面的匹配IPv4地址进行了简化。用括号将\[0-9]{1,3}\\.扩起来。然后后面跟上{3}代表出现3次。后面再单独写\[0-9]{1,3} 代表不带点 在单独出现一次。这样一来就能匹配到完整的IPv4地址
+
+
+
+后面的则是^aaa,代表字符串必须以aaa开头。至于后面是什么不管。
+
+
+
+## 列表和字典
+
+| 对象               | 类型           | 可变 |
+| ------------------ | -------------- | ---- |
+| List(列表)         | Sequence(序列) | 可变 |
+| Dictionaries(字典) | Mapping(映射)  | 可变 |
+
+### 列表
+
+一看到序列类型，我们就知道，一定可以根据索引提取内容，可以切片。可以改的。字符串我们体会过，根据某个位置去改值 是不行的。但是列表就可以。
+
+列表的主要属性有以下几个：
+
+- **任意**对象的**有序集合**
+- 通过**偏移**读取
+- 可变长度，异构以及任意嵌套
+- 属于**可变序列**的分类
+- 对象引用数组
+
+什么叫任意对象？就是说列表里放字符，数字，甚至再放列表都是可以的。有序就是可以通过索引的方式提取。通过操作来感受一下：
+
+```python
+>>> list = ['cisco',123,['H3C','BSD','Linux']]
+>>> list
+['cisco', 123, ['H3C', 'BSD', 'Linux']]
+>>> list [2]
+['H3C', 'BSD', 'Linux']
+```
+
+
+
+
+
+又或者把0号位置的cisco改成大写的CISCO
+
+```python
+>>> list[0]='CISCO'
+>>> list
+['CISCO', 123, ['H3C', 'BSD', 'Linux'], 'Playstation']
+```
+
+
+
+如果想要提取列表中的列表，则可以这样
+
+```python
+>>> list[2][0]
+'H3C'
+>>> list[2][1]
+'BSD'
+```
+
+
+
+列表也可以直接用+号连接在一起。
+
+
+
+#### 列表的常见操作方法
+
+##### len
+
+使用len()可以提取列表的长度
+
+```python
+>>> list
+['CISCO', 123, ['H3C', 'BSD', 'Linux'], 'Playstation']
+>>> len(list)
+4
+>>> 
+```
+
+这里显示list这个列表有4个元素。分别是CISCO 123 一个列表和 Playstation。计算长度是从1开始算的。
+
+##### in 
+
+也可以用 in 来判断
+
+```python
+>>> 'CISCO' in list
+True
+>>> 'Cisco' in list
+False
+```
+
+
+
+以及所有序列类型都可以用for循环。这里不再赘述。
+
+
+
+##### append
+
+我们可以通过append方法来往列表后面追加
+
+
+
+```python
+>>> list.append('Playstation')
+>>> list
+['cisco', 123, ['H3C', 'BSD', 'Linux'], 'Playstation']
+```
+
+
+
+##### insert
+
+插入操作。可以在列表中指定位置去插入。例如上面的list。在1位置插入。
+
+```python
+>>> list = [1,'Cisco','H3C','Python'] \\创建列表
+>>> list \\显示列表
+[1, 'Cisco', 'H3C', 'Python']
+>>> list.insert(1,'Playstation') \\在1位置插入Playstation
+>>> list  \\显示列表
+[1, 'Playstation', 'Cisco', 'H3C', 'Python'] \\1位置变成了Playstation，其他元素往后顺移。
+```
+
+
+
+##### remove
+
+remove 可以移除列表中的某个元素。只能填具体的值。
+
+```python
+>>> list
+[1, 'Playstation', 'Cisco', 'H3C', 'Python']
+>>> list.remove('Cisco')
+>>> list
+[1, 'Playstation', 'H3C', 'Python']
+```
+
+
+
+
+
+### 字典
+
+字典是映射类型，是通过“键”来提取“值”。所以不能通过索引提取值。由于不是序列，所以也不能切片了。
