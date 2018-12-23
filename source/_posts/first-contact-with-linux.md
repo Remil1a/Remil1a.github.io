@@ -3,6 +3,7 @@ title: First contact with linux
 date: 2018-04-17 16:45:35
 categories: Linux
 tags: Linux
+mathjax: true
 ---
 
 # 写在前面的话
@@ -84,7 +85,7 @@ echo命令用于在屏幕上输出字符串或者变量提取后的值，格式�
 
 
 
-```bash
+```shell
 [root@remilia ~]# echo hello
 hello
 [root@remilia ~]# 
@@ -94,7 +95,7 @@ hello
 
 如果想要提取一个变量SHELL。则可以输入
 
-```bash
+```shell
 [root@remilia ~]# echo $SHELL
 /bin/bash
 [root@remilia ~]# 
@@ -145,7 +146,7 @@ date常用的参数格式和作用如下
 
 比如按照默认的格式输出当前系统时间是这样的
 
-```bash
+```shell
 [root@remilia ~]# date
 Tue Apr 17 03:45:33 EDT 2018
 [root@remilia ~]# 
@@ -155,7 +156,7 @@ Tue Apr 17 03:45:33 EDT 2018
 
 按照"年-月-日 小时:分钟:秒"的格式查看系统当前时间是这样的
 
-```bash
+```shell
 [root@remilia ~]# date "+%Y-%m-%d %H:%M:%S"
 2018-04-17 03:47:16
 [root@remilia ~]# 
@@ -181,7 +182,7 @@ man命令的常用格式如下:
 
 如果直接输入man 则会显示
 
-```bash
+```shell
 [root@remilia ~]# man
 What manual page do you want?
 ```
@@ -192,7 +193,7 @@ What manual page do you want?
 
 那么拿date来举例。如果想看date的每个参数都是什么意思的话，则输入以下命令
 
-```bash
+```shell
 [root@remilia ~]# man date
 DATE(1)                          User Commands                         DATE(1)
 
@@ -228,7 +229,7 @@ DESCRIPTION
 
 稍微下翻一下以后会发现大量参数和说明。
 
-```bash
+```shell
   FORMAT controls the output.  Interpreted sequences are:
 
        %%     a literal %
@@ -260,7 +261,7 @@ DESCRIPTION
 
 那么我们来试一下
 
-```bash
+```shell
 [root@remilia ~]# date "+%d"
 17
 [root@remilia ~]# 
@@ -294,7 +295,7 @@ DESCRIPTION
 
     试一下。
 
-    ```bash
+    ```shell
     [root@remilia ~]# date "+%F %T"
     2018-04-17 04:07:19
     [root@remilia ~]# date "+%Y-%m-%d %H:%M:%S"
@@ -322,7 +323,7 @@ reboot命令用于重启系统，其格式为**reboot**
 
 其命令如下:
 
-```bash
+```shell
 [root@remilia ~]# reboot
 ```
 
@@ -344,7 +345,7 @@ poweroff命令用于关闭系统,其格式为**poweroff**
 
 
 
-```bash
+```shell
 [root@remilia ~]# poweroff
 ```
 
@@ -387,7 +388,7 @@ http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/GitPython-1.0.1-5.
 
 
 
-```bash
+```shell
 [root@remilia ~]# wget http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/GitPython-1.0.1-5.el7.noarch.rpm
 --2018-04-17 05:56:44--  http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/GitPython-1.0.1-5.el7.noarch.rpm
 Resolving mirrors.163.com (mirrors.163.com)... 59.111.0.251
@@ -407,7 +408,7 @@ Saving to: ‘GitPython-1.0.1-5.el7.noarch.rpm’
 
 wget -r -p http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/repodata/
 
-```bash
+```shell
 [root@remilia ~]# wget -r -p http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/repodata/
 --2018-04-17 06:01:35--  http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/repodata/
 Resolving mirrors.163.com (mirrors.163.com)... 59.111.0.251
@@ -460,7 +461,7 @@ Linux系统中时刻运行着许多进程，如果能够合理地管理它们，
 
 
 
-```bash
+```shell
 [root@remilia ~]# ps -aux
 USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root          1  0.1  0.3  50796  7212 ?        Ss   02:45   0:01 /usr/lib/systemd/systemd --swi
@@ -637,7 +638,7 @@ top命令用于动态地监视进程活动与系统负载信息等。其格式�
 
 top命令非常强大。可以看作是Linux中的任务管理器。由于运行了top之后其中的数据会不断变换，这里只截取一次，实际是不停变化的。按q可退出。结果如下:
 
-```bash
+```shell
 [root@remilia ~]# top
 top - 03:02:24 up 16 min,  1 user,  load average: 0.00, 0.01, 0.05
 Tasks: 418 total,   1 running, 417 sleeping,   0 stopped,   0 zombie
@@ -674,7 +675,7 @@ KiB Swap:  2097148 total,        0 used,  2097148 free.    91104 cached Mem
 
 pidof命令用于查询某个指定服务进程的PID值，格式为“**pidof** {[参数]\[*服务名称*]}”。
 每个进程的进程号码值（PID）是唯一的，因此可以通过PID来区分不同的进程。例如，可以使用如下命令来查询本机上sshd服务程序的PID：
-```bash
+```shell
 [root@remilia ~]# pidof sshd
 2156
 ```
@@ -683,7 +684,7 @@ pidof命令用于查询某个指定服务进程的PID值，格式为“**pidof**
 
 kill命令用于终止某个指定PID的服务进程，格式为“**kill** [参数]\[*进程PID*]”。
 接下来，我们使用kill命令把上面用pidof命令查询到的PID所代表的进程终止掉，其命令如下所示。这种操作的效果等同于强制停止sshd服务。
-```bash
+```shell
 [root@remilia ~]# kill 2156
 ```
 
@@ -692,7 +693,7 @@ kill命令用于终止某个指定PID的服务进程，格式为“**kill** [参
 killall命令用于终止某个指定名称的服务所对应的全部进程，格式为：“**killall** [参数]\[*进程名称*]”。
 通常来讲，复杂软件的服务程序会有多个进程协同为用户提供服务，如果逐个去结束这些进程会比较麻烦，此时可以使用killall命令来批量结束某个服务程序带有的全部进程。下面以httpd服务程序为例，来结束其全部进程。由于RHEL7系统默认没有安装httpd服务程序，因此此时只需看操作过程和输出结果即可。
 
-```bash
+```shell
 [root@remilia ~]# pidof httpd
 13581 13580 13579 13578 13577 13576
 [root@remilia ~]# killall httpd
@@ -717,7 +718,7 @@ ifconfig命令用于获取网卡配置与网络状态等信息，格式为“**i
 使用ifconfig命令来查看本机当前的网卡配置与网络状态等信息时，其实主要查看的就是网卡名称、inet参数后面的IP地址、ether参数后面的网卡物理地址（又称为MAC地址），以及RX、TX的接收数据包与发送数据包的个数及累计流量：
 
 
-```bash
+```shell
 [root@remilia ~]# ifconfig
 
 eno16777728: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
@@ -766,7 +767,7 @@ uname命令用于查看系统内核与系统版本等信息，格式为“**unam
 
  
 
- ```bash
+ ```shell
 [root@remilia ~]# uname -a
 Linux remilia.com 3.10.0-123.el7.x86_64 #1 SMP Mon May 5 11:16:57 EDT 2017 
 x86_64 x86_64 x86_64 GNU/Linux
@@ -775,7 +776,7 @@ x86_64 x86_64 x86_64 GNU/Linux
 
 顺带一提，如果要查看当前系统版本的详细信息，则需要查看redhat-release文件，其命令以及相应的结果如下：
 
-```bash 
+```shell 
 [root@remilia ~]# cat /etc/redhat-release
 Red Hat Enterprise Linux Server release 7.0 (Maipo)
 ```
@@ -799,7 +800,7 @@ who用于查看当前登入主机的用户终端信息，格式为“**who** [�
 
 这三个简单的字母可以快速显示出所有正在登录本机的用户的名称以及他们正在开启的终端信息。
 
-```bash
+```shell
 [root@remilia ~]# who
 ```
 
@@ -820,7 +821,7 @@ last命令用于查看所有系统的登录记录，格式为“**last** [参数
 
 
 
-```bash
+```shell
 [root@remilia ~]# last
 root       pts/0       :0               Mon Aug  24 17:52   still  logged in
 root       :0          :0               Mon Aug  24 17:52   still  logged in
@@ -840,7 +841,7 @@ history命令用于显示历史执行过的命令，格式为“**history** [-c]
 
 
 
-```bash
+```shell
 [root@remilia ~]# history
 1 tar xzvf VMwareTools-9.9.0-2304977.tar.gz
 2 cd vmware-tools-distrib/
@@ -870,13 +871,13 @@ Desktop          Downloads  Music                 Public    Videos
 
 历史命令会被保存到用户家目录中的.bash_history文件中。Linux系统中以点（.）开头的文件均代表隐藏文件，这些文件大多数为系统服务文件，可以用cat命令查看其文件内容。
 
-```bash
+```shell
 [root@remilia ~]# cat ~/.bash_history
 ```
 
 要清空当前用户在本机上执行的Linux命令历史记录信息，可执行如下命令：
 
-```bash
+```shell
 [root@remilia ~]# history -c	
 ```
 
@@ -890,7 +891,7 @@ Linux
 
 系统出现故障需要联系技术支持人员时，大多数时候都要先使用这个命令来简单收集系统的运行状态和服务配置信息，以便让技术支持人员能够远程解决一些小问题，亦或让他们能提前了解某些复杂问题。在下面的输出信息中，加粗的部分是收集好的资料压缩文件以及校验码，将其发送给技术支持人员即可：
 
-```bash
+```shell
 [root@remilia ~]# sosreport
 sosreport (version 3.0)
 This command will collect diagnostic and configuration information from
@@ -934,7 +935,7 @@ pwd命令用于显示用户当前所处的工作目录，格式为“**pwd** [�
 
 
 
-```bash
+```shell
 [root@remilia etc]# pwd
 /etc
 ```
@@ -1340,7 +1341,6 @@ cp命令用于复制文件或目录，格式为“**cp** [选项] {源文件} {�
 
    cp命令常用参数如下:
 
-   
 
 | 参数 | 作用                                         |
 | ---- | -------------------------------------------- |

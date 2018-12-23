@@ -22,6 +22,10 @@ Linux中的防火墙主要针对于网络层以及IP数据包，可以处理IP�
 
 
 
+<!----more---->
+
+
+
 # iptables中的表、链结构
 
 - 规则链
@@ -76,7 +80,7 @@ Linux中的防火墙主要针对于网络层以及IP数据包，可以处理IP�
 
 > 注意，如果要让Linux主机能够有数据包的转发功能，要修改一个配置文件，在/etc/sysctl.conf中将net.ipv4.ip_forward的值修改为1.如下所示，顺便再清空一下iptables，完毕以后可以使用iptables -L查看
 
-```bash
+```shell
 [root@remilia ~]# vi /etc/sysctl.conf 
 net.ipv4.ip_forward = 1
 [root@remilia ~]# iptables -F \\删除所有链中的规则
@@ -86,7 +90,7 @@ net.ipv4.ip_forward = 1
 
 完毕以后我们来看一下R1和R2 以及R1与Linux主机，R2与Linux主机之间能否互通吧。
 
-```bash
+```shell
 R1(config)#do ping 192.168.80.10 \\R1 ping Linux主机
 
 Type escape sequence to abort.
@@ -109,7 +113,7 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 16/22/28 ms
 
 现在先来分析一下，R1如果要Ping Linux主机，使用的是ICMP，以及这算是入站，所以应该是input，然后如果不想让这个包通过，应该是属于filter表。那么命令就出来了
 
-```bash
+```shell
 [root@remilia ~]# iptables -t filter -I INPUT -p icmp -j REJECT
 [root@remilia ~]# iptables -L -t filter
 Chain INPUT (policy ACCEPT)
@@ -131,7 +135,7 @@ target     prot opt source               destination
 
 来看看这么写会有什么效果
 
-```bash
+```shell
 R1(config)#do ping 192.168.80.10
 
 Type escape sequence to abort.
@@ -149,7 +153,7 @@ Success rate is 0 percent (0/5)
 
 
 
-```bash
+```shell
 [root@remilia ~]# iptables -D INPUT 1
 [root@remilia ~]# iptables -L
 Chain INPUT (policy ACCEPT)
@@ -168,7 +172,7 @@ target     prot opt source               destination
 
 
 
-```bash
+```shell
 [root@remilia ~]# iptables -t filter -I INPUT -p icmp -j DROP
 [root@remilia ~]# iptables -L
 Chain INPUT (policy ACCEPT)
@@ -186,7 +190,7 @@ target     prot opt source               destination
 
 规则写好了 接下来用R1来测试一下
 
-```bash
+```shell
 R1(config)#do ping 192.168.80.10
 
 Type escape sequence to abort.
@@ -211,7 +215,7 @@ iptables中还有一个很重要的内容是地址转换。跟网络中的NAT有
 
 
 
-```bash
+```shell
 [root@remilia ~]# iptables -t nat -I POSTROUTING -s 192.168.80.0/24 -o eth1 -j SNAT --to-source 200.1.1.1
 [root@remilia ~]# iptables -L -t nat 
 Chain PREROUTING (policy ACCEPT)
@@ -233,7 +237,7 @@ SNAT       all  --  192.168.80.0/24      anywhere             to:200.1.1.1
 
 
 
-```bash
+```shell
 [root@remilia ~]# iptables -t nat -I PREROUTING -i eth1 -d 200.1.1.1 -p icmp -j DNAT --to-destination 192.168.80.80
 [root@remilia ~]# iptables -L -t nat
 Chain PREROUTING (policy ACCEPT)
@@ -263,7 +267,7 @@ SNAT       all  --  192.168.80.0/24      anywhere             to:200.1.1.1
 
 
 
-```bash
+```shell
 R1(config)#do ping 192.168.10.10 \\在R1上ping R2 能通
 
 Type escape sequence to abort.
