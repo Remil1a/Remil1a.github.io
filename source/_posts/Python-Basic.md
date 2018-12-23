@@ -989,3 +989,46 @@ remove 可以移除列表中的某个元素。只能填具体的值。
 ### 字典
 
 字典是映射类型，是通过“键”来提取“值”。所以不能通过索引提取值。由于不是序列，所以也不能切片了。
+
+
+
+创建字典的方法很简单 如下：
+
+```python
+a = {'name':'leexu','age':23}
+ a.get('name')
+'leexu'
+```
+
+可以通过get()来提取键值.
+
+
+
+也可以用dict()来创建
+
+```python
+b = dict(name="leexu",age=23)
+b
+{'name': 'leexu', 'age': 23}
+```
+
+
+
+#### 字典的增加和修改
+
+给字典增加键值对，如果键已经存在，则会覆盖，如果不存在，则增加新的键值对
+
+```python
+b = dict(name="leexu",age=23)
+b
+{'name': 'leexu', 'age': 23}
+b['name']='lixu'
+b
+{'name': 'lixu', 'age': 23}
+b['job']='teacher'
+b
+{'name': 'lixu', 'age': 23, 'job': 'teacher'}
+```
+
+
+

@@ -30,9 +30,11 @@ mathjax: true
 
 2.1 交换网络在刚开始运行的阶段，所有交换机都会从所有的端口发送BPDU，大家都认为自己是root，随着BPDU的泛洪和收集，根据BPDU中的信息，交换机会算出一个结果。root会被选举出来，整个交换网络有且只有一个root。（选举root的过程先不提，后面再说。）在此之后由root以默认的每隔2s为周期发送BPDU，所有的非root交换机从自己的根端口收到BPDU，再从自己的指定端口产生bpdu发出去。被block的非指定端口会不断侦听链路上的bpdu，当其在一段时间内没有收到bpdu，则认为链路出现故障。开始新的收敛阶段。
 
-> When a switch receives a configuration BPDU that contains superior information(lower bridge ID,lower path cost, and so forth),it stores the information for that port.If this BPDU is received on the root port of the switch,the switch also forwards it with an updated message to all attached LANs for which it is the designated switch. 
+> a)  A Bridge that believes itself to be the Root (all Bridges start by believing themselves to be the Root until they discover otherwise) originates Configuration Messages (by transmitting Configuration BPDUs) on all the LANs to which it is attached, at regular intervals. 
 >
-> If a switch receives a configuration BPDU that contains inferior information to that currently stored for that port,it discard the BPDU.If the switch is a designated switch for the LAN from which the inferior BPDU was received,it sends that LAN a BPDU containing the up-to-date information stored for that port.In this way,inferior information is discarded,and superior information is propagated on the network.
+> b)  A Bridge that receives a Configuration BPDU on what it decides is its Root Port conveying better information (i.e., highest priority Root Identifier, lowest Root Path Cost, highest priority transmit- ting Bridge and Port), passes that information on to all the LANs for which it believes itself to be the Designated Bridge. 
+>
+> c)  A Bridge that receives inferior information, on a Port it considers to be the Designated Port on the LAN to which it is attached, transmits its own information in reply, for all other Bridges attached to that LAN to hear. 
 
 配置BPDU的结构如下:
 
@@ -237,5 +239,7 @@ mathjax: true
 
 ![6](Spanning-Tree\6.png)
 
-如图，假设Switch A
+如图，假设Switch A发生了故障，SwitchB会感知到链路故障，然后向它的RP发送TCN BPDU，当上游交换机收到Switch B发来的TCN BPDU后会回送一个TCN ACK代表收到了Switch B的TCN BPDU。同时也会向其RP发送TCN BPDU。以此类推，目的是为了让ROOT收到TCN BPDU。
+
+
 
