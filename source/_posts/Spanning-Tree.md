@@ -94,7 +94,7 @@ mathjax: true
 
 ## TCN BPDU
 
-3.1 TCP BPDU在网络拓扑发生变化时产生。TYPE字段为0x80，FLAG字段LSB和MSB位均置位。
+3.1 TCN BPDU在网络拓扑发生变化时产生。TYPE字段为0x80，FLAG字段LSB和MSB位均置。
 
    当网络拓扑发生变化的时候，最先意识到变化的交换机会从根端口发送TCN到上一层交换机，一直到根交换机，上层交换机除了接着向其上层发送TCN之外，也会回一个TCA的确认信息给前一个交换机。当根接受到TC后发送TCA回最开始的交换机并向所有交换机发送TC。交换机收到ROOT发来的TC后，会将MAC地址表的老化时间缩减为15S（一个转发延迟），这个TC会一直持续35S（20+15）。
 
@@ -125,7 +125,7 @@ mathjax: true
 
 > 注意：
 >
-> 根桥的角色是可以抢占的。桥ID中的MAC地址指的是交换机的背板MAC地址 使用show version | in Base查看。
+> 根桥的角色是可以抢占的。桥ID中的MAC地址指的是交换机的背板MAC地址 使用show version | in bia查看。
 >
 > sw1-huiju#show version | in Base
 > Base ethernet MAC Address       : 00:23:5E:26:D9:80

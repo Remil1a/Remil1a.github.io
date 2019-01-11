@@ -28,6 +28,8 @@ Linux中的防火墙主要针对于网络层以及IP数据包，可以处理IP�
 
 # iptables中的表、链结构
 
+iptables service是一种静态的防火墙管理工具，用户可以通过命令将规则写入/etc/sysconfig/iptables中，再执行reload。其实reload是对旧的规则进行了清空，再写入新的规则。这种哪怕写入一条规则也要reload生效的防火墙叫静态防火墙。
+
 - 规则链
     - 规则：可以对数据包进行过滤或处理
     - 链：容纳各种规则
@@ -288,3 +290,73 @@ R2#
 \\此时可以看出R2认为是200.1.1.1在ping他。
 ```
 
+# Firewalld
+
+- 在CentOS7.0以后的版本中，加入了新的Firewalld服务。以下是firewalld的简介。
+
+Firewalld提供了动态的防火墙管理，支持区域的定义，为网络和及其关联的接口或源分配信任级别。它支持IPv4，IPv6，以太桥。它的配置分为实时的和永久的，同时它也为应用程序和服务提供了接口，可以直接将规则添加进iptables和ip6tables等。
+
+>  firewalld provides a dynamically managed firewall with support for network/firewall “zones” to assign a level of trust to a network and its associated connections, interfaces or sources. It has support for IPv4, IPv6, Ethernet bridges and also for IPSet firewall settings. There is a separation of the runtime and permanent configuration options. It also provides an interface for services or applications to add iptables, ip6tables and ebtables rules directly. 
+
+![3](iptables-firewalld/4.png)
+
+firewalld架构如图所示。首先能看到图中也出现了iptables。要注意的是，firewalld是动态防火墙。可以回顾上面提到的iptables service静态防火墙的概念。
+
+>用户可以通过命令将规则写入`/etc/sysconfig/iptables`中，再执行reload。其实reload是对旧的规则进行了清空，再写入新的规则。这种哪怕写入一条规则也要reload生效的防火墙叫静态防火墙。
+
+
+
+而人们经常提到的firewalld取代了iptables只是取代了iptables的service部分，其backends（后端，或者说底层）还是依靠iptables。firewalld动态的好处在于，每次创建，改变，删除时，不需要重启进程就可以应用规则。我们可以把iptables的服务关掉，然后把firewalld打开（系统应该是默认打开的），之后使用`iptables -L` 查看，依然可以看到很多规则。
+
+> Being dynamic, it enables creating, changing, and deleting the rules without the necessity to restart the firewall daemon each time the rules are changed.
+
+## 区域（Zones）
+
+Firewalld使用区域来将网络划分到不同的安全级别的区域（Zones）中。一个接口只能属于一个区域，但是一个区域能够有多个网络接口。系统预设了多个防火墙区域。预设的防火墙区域配置放在`/usr/lib/firewalld/zones/`中。生效的放在`/etc/firewalld/zones`中
+
+
+
+firewalld基本语法是这样的：`firewall-cmd [OPTIONS...] ` 
+
+
+
+例如我们可以通过firewall-cmd查看系统预设的区域：
+
+```shell
+[root@oolong-tea ~]# firewall-cmd --get-zones
+block dmz drop external home internal public trusted work
+```
+
+
+
+能够看到系统本身就预设了很多区域。那么我们可以先来认识一下这些预设的区域。
+
+### block(阻塞)
+
+任何连入的ipv4连接都会贝icmp-host-prohibited消息拒绝，ipv6连接都会被icmp6-adm-prohibited拒绝。
+
+> Any incoming network connections are rejected with an icmp-host-prohibited message for `IPv4` and icmp6-adm-prohibited for `IPv6`. Only network connections initiated from within the system are possible.
+
+
+
+### dmz
+
+用户定义的区域，可以被公共接入，也可以有限制的访问内部网络。仅接受经过选择的连接
+
+> For computers in your demilitarized zone that are publicly-accessible with limited access to your internal network. Only selected incoming connections are accepted.
+
+
+
+### drop（丢弃）
+
+任何接收的网络数据包都被丢弃，没有任何回复。仅能有发送出去的网络连接。
+
+> Any incoming network packets are dropped without any notification. Only outgoing network connections are possible.
+
+
+
+### external（外部）
+
+特别为路由器使用的伪装区域，不信任这个区域的设备，认为这个区域的设备会危害你的电脑，只放行经过选择的连接
+
+> For use on external networks with masquerading enabled, especially for routers. You do not trust the other computers on the network to not harm your computer. Only selected incoming connections are accepted.
