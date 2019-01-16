@@ -359,4 +359,4 @@ block dmz drop external home internal public trusted work
 
 特别为路由器使用的伪装区域，不信任这个区域的设备，认为这个区域的设备会危害你的电脑，只放行经过选择的连接
 
-> For use on external networks with masquerading enabled, especially for routers. You do not trust the other computers on the network to not harm your computer. Only selected incoming connections are accepted.
+> For use on external networks with masquerading enabled, especially for routers. You do not trust the other computers on the network to not harm your computer. Only selected incoming connections are accepted
