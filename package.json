@@ -25,6 +25,9 @@
     "lodash": "^4.17.11",
     "lodash.update": "^4.10.2",
     "md5": "^2.2.1",
+    "react": "^16.8.2",
+    "react-dom": "^16.8.2",
+    "react-flip-move": "^2.9.14",
     "save": "^2.3.2"
   }
 }
