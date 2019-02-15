@@ -23,7 +23,7 @@ tags: [Cisco,Huawei,H3C]
 
 ![1](Basic-Switching\1.png)
 
-首先在刚开机时，MAC地址表是空的。交换机依靠这张表转发数据。可是在刚开机时，这张表里没有任何信息。这里以思科的设备为例。在设备上使用show mac address-table查看mac地址表。
+首先在刚开机时，MAC地址表是空的。交换机依靠这张表转发数据。可是在刚开机时，这张表里没有任何信息。这里以思科的设备为例。在设备上使用show mac address-table查看mac地址表
 
 ![2](Basic-Switching\2.png)
 
