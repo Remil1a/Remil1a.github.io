@@ -12,28 +12,27 @@ mathjax: true
 
 <!----more---->
 
-![1](Spanning-Tree\1.png)
-
+![1](Spanning-tree/1.png)
 如图所示，若switch0和switch2下方均接入了若干PC，当网络中任意一点出现故障时，整个网络将会变得不可用，这显然是不行的。所以一般会在SWITCH0和SWITCH2之间再连一根线，这种拓扑就是有冗余链路的拓扑。这样可以防止网络中的单点故障问题。但是也随之带来了新问题。那就是网络环路。而生成树就是为了破除冗余链路带来的环路问题而被提出的。
 
 
 
 # 802.1d
 
-##  BPDU报文
+## BPDU报文
 
    交换机之间通过BPDU报文的交互来计算生成树。生成树之所以叫生成树，是因为破环就是在环形的冗余链路中计算出一个无环的树形结构。
 
    BPDU报文一共有两种：配置BPDU（configuration BPDU）和TCN（topology change notification）
 
-##  配置BPDU
+## 配置BPDU
 
 2.1 交换网络在刚开始运行的阶段，所有交换机都会从所有的端口发送BPDU，大家都认为自己是root，随着BPDU的泛洪和收集，根据BPDU中的信息，交换机会算出一个结果。root会被选举出来，整个交换网络有且只有一个root。（选举root的过程先不提，后面再说。）在此之后由root以默认的每隔2s为周期发送BPDU，所有的非root交换机从自己的根端口收到BPDU，再从自己的指定端口产生bpdu发出去。被block的非指定端口会不断侦听链路上的bpdu，当其在一段时间内没有收到bpdu，则认为链路出现故障。开始新的收敛阶段。
 
 > a)  A Bridge that believes itself to be the Root (all Bridges start by believing themselves to be the Root until they discover otherwise) originates Configuration Messages (by transmitting Configuration BPDUs) on all the LANs to which it is attached, at regular intervals. 
->
+> 
 > b)  A Bridge that receives a Configuration BPDU on what it decides is its Root Port conveying better information (i.e., highest priority Root Identifier, lowest Root Path Cost, highest priority transmit- ting Bridge and Port), passes that information on to all the LANs for which it believes itself to be the Designated Bridge. 
->
+> 
 > c)  A Bridge that receives inferior information, on a Port it considers to be the Designated Port on the LAN to which it is attached, transmits its own information in reply, for all other Bridges attached to that LAN to hear. 
 
 配置BPDU的结构如下:
@@ -72,7 +71,7 @@ mathjax: true
  12. Forward Delay:    2 bytes in 1/256 secs
  13. Version 1 Length: 1 byte (0x00 no ver 1 protocol info present. RST, MST, SPT BPDU only)
  14. Version 3 Length: 2 bytes (MST, SPT BPDU only)
- 					——————摘自维基百科
+                    ——————摘自维基百科
 ```
 
 每个字段的意义大体如下：
@@ -102,19 +101,19 @@ mathjax: true
 
 4.1 STP采用四个步骤来解决二层环路：
 
-​	4.1.1 在一个交换网络中选举一个root bridge
+​ 4.1.1 在一个交换网络中选举一个root bridge
 
-​	4.1.2 在每个非根交换机上选举一个根端口（RP）
+​ 4.1.2 在每个非根交换机上选举一个根端口（RP）
 
-​	4.1.3 为每个segment选举一个指定端口（DP）
+​ 4.1.3 为每个segment选举一个指定端口（DP）
 
-​	4.1.4 阻塞非指定端口
+​ 4.1.4 阻塞非指定端口
 
 4.2 比较原则
 
-​	4.2.1 STP需要网络设备相互交换消息来检测桥接环路，这个消息就叫**BPDU（桥协议数据单元）**即使是阻塞的端口也会不断收到BPDU。
+​ 4.2.1 STP需要网络设备相互交换消息来检测桥接环路，这个消息就叫**BPDU（桥协议数据单元）**即使是阻塞的端口也会不断收到BPDU。
 
-​	4.2.2 生成树总是按照以下步骤来生成一个无环的拓扑：
+​ 4.2.2 生成树总是按照以下步骤来生成一个无环的拓扑：
 
 - 最低的桥ID
 - 到根桥最低的路径开销
@@ -124,18 +123,18 @@ mathjax: true
 交换机使用这四个步骤分别选举出根交换机，根端口和指定端口。并且会保存各个端口收到的最好的BPDU。每收到一个新的BPDU，都会和这个最优的BPDU进行比较。如果收到的BPDU比保存的BPDU更优，则更新。反之则不做任何操作。
 
 > 注意：
->
+> 
 > 根桥的角色是可以抢占的。桥ID中的MAC地址指的是交换机的背板MAC地址 使用show version | in bia查看。
->
+> 
 > sw1-huiju#show version | in Base
 > Base ethernet MAC Address       : 00:23:5E:26:D9:80
->
 > 
->
 > 
->
+> 
+> 
+> 
 > 端口ID中的MAC是指端口的MAC地址。思科交换机上可使用show interfaces | in bia查看
->
+> 
 > sw1-huiju#show interfaces | in bia
 >   Hardware is EtherSVI, address is 0023.5e26.d9c0 (bia 0023.5e26.d9c0)
 >   Hardware is EtherSVI, address is 0023.5e26.d9c1 (bia 0023.5e26.d9c1)
@@ -147,23 +146,23 @@ mathjax: true
 
 接下来看几组802.1d的选举实例：
 
-![2](Spanning-Tree\2.png)
+![2](Spanning-tree/2.png))
 
 如图所示，交换机X和Y的优先级分别是1111和2222，拓扑中存在冗余链路。BPDU在经过交换后，会进行两个参数的比较来选出根桥。一是优先级。在不手动进行更改的情况下。两台交换机的优先级都为32768。所以优先级这一块是比较不出来的。这种情况下会去比较MAC地址。MAC地址是比小的。所以交换机X胜出。
 
 
 
-​		 ![3](Spanning-Tree\3.png)
+​      ![3](Spanning-tree/3.png)
 
 
 
-​		接下来看这组选举实例。先进行根桥的选举。根桥选举先看优先级。交换机X，Y，Z都是32768 所以比较不出来。那么就会看交换机的MAC地址。交换机Z的最小。胜出。所以交换机Z是根桥。根桥上所有的端口都是指定端口，处于转发状态。之后在非根交换机上选举根端口。
+​     接下来看这组选举实例。先进行根桥的选举。根桥选举先看优先级。交换机X，Y，Z都是32768 所以比较不出来。那么就会看交换机的MAC地址。交换机Z的最小。胜出。所以交换机Z是根桥。根桥上所有的端口都是指定端口，处于转发状态。之后在非根交换机上选举根端口。
 
 
 
-​		根端口的定义是去往根桥最小的路径开销。那么按照下面这幅图
+​     根端口的定义是去往根桥最小的路径开销。那么按照下面这幅图
 
-![4](Spanning-Tree\4.png)
+![4](Spanning-tree/4.png)
 
 由图上的100Base-T和10Base-T可得，X和Y之间的链路开销会比XZ以及XY之间的大。所以交换机X和Y的port0胜出。为根端口。
 
@@ -207,7 +206,7 @@ mathjax: true
 
 ### STP端口状态转换过程
 
-![5](Spanning-Tree\5.png)
+![5](Spanning-tree/5.png)
 
 ## STP拓扑变更
 
@@ -235,9 +234,9 @@ mathjax: true
 
 
 
-### 拓扑变更案例 
+### 拓扑变更案例
 
-![6](Spanning-Tree\6.png)
+![6](Spanning-tree/6.png)
 
 如图，假设Switch A发生了故障，SwitchB会感知到链路故障，然后向它的RP发送TCN BPDU，当上游交换机收到Switch B发来的TCN BPDU后会回送一个TCN ACK代表收到了Switch B的TCN BPDU。同时也会向其RP发送TCN BPDU。以此类推，目的是为了让ROOT收到TCN BPDU。
 
