@@ -12,7 +12,7 @@ mathjax: true
 
 <!----more---->
 
-![1](/1.png)
+![1](Spanning-Tree/1.png)
 如图所示，若switch0和switch2下方均接入了若干PC，当网络中任意一点出现故障时，整个网络将会变得不可用，这显然是不行的。所以一般会在SWITCH0和SWITCH2之间再连一根线，这种拓扑就是有冗余链路的拓扑。这样可以防止网络中的单点故障问题。但是也随之带来了新问题。那就是网络环路。而生成树就是为了破除冗余链路带来的环路问题而被提出的。
 
 
@@ -146,13 +146,13 @@ mathjax: true
 
 接下来看几组802.1d的选举实例：
 
-![2](/2.png))
+![2](Spanning-Tree/2.png))
 
 如图所示，交换机X和Y的优先级分别是1111和2222，拓扑中存在冗余链路。BPDU在经过交换后，会进行两个参数的比较来选出根桥。一是优先级。在不手动进行更改的情况下。两台交换机的优先级都为32768。所以优先级这一块是比较不出来的。这种情况下会去比较MAC地址。MAC地址是比小的。所以交换机X胜出。
 
 
 
-​      ![3](/3.png)
+​      ![3](Spanning-Tree/3.png)
 
 
 
@@ -162,7 +162,7 @@ mathjax: true
 
 ​     根端口的定义是去往根桥最小的路径开销。那么按照下面这幅图
 
-![4](/4.png)
+![4](Spanning-Tree/4.png)
 
 由图上的100Base-T和10Base-T可得，X和Y之间的链路开销会比XZ以及XY之间的大。所以交换机X和Y的port0胜出。为根端口。
 
@@ -206,7 +206,7 @@ mathjax: true
 
 ### STP端口状态转换过程
 
-![5](/5.png)
+![5](Spanning-Tree/5.png)
 
 ## STP拓扑变更
 
@@ -236,7 +236,7 @@ mathjax: true
 
 ### 拓扑变更案例
 
-![6](/6.png)
+![6](Spanning-Tree/6.png)
 
 如图，假设Switch A发生了故障，SwitchB会感知到链路故障，然后向它的RP发送TCN BPDU，当上游交换机收到Switch B发来的TCN BPDU后会回送一个TCN ACK代表收到了Switch B的TCN BPDU。同时也会向其RP发送TCN BPDU。以此类推，目的是为了让ROOT收到TCN BPDU。
 
