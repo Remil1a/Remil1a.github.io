@@ -9,6 +9,8 @@ tags: Cisco
 
 设备在上架以后，一般会配置远程访问方便管理员调试设备，先看两个最基本的管理方式。
 
+<!--more-->
+
 ## 通过Telnet管理设备
 
 ![1](Device-Management-For-AAA/1.png)
