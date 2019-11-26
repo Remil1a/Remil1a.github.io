@@ -32,7 +32,7 @@ mathjax: true
 
 一般来说，在VMWare Workstation中，你的虚拟机加了几块网卡，在命令行中使用ip a命令就可以看到几块网卡。
 
-![1](Linux-Network-Manage/1.PNG)
+![1](Linux-Network-Manage/1.png)
 
 
 
@@ -78,7 +78,7 @@ Linux系统的命名原来是eth0,eth1这样的形式，但是这个编号往往
 systemd v197版本中将dell的方案作了进一步的一般化拓展。
 目前的Centos既支持dell的biosdevname，也支持systemd的方案。
 
-![1](Linux-Network-Manage/2.PNG)
+![1](Linux-Network-Manage/2.png)
 
 可以看一下这张图，有板载网卡和PCI网卡的情况下，很难说清楚哪个是eth0
 
@@ -99,7 +99,7 @@ net.ifnames的命名规范为:   设备类型+设备位置+数字
 
 设备位置如下：
 
-![1](Linux-Network-Manage/3.PNG)
+![1](Linux-Network-Manage/3.png)
 
 
 
