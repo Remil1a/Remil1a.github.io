@@ -153,8 +153,8 @@ net.ifnames的命名规范为:   设备类型+设备位置+数字
 上边的71-biosdevname.rules 是实际执行biosdevname的policy75-net-description.rules和80-net-name-slot.rules实际执行Scheme 1,2,3
 根据上述的过程，可见网卡命名受 biosdevname和net.ifnames这两个内核参数影响。这两个参数都可以在grub配置中提供。
 biosdevname=0是系统默认值（dell服务器默认是1），net.ifnames=1是系统默认值:
-#vi /boot/grub/grub.conf
-​    kernel /boot/vmlinuz biosdevname=1
+​    vi /boot/grub/grub.conf
+​    kernel /boot/ biosdevname=1
 ​    initrd /boot/initrd.img 
 
 在上面Centos7中命名的策略顺序是系统默认的。
