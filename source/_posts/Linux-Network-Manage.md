@@ -114,7 +114,7 @@ net.ifnames的命名规范为:   设备类型+设备位置+数字
 
 而biosdevname的命名规范为
 
-![1](Linux-Network-Manage/4.PNG)
+![1](Linux-Network-Manage/4.png)
 
 
 
