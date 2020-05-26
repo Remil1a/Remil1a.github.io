@@ -66,7 +66,6 @@ tag_map:
      华为: Huawei
      思科: Cisco
      华三: H3C
-     深信服: SANGFOR
 
 
 
@@ -96,13 +95,18 @@ deploy:
   branch: master
 
 algolia:
- applicationID: '1XKZIWX0FE'
- apiKey: 'd44daaeec579889873eebb586f755ad5'
- adminApiKey: '43957576cc6d7fbae81008014e288ea1'
- indexName: 'remil1a.github.io'
- chunkSize: 5000
- fields:
- - title
- - slug
- - path
- - content:strip
+# applicationID: '1XKZIWX0FE'
+# apiKey: 'd44daaeec579889873eebb586f755ad5'
+# adminApiKey: '43957576cc6d7fbae81008014e288ea1'
+# indexName: 'hexo_remilia'
+# chunkSize: 5000
+# fields:
+# - title
+# - slug
+# - path
+# - content:strip
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
