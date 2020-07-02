@@ -6,6 +6,7 @@
     "version": "3.7.1"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "gitalk": "^1.2.2",
     "gitment": "0.0.3",
     "hexo": "^3.7.1",
