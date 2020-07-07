@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Cisco,Huawei,H3C," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="生成树概览在较简单的交换网络中，为了防止出现单点故障，经常会做冗余链路来提高整个交换网络的可靠性。">
+<meta name="keywords" content="Cisco,Huawei,H3C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spanning Tree">
+<meta property="og:url" content="http://remil1a.github.io/2018/07/17/Spanning-Tree/index.html">
+<meta property="og:site_name" content="Take Your Heart">
+<meta property="og:description" content="生成树概览在较简单的交换网络中，为了防止出现单点故障，经常会做冗余链路来提高整个交换网络的可靠性。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Spanning-Tree/1.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Spanning-Tree/2.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Spanning-Tree/3.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Spanning-Tree/4.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Spanning-Tree/5.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Spanning-Tree/6.png">
+<meta property="og:updated_time" content="2020-07-01T01:30:42.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spanning Tree">
+<meta name="twitter:description" content="生成树概览在较简单的交换网络中，为了防止出现单点故障，经常会做冗余链路来提高整个交换网络的可靠性。">
+<meta name="twitter:image" content="http://remil1a.github.io/2018/07/17/Spanning-Tree/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://remil1a.github.io/2018/07/17/Spanning-Tree/"/>
+
+
+
+
+
+  <title>Spanning Tree | Take Your Heart</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Take Your Heart</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/tags/Linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cisco">
+          <a href="/tags/Cisco" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Cisco
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-huawei">
+          <a href="/tags/Huawei" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Huawei
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-h3c">
+          <a href="/tags/H3C" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            H3C
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/tags/Python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docker">
+          <a href="/tags/Docker" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Docker
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://remil1a.github.io/2018/07/17/Spanning-Tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Remilia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Take Your Heart">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spanning Tree</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T16:38:38+08:00">
+                2018-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="生成树概览"><a href="#生成树概览" class="headerlink" title="生成树概览"></a>生成树概览</h1><p>在较简单的交换网络中，为了防止出现单点故障，经常会做冗余链路来提高整个交换网络的可靠性。</p>
+<a id="more"></a>
+<p><img src="/2018/07/17/Spanning-Tree/1.png" alt="1"><br>如图所示，若switch0和switch2下方均接入了若干PC，当网络中任意一点出现故障时，整个网络将会变得不可用，这显然是不行的。所以一般会在SWITCH0和SWITCH2之间再连一根线，这种拓扑就是有冗余链路的拓扑。这样可以防止网络中的单点故障问题。但是也随之带来了新问题。那就是网络环路。而生成树就是为了破除冗余链路带来的环路问题而被提出的。</p>
+<h1 id="802-1d"><a href="#802-1d" class="headerlink" title="802.1d"></a>802.1d</h1><h2 id="BPDU报文"><a href="#BPDU报文" class="headerlink" title="BPDU报文"></a>BPDU报文</h2><p>   交换机之间通过BPDU报文的交互来计算生成树。生成树之所以叫生成树，是因为破环就是在环形的冗余链路中计算出一个无环的树形结构。</p>
+<p>   BPDU报文一共有两种：配置BPDU（configuration BPDU）和TCN（topology change notification）</p>
+<h2 id="配置BPDU"><a href="#配置BPDU" class="headerlink" title="配置BPDU"></a>配置BPDU</h2><p>2.1 交换网络在刚开始运行的阶段，所有交换机都会从所有的端口发送BPDU，大家都认为自己是root，随着BPDU的泛洪和收集，根据BPDU中的信息，交换机会算出一个结果。root会被选举出来，整个交换网络有且只有一个root。（选举root的过程先不提，后面再说。）在此之后由root以默认的每隔2s为周期发送BPDU，所有的非root交换机从自己的根端口收到BPDU，再从自己的指定端口产生bpdu发出去。被block的非指定端口会不断侦听链路上的bpdu，当其在一段时间内没有收到bpdu，则认为链路出现故障。开始新的收敛阶段。</p>
+<blockquote>
+<p>a)  A Bridge that believes itself to be the Root (all Bridges start by believing themselves to be the Root until they discover otherwise) originates Configuration Messages (by transmitting Configuration BPDUs) on all the LANs to which it is attached, at regular intervals. </p>
+<p>b)  A Bridge that receives a Configuration BPDU on what it decides is its Root Port conveying better information (i.e., highest priority Root Identifier, lowest Root Path Cost, highest priority transmit- ting Bridge and Port), passes that information on to all the LANs for which it believes itself to be the Designated Bridge. </p>
+<p>c)  A Bridge that receives inferior information, on a Port it considers to be the Designated Port on the LAN to which it is attached, transmits its own information in reply, for all other Bridges attached to that LAN to hear. </p>
+</blockquote>
+<p>配置BPDU的结构如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">1. Protocol ID:       2 bytes (0x0000 IEEE 802.1D)</span><br><span class="line"> 2. Version ID:        1 byte (0x00 Config &amp; TCN / 0x02 RST / 0x03 MST / 0x04 SPT  BPDU) </span><br><span class="line"> 3. BPDU Type:         1 byte (0x00 STP Config BPDU, 0x80 TCN BPDU, 0x02 RST/MST Config BPDU)</span><br><span class="line"> 4. Flags:             1 byte</span><br><span class="line">   bits  : usage</span><br><span class="line">       1 : 0 or 1 for Topology Change</span><br><span class="line">       2 : 0 (unused) or 1 for Proposal in RST/MST/SPT BPDU</span><br><span class="line">     3-4 : 00 (unused) or</span><br><span class="line">           01 for Port Role Alternate/Backup in RST/MST/SPT BPDU</span><br><span class="line">           10 for Port Role Root in RST/MST/SPT BPDU</span><br><span class="line">           11 for Port Role Designated in RST/MST/SPT BPDU</span><br><span class="line">       5 : 0 (unused) or 1 for Learning in RST/MST/SPT BPDU</span><br><span class="line">       6 : 0 (unused) or 1 for Forwarding in RST/MST/SPT BPDU</span><br><span class="line">       7 : 0 (unused) or 1 for Agreement in RST/MST/SPT BPDU</span><br><span class="line">       8 : 0 or 1 for Topology Change Acknowledgement</span><br><span class="line"> 5. Root ID:           8 bytes (CIST Root ID in MST/SPT BPDU)</span><br><span class="line">   bits  : usage</span><br><span class="line">     1-4 : Root Bridge Priority</span><br><span class="line">    5-16 : Root Bridge System ID Extension</span><br><span class="line">   17-64 : Root Bridge MAC Address</span><br><span class="line"> 6. Root Path Cost:    4 bytes (CIST External Path Cost in MST/SPT BPDU)</span><br><span class="line"> 7. Bridge ID:         8 bytes (CIST Regional Root ID in MST/SPT BPDU)</span><br><span class="line">   bits  : usage</span><br><span class="line">     1-4 : Bridge Priority </span><br><span class="line">    5-16 : Bridge System ID Extension</span><br><span class="line">   17-64 : Bridge MAC Address</span><br><span class="line">  8. Port ID:          2 bytes</span><br><span class="line">  9. Message Age:      2 bytes in 1/256 secs</span><br><span class="line"> 10. Max Age:          2 bytes in 1/256 secs</span><br><span class="line"> 11. Hello Time:       2 bytes in 1/256 secs</span><br><span class="line"> 12. Forward Delay:    2 bytes in 1/256 secs</span><br><span class="line"> 13. Version 1 Length: 1 byte (0x00 no ver 1 protocol info present. RST, MST, SPT BPDU only)</span><br><span class="line"> 14. Version 3 Length: 2 bytes (MST, SPT BPDU only)</span><br><span class="line">                    ——————摘自维基百科</span><br></pre></td></tr></table></figure>
+<p>每个字段的意义大体如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>字节</th>
+<th>字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>协议（protocol）</td>
+<td>代表上层协议（BPDU），该值总为0.</td>
+</tr>
+<tr>
+<td>1</td>
+<td>版本（version）</td>
+<td>802.1d总为0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>类型（Type）</td>
+<td>配置BPDU为0x00、TCN BPDU为0x80</td>
+</tr>
+<tr>
+<td>1</td>
+<td>标识（Flag）</td>
+<td>LSB最低有效位置位表示TC标识，MSB最高有效位置位表示TCA标识</td>
+</tr>
+<tr>
+<td>8</td>
+<td>根ID（Root ID）</td>
+<td>根桥的桥ID</td>
+</tr>
+<tr>
+<td>4</td>
+<td>路径开销（Path Cost）</td>
+<td>到达根桥的开销</td>
+</tr>
+<tr>
+<td>8</td>
+<td>网桥ID（Bridge ID）</td>
+<td>BPDU发送桥的ID</td>
+</tr>
+<tr>
+<td>2</td>
+<td>端口ID（Port ID）</td>
+<td>BPDU发送网桥的端口ID（优先级+端口号）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>消息寿命（Message age）</td>
+<td>从根网桥发出BPDU之后的秒数，每经过一个网桥都-1，所以本质上是到达根桥的跳数。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>最大寿命（Max age）</td>
+<td>当一段时间未收到任何BPDU，生存期到达MAX age时，网桥认为该端口连接的链路发生故障。也可理解为BPDU的最大寿命，默认20s</td>
+</tr>
+<tr>
+<td>2</td>
+<td>HELLO时间（Hello Time）</td>
+<td>根网桥连续发出BPDU之间的时间间隔，默认2s</td>
+</tr>
+<tr>
+<td>2</td>
+<td>转发延迟（Forward Delay）</td>
+<td>在侦听和学习状态停留的时间，默认15s。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="TCN-BPDU"><a href="#TCN-BPDU" class="headerlink" title="TCN BPDU"></a>TCN BPDU</h2><p>3.1 TCN BPDU在网络拓扑发生变化时产生。TYPE字段为0x80，FLAG字段LSB和MSB位均置。</p>
+<p>   当网络拓扑发生变化的时候，最先意识到变化的交换机会从根端口发送TCN到上一层交换机，一直到根交换机，上层交换机除了接着向其上层发送TCN之外，也会回一个TCA的确认信息给前一个交换机。当根接受到TC后发送TCA回最开始的交换机并向所有交换机发送TC。交换机收到ROOT发来的TC后，会将MAC地址表的老化时间缩减为15S（一个转发延迟），这个TC会一直持续35S（20+15）。</p>
+<h2 id="STP的运行"><a href="#STP的运行" class="headerlink" title="STP的运行"></a>STP的运行</h2><p>4.1 STP采用四个步骤来解决二层环路：</p>
+<p>​ 4.1.1 在一个交换网络中选举一个root bridge</p>
+<p>​ 4.1.2 在每个非根交换机上选举一个根端口（RP）</p>
+<p>​ 4.1.3 为每个segment选举一个指定端口（DP）</p>
+<p>​ 4.1.4 阻塞非指定端口</p>
+<p>4.2 比较原则</p>
+<p>​ 4.2.1 STP需要网络设备相互交换消息来检测桥接环路，这个消息就叫<strong>BPDU（桥协议数据单元）</strong>即使是阻塞的端口也会不断收到BPDU。</p>
+<p>​ 4.2.2 生成树总是按照以下步骤来生成一个无环的拓扑：</p>
+<ul>
+<li>最低的桥ID</li>
+<li>到根桥最低的路径开销</li>
+<li>最低的发送者桥ID</li>
+<li>最低的发送者端口ID</li>
+</ul>
+<p>交换机使用这四个步骤分别选举出根交换机，根端口和指定端口。并且会保存各个端口收到的最好的BPDU。每收到一个新的BPDU，都会和这个最优的BPDU进行比较。如果收到的BPDU比保存的BPDU更优，则更新。反之则不做任何操作。</p>
+<blockquote>
+<p>注意：</p>
+<p>根桥的角色是可以抢占的。桥ID中的MAC地址指的是交换机的背板MAC地址 使用show version | in bia查看。</p>
+<p>sw1-huiju#show version | in Base<br>Base ethernet MAC Address       : 00:23:5E:26:D9:80</p>
+<p>端口ID中的MAC是指端口的MAC地址。思科交换机上可使用show interfaces | in bia查看</p>
+<p>sw1-huiju#show interfaces | in bia<br>  Hardware is EtherSVI, address is 0023.5e26.d9c0 (bia 0023.5e26.d9c0)<br>  Hardware is EtherSVI, address is 0023.5e26.d9c1 (bia 0023.5e26.d9c1)<br>  Hardware is EtherSVI, address is 0023.5e26.d9c2 (bia 0023.5e26.d9c2)<br>  Hardware is EtherSVI, address is 0023.5e26.d9c3 (bia 0023.5e26.d9c3)<br>  Hardware is EtherSVI, address is 0023.5e26.d9c4 (bia 0023.5e26.d9c4)<br>  Hardware is EtherSVI, address is 0023.5e26.d9c5 (bia 0023.5e26.d9c5)<br>  Hardware is EtherSVI, address is 0023.5e26.d9c6 (bia 0023.5e26.d9c6)</p>
+</blockquote>
+<p>接下来看几组802.1d的选举实例：</p>
+<p><img src="/2018/07/17/Spanning-Tree/2.png" alt="2">)</p>
+<p>如图所示，交换机X和Y的优先级分别是1111和2222，拓扑中存在冗余链路。BPDU在经过交换后，会进行两个参数的比较来选出根桥。一是优先级。在不手动进行更改的情况下。两台交换机的优先级都为32768。所以优先级这一块是比较不出来的。这种情况下会去比较MAC地址。MAC地址是比小的。所以交换机X胜出。</p>
+<p>​      <img src="/2018/07/17/Spanning-Tree/3.png" alt="3"></p>
+<p>​     接下来看这组选举实例。先进行根桥的选举。根桥选举先看优先级。交换机X，Y，Z都是32768 所以比较不出来。那么就会看交换机的MAC地址。交换机Z的最小。胜出。所以交换机Z是根桥。根桥上所有的端口都是指定端口，处于转发状态。之后在非根交换机上选举根端口。</p>
+<p>​     根端口的定义是去往根桥最小的路径开销。那么按照下面这幅图</p>
+<p><img src="/2018/07/17/Spanning-Tree/4.png" alt="4"></p>
+<p>由图上的100Base-T和10Base-T可得，X和Y之间的链路开销会比XZ以及XY之间的大。所以交换机X和Y的port0胜出。为根端口。</p>
+<p>接下来在XY之间的链路选举指定端口。由于交换机X的MAC地址较小。所以交换机X胜出。交换机X的port1为指定端口。那么就只剩下交换机Y的port1了。它就是NDP非指定端口。会被阻塞。</p>
+<h2 id="STP端口状态"><a href="#STP端口状态" class="headerlink" title="STP端口状态"></a>STP端口状态</h2><h3 id="为什么要有STP端口状态"><a href="#为什么要有STP端口状态" class="headerlink" title="为什么要有STP端口状态"></a>为什么要有STP端口状态</h3><p>   由于交换网络中存在传播的延迟。拓扑变更可能会发生在网络的任何时间，任何网段。如果二层接口直接从生成树的block状态过渡到转发状态。就可能会导致临时的环路。为了缓解这种问题，在一个端口开始转发数据之前，它应该等待新的拓扑信息传播到整个交换网络中。</p>
+<h3 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h3><p>   阻塞状态到转发状态通常需要30～50秒，主要涉及到以下的计时器：</p>
+<p>   <strong>Hello时间：</strong>根桥发送配置BPDU的时间间隔。默认是2s</p>
+<p>   <strong>转发延迟：</strong>端口由侦听过渡到学习状态，学习状态过渡到转发状态所需要的时间。默认是15s</p>
+<p>   <strong>最大存活时间：</strong> 在丢弃BPDU之前，网桥用来存储BPDU的时间。缺省为20s。如果连续20秒收不到BPDU。则进入侦听（listening）状态。</p>
+<p>   网络中的生成树拓扑依附于根桥的计时器，根桥将BPDU中的计时器传递给第二层的所有交换机。</p>
+<h3 id="STP各端口状态"><a href="#STP各端口状态" class="headerlink" title="STP各端口状态"></a>STP各端口状态</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>状态名称</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disable</td>
+<td>不收发任何报文</td>
+</tr>
+<tr>
+<td>Blocking</td>
+<td>不接受也不转发帧，接受但不发送BPDU，不学习MAC地址。</td>
+</tr>
+<tr>
+<td>Listening</td>
+<td>不接受也不转发帧，接受并发送BPDU，不学习MAC地址。</td>
+</tr>
+<tr>
+<td>Learning</td>
+<td>不接受也不转发帧，接受并发送BPUD，学习MAC地址。</td>
+</tr>
+<tr>
+<td>Forwarding</td>
+<td>接受并转发帧，接受并发送BPDU，学习MAC地址。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="STP端口状态转换过程"><a href="#STP端口状态转换过程" class="headerlink" title="STP端口状态转换过程"></a>STP端口状态转换过程</h3><p><img src="/2018/07/17/Spanning-Tree/5.png" alt="5"></p>
+<h2 id="STP拓扑变更"><a href="#STP拓扑变更" class="headerlink" title="STP拓扑变更"></a>STP拓扑变更</h2><h3 id="TCN-BPDU概述"><a href="#TCN-BPDU概述" class="headerlink" title="TCN BPDU概述"></a>TCN BPDU概述</h3><p><strong>当网络拓扑出现变化时，最先发现变化的交换机将发送TCN BPDU。</strong></p>
+<p><strong>发生以下事件时，交换机认为是拓扑变更，发送TCN BPDU</strong></p>
+<ul>
+<li>对于处于转发和监听状态的端口，过渡到block状态</li>
+<li>端口进入转发状态，且这个网桥已经有指定接口</li>
+<li>非根桥设备在它的指定端口收到TCN BPDU</li>
+</ul>
+<h3 id="TCN-BPDU-1"><a href="#TCN-BPDU-1" class="headerlink" title="TCN BPDU"></a>TCN BPDU</h3><p><strong>TCN BPDU包含3个字段，它与配置BPDU除了type字段之外的前3个字段完全相同</strong></p>
+<h3 id="拓扑变更的过程"><a href="#拓扑变更的过程" class="headerlink" title="拓扑变更的过程"></a>拓扑变更的过程</h3><p>最先发现拓扑变更的交换机发送TCN，上游交换机接受到TCN会立即回送TCA被置位的BPDU来作确认。在上游交换机确认这个TCN之前，最先发现拓扑变更的交换机会持续发送TCN BPDU。</p>
+<p>接下来上游交换机将在自己的根端口产生另外的TCN BPDU，并且这整个过程会重复，一直到这个拓扑变更被root知道为止。</p>
+<h3 id="拓扑变更案例"><a href="#拓扑变更案例" class="headerlink" title="拓扑变更案例"></a>拓扑变更案例</h3><p><img src="/2018/07/17/Spanning-Tree/6.png" alt="6"></p>
+<p>如图，假设Switch A发生了故障，SwitchB会感知到链路故障，然后向它的RP发送TCN BPDU，当上游交换机收到Switch B发来的TCN BPDU后会回送一个TCN ACK代表收到了Switch B的TCN BPDU。同时也会向其RP发送TCN BPDU。以此类推，目的是为了让ROOT收到TCN BPDU。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Cisco/" rel="tag"># Cisco</a>
+          
+            <a href="/tags/Huawei/" rel="tag"># Huawei</a>
+          
+            <a href="/tags/H3C/" rel="tag"># H3C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/17/Basic-Switching/" rel="next" title="Basic Switching">
+                <i class="fa fa-chevron-left"></i> Basic Switching
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/09/Python-Basic/" rel="prev" title="Python_Basic">
+                Python_Basic <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Remilia" />
+            
+              <p class="site-author-name" itemprop="name">Remilia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#生成树概览"><span class="nav-number">1.</span> <span class="nav-text">生成树概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#802-1d"><span class="nav-number">2.</span> <span class="nav-text">802.1d</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BPDU报文"><span class="nav-number">2.1.</span> <span class="nav-text">BPDU报文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置BPDU"><span class="nav-number">2.2.</span> <span class="nav-text">配置BPDU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCN-BPDU"><span class="nav-number">2.3.</span> <span class="nav-text">TCN BPDU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STP的运行"><span class="nav-number">2.4.</span> <span class="nav-text">STP的运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STP端口状态"><span class="nav-number">2.5.</span> <span class="nav-text">STP端口状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要有STP端口状态"><span class="nav-number">2.5.1.</span> <span class="nav-text">为什么要有STP端口状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计时器"><span class="nav-number">2.5.2.</span> <span class="nav-text">计时器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STP各端口状态"><span class="nav-number">2.5.3.</span> <span class="nav-text">STP各端口状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STP端口状态转换过程"><span class="nav-number">2.5.4.</span> <span class="nav-text">STP端口状态转换过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STP拓扑变更"><span class="nav-number">2.6.</span> <span class="nav-text">STP拓扑变更</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TCN-BPDU概述"><span class="nav-number">2.6.1.</span> <span class="nav-text">TCN BPDU概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCN-BPDU-1"><span class="nav-number">2.6.2.</span> <span class="nav-text">TCN BPDU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拓扑变更的过程"><span class="nav-number">2.6.3.</span> <span class="nav-text">拓扑变更的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拓扑变更案例"><span class="nav-number">2.6.4.</span> <span class="nav-text">拓扑变更案例</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Remilia</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '0bdc0d6f49bfb51e5834',
+          clientSecret: '9306599f43db3af1e58268b660f8fb11fe4771ec',
+          repo: 'git-comments',
+          owner: 'remil1a',
+          admin: ['remil1a'], 
+          id: window.location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML""></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

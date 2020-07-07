@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Cisco,Huawei,H3C," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="IPv4地址概述IPv4地址长度为32位。包括网络号和主机号。网络号和主机号就像人的姓名一样，人的名字分“姓”和“名”。姓是表明家族的字。姓最初代表有共同血缘、血统、血族关系的种族称号。是一种代表整体的概念。而名则代表这个整体中的某个个体。">
+<meta name="keywords" content="Cisco,Huawei,H3C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IPv4 Address">
+<meta property="og:url" content="http://remil1a.github.io/2018/07/14/IPv4-Address/index.html">
+<meta property="og:site_name" content="Take Your Heart">
+<meta property="og:description" content="IPv4地址概述IPv4地址长度为32位。包括网络号和主机号。网络号和主机号就像人的姓名一样，人的名字分“姓”和“名”。姓是表明家族的字。姓最初代表有共同血缘、血统、血族关系的种族称号。是一种代表整体的概念。而名则代表这个整体中的某个个体。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/14/IPv4-Address/1.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/14/IPv4-Address/2.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/14/IPv4-Address/3.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/14/IPv4-Address/4.png">
+<meta property="og:updated_time" content="2020-07-01T01:30:42.558Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IPv4 Address">
+<meta name="twitter:description" content="IPv4地址概述IPv4地址长度为32位。包括网络号和主机号。网络号和主机号就像人的姓名一样，人的名字分“姓”和“名”。姓是表明家族的字。姓最初代表有共同血缘、血统、血族关系的种族称号。是一种代表整体的概念。而名则代表这个整体中的某个个体。">
+<meta name="twitter:image" content="http://remil1a.github.io/2018/07/14/IPv4-Address/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://remil1a.github.io/2018/07/14/IPv4-Address/"/>
+
+
+
+
+
+  <title>IPv4 Address | Take Your Heart</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Take Your Heart</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/tags/Linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cisco">
+          <a href="/tags/Cisco" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Cisco
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-huawei">
+          <a href="/tags/Huawei" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Huawei
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-h3c">
+          <a href="/tags/H3C" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            H3C
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/tags/Python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docker">
+          <a href="/tags/Docker" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Docker
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://remil1a.github.io/2018/07/14/IPv4-Address/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Remilia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Take Your Heart">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IPv4 Address</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-14T11:32:47+08:00">
+                2018-07-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="IPv4地址概述"><a href="#IPv4地址概述" class="headerlink" title="IPv4地址概述"></a>IPv4地址概述</h1><p>IPv4地址长度为32位。包括网络号和主机号。网络号和主机号就像人的姓名一样，人的名字分“姓”和“名”。姓是表明家族的字。姓最初代表有共同血缘、血统、血族关系的种族称号。是一种代表整体的概念。而名则代表这个整体中的某个个体。</p>
+<a id="more"></a>
+<p>类似的，IPv4地址也有这种概念：网络号部分惟一地标识了一条物理链路或逻辑链路，对于与该链路相连的所有设备来说网络号是一样的，就像人的姓一样。一个家族的人都是相同的姓。而主机号部分惟一地标识了该链路上的具体设备。</p>
+<p>有几种方式可以表示IP地址的32位。例如11000000.10101000.00000001.00000001。这个可以用十进制表示成19216811。由此可见，用二进制表示IP地址很麻烦。而全部用十进制表示的话计算起来又很耗时。所以给出一种较好的解决方法。</p>
+<p><img src="/2018/07/14/IPv4-Address/1.png" alt="8"></p>
+<p>32位地址包含4个字节，每个字节都可以用0～255之间的十进制数表示。而每个十进制用点号分隔。这种写法叫点分十进制。如上所示。</p>
+<p>但是要注意的是，路由器不是按照这种方式读取的。更多的时候是按照32位二进制串读取。且IP地址不像其他网络层地址（如Apple Talk和NetWare）那样，网络号和主机号是固定不变的。相反，IP地址的网络号和主机号可以在32位的界线内发生变化。因为TCP/IP从最初设计出来可以灵活地应用于任何网络，从很简单的几个功能发展成一个庞大的协议簇。TCP/IP这种适应性使得IP地址管理变得很困难。</p>
+<h1 id="首个八位组字节规则"><a href="#首个八位组字节规则" class="headerlink" title="首个八位组字节规则"></a>首个八位组字节规则</h1><p>对于大，中，小型网络。会有三种地址分类。分别是A.B.C三类地址。这三类的网络号和主机号是规定好了的。这种地址也叫做有类地址。</p>
+<ul>
+<li>A类地址—— 用于大型网络，第一个八位组是网络号，后三个八位组是主机号。8位的网络号最多可以有256个网络，而每个网络地址后面的主机号可以提供的主机数量为$2^{24}$（IP地址共32位，去掉8个网络位，得出主机位一共有24个）</li>
+<li>B类地址—— 用于中型网络。前2个八位组表示网络号，后2个八位组表示主机号。网络号和主机号地址都是$2^{16}$方个。</li>
+<li>C类地址—— 前3个8位表示网络号，最后一个8位表示主机号。跟A类地址正好相反。能提供256个主机。可以提供$2^{24}$个网络</li>
+</ul>
+<p>那么对于ABC三类地址，需要用某一特定方法区分开来。人们规定，A类地址首个八位组的第一位总被设置为0。B类地址首个八位组第一，二位恒为10。C类地址首个八位组前三位恒为110。这么一来ABC三类地址的范围就如下所示</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">地址类</th>
+<th style="text-align:center">范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A类</td>
+<td style="text-align:center">1～126</td>
+</tr>
+<tr>
+<td style="text-align:center">B类</td>
+<td style="text-align:center">128～191</td>
+</tr>
+<tr>
+<td style="text-align:center">C类</td>
+<td style="text-align:center">192～223</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>注：回环地址（典型的像127.0.0.1）向自己发送流量，发送到这个地址的数据将直接被送回给发送进程，不会离开设备。</p>
+</blockquote>
+<h1 id="地址掩码"><a href="#地址掩码" class="headerlink" title="地址掩码"></a>地址掩码</h1><p>表示整个链路的地址，非某台特定的主机。可以用IP地址的网络部分来表示。比方说李小狼，可以用李来表示这个人的姓。同样的。主机位部分全为0就可以用来表示整个链路。例如192.168.1.0。这是一个C类地址。主机位部分为最后四个八位组。全为0。如果分配给某个机构，那么这个机构有权决定后8位的使用。</p>
+<p>每一台设备和接口都将被分配惟一的、主机号明确的地址。比方说192.168.1.1。不管是路由器还是主机。除了要确定自身的地址以外，还要知道自身所属的网络。例如上面提到的192.168.1.1。它属于192.168.1.0。</p>
+<p>不过确认自己所属的网络由掩码来单独完成。掩码也是一个32位的字符串。和IP地址类似的。用点分十进制来表示，但是掩码并不是一种地址。人的姓名之所以能够很快的分辨出来是因为我们人为有规定了，第一个字或者头两个字是姓，后面的都是名。正因为这样我们才能够在对方报上姓名的时候很快分出姓氏和名字。但是IP地址不一样。没有这种规定，所以要依靠掩码来区分网络位（姓）和主机位（名）</p>
+<p>对于有类地址来说，人们规定了三种掩码。</p>
+<ul>
+<li><p>A类地址的掩码为255.0.0.0</p>
+</li>
+<li><p>B类地址的掩码为255.255.0.0</p>
+</li>
+<li><p>C类地址的掩码为255.255.255.0</p>
+</li>
+</ul>
+<p>而对于每一位IPv4地址，设备会拿它与地址掩码的对应位进行布尔AND操作。或者叫逻辑与运算。逻辑运算是一种运算方式，跟加减乘除类似，加法得出的结果叫和，乘法得出的叫积。逻辑运算得出的都叫“真值”。对于与运算，真值表如下：</p>
+<p><img src="/2018/07/14/IPv4-Address/2.png" alt="2"></p>
+<p>那么对于我们熟知的192.168.1.1来说，由上述可知C类地址的掩码为255.255.255.0。如果转换成二进制一一对应起来做与运算就可以算出网络地址。过程如下</p>
+<p>11000000.10101000.00000001.00000001</p>
+<p>11111111.11111111.11111111.00000000</p>
+<p>与运算得</p>
+<p>11000000.10101000.00000001.00000000结果为192.168.1.0.</p>
+<p>所以为什么要用掩码？到目前为止好像使用首个八位组的规则要更简单一点，也不用进行如此复杂的计算。</p>
+<h1 id="子网和子网掩码"><a href="#子网和子网掩码" class="headerlink" title="子网和子网掩码"></a>子网和子网掩码</h1><p>到目前为止的定义中，一个有类地址仅能使用在一个单一网络中；为了建立一个网络，每个数据链路都必须使用不同的地址，以便这些网络可以被惟一地标识。如果每个数据链路都是用一个单独的A，B或者C类地址，那么就算用尽所有的IPv4地址，也只能提供少于1700万个数据链路分配地址。这种方法显然是不切实际的。在之前的内容中，我们知道如果要充分地使用主机地址的空间，那么在数据链路172.21.0.0中设备数目可超过65000个。这显然过于庞大且不好管理，更主要的是在大多数情况下根本没有如此巨大的网络。</p>
+<p><img src="/2018/07/14/IPv4-Address/3.png" alt="3"></p>
+<p>想让A，B，C类地址实用化的惟一方法是对网络地址进行划分。例如将172.21.0.0再进行划分，变成子网地址。由于IPv4地址的主机部分可以随意使用且IPv4地址的网络号由分配给接口的地址掩码确定，所以如上图所示。分配给网络的B类地址172.21.0.0由5个数据链路将主机和路由器连接起来，每个链路都需要一个网络地址。照目前的情况，172.21.0.0必须分配给其中的一个数据链路，则另外4个链路还需要4个地址。</p>
+<p>可以注意到上图的掩码并不是标准的16位的B类地址的掩码。而是被扩展了8位，所以IP地址前24位都是网络位。也就是说，掩码使路由器和主机把读取到的前8位的主机地址作为网络地址的一部分。结果就变成了，主网络地址（172.21.0.0）用于整个网络，而每一个数据链路则变为一个子网（subnet）；一个子网总是属于A，B，C这三种地址空间。</p>
+<p>所以现在我们知道，IPv4地址包括三个部分：网络部分，子网部分和主机部分。地址掩码现在变成了子网掩码。地址的前两个八位组仍然是172.21.但是第三个八位组的主机位已经由子网位替代。变化的范围是0～255。在上图的网络中有子网1、2、3、4、5。（172.21.1.0～172.21.5.0）。在单一的B类地址下最多可以有256个子网。对应的掩码也如上图所示。这就是通过向主机位借位用作子网位，子网掩码使得一个单一的网络第一可以用于多个数据链路。</p>
+<p>子网掩码有三种写法：</p>
+<ul>
+<li>点分十进制：255.255.255.0</li>
+<li>位计数：172.21.0.0/24</li>
+<li>十六进制：0xFFFFFF00</li>
+</ul>
+<h1 id="子网规划"><a href="#子网规划" class="headerlink" title="子网规划"></a>子网规划</h1><p>网络设计人员需要根据地址空间与网络详细的匹配程度来选择最合理的子网划分方案。在规划子网和子网掩码时，可以使用相同的计算公式计算一个主网地址下可用的子网数以及每个子网内可用的主机数。公式为$2^n-2$。其中n代表子网位数。减2表示减去主机位全0的地址（网络地址。相当于一个人的名字中只有姓。这种地址是不可用的）和全1的地址（广播地址，向这个地址发送消息相当于给该网络中的所有人发送消息，也不可用）。例如。给定一个A类地址10.0.0.0，子网掩码为10.0.0.0/16。意味着有8位是子网空间，也就是可以产生$2^8-2=254$个子网。每个子网可以有$2^{16}-2=65534$个主机地址。要注意的是，如果以8位组为界限，就无法对C类地址进行划分了。</p>
+<p><img src="/2018/07/14/IPv4-Address/4.png" alt="4"></p>
+<p>如图所示，如果分配C类地址，这里将无法进行划分所以我们要打破8位组界限。子网划分的核心思想是向主机位借位充当网络位。所以在这个网络中共有5条数据链路，所以至少要划分5个子网地址。图上还指明了每个子网需要分配的主机数。其中两个以太网最多需要25个主机地址。所以完整的子网划分最小需求是5个子网，每个子网至少要25个主机地址。</p>
+<p>之后使用公式$2^n-2$ 可以计算出，3个子网位和5个主机位即可满足需求：$2^3-2=6$,$2^5-2=30$ 带有3位子网位的C类地址掩码可以用点分十进制表示为255.255.255.224.</p>
+<p>这边直接给出比较简单的计算方式</p>
+<ul>
+<li>你选择的子网掩码将会产生$2^x$个子网，x代表掩码位数。举个例子，192.168.1.1/24借2位。则x=2 会产生4个子网</li>
+<li>每个子网有$2^y-2$个主机，y为主机位的长度。还是按照上面的例子。如果借两位，就变成了192.168.1.1/26.这样一来主机位的长度就是$32-26=6$位。则每个子网有$2^6-2=30$个主机。</li>
+<li>有效子网，或者说每个网络的范围是256-10进制的子网掩码。得到的叫块大小(Block Size)。这个很奇妙。按照192.168.1.1/26来说，将掩码转换成十进制就是255.255.255.192.这样拿$256-192=64$.也就是说，每个网络的块大小是64。所以第一个网络的范围是192.168.1.0～192.168.1.63.第二个就是192.168.1.64～192.168.1.127。以此类推。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Cisco/" rel="tag"># Cisco</a>
+          
+            <a href="/tags/Huawei/" rel="tag"># Huawei</a>
+          
+            <a href="/tags/H3C/" rel="tag"># H3C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/13/OSI-and-TCP-IP/" rel="next" title="OSI and TCP/IP protocol stacks">
+                <i class="fa fa-chevron-left"></i> OSI and TCP/IP protocol stacks
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/17/Basic-Switching/" rel="prev" title="Basic Switching">
+                Basic Switching <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Remilia" />
+            
+              <p class="site-author-name" itemprop="name">Remilia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#IPv4地址概述"><span class="nav-number">1.</span> <span class="nav-text">IPv4地址概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#首个八位组字节规则"><span class="nav-number">2.</span> <span class="nav-text">首个八位组字节规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#地址掩码"><span class="nav-number">3.</span> <span class="nav-text">地址掩码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子网和子网掩码"><span class="nav-number">4.</span> <span class="nav-text">子网和子网掩码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#子网规划"><span class="nav-number">5.</span> <span class="nav-text">子网规划</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Remilia</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '0bdc0d6f49bfb51e5834',
+          clientSecret: '9306599f43db3af1e58268b660f8fb11fe4771ec',
+          repo: 'git-comments',
+          owner: 'remil1a',
+          admin: ['remil1a'], 
+          id: window.location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML""></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

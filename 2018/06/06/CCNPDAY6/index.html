@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Cisco,OSPF," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OSPF邻居状态机和网络类型 OSPF邻居状态机OSPF路由器需要邻居路由器在几种邻居状态之间转换后，才能形成邻居之间的完全邻接关系。  Down（失效状态）：这是一个邻居会话的初始状态，指明在一个deadinterval的时间内还没有收到来自邻居路由器的hello包。除非在NBMA网络中的那些邻居路由器，否则，hello包不会发送给那些失效的邻居路由器。在NBMA网络环境中，hello包每个po">
+<meta name="keywords" content="Cisco,OSPF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OSPF Neighbor State">
+<meta property="og:url" content="http://remil1a.github.io/2018/06/06/CCNPDAY6/index.html">
+<meta property="og:site_name" content="Take Your Heart">
+<meta property="og:description" content="OSPF邻居状态机和网络类型 OSPF邻居状态机OSPF路由器需要邻居路由器在几种邻居状态之间转换后，才能形成邻居之间的完全邻接关系。  Down（失效状态）：这是一个邻居会话的初始状态，指明在一个deadinterval的时间内还没有收到来自邻居路由器的hello包。除非在NBMA网络中的那些邻居路由器，否则，hello包不会发送给那些失效的邻居路由器。在NBMA网络环境中，hello包每个po">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY6/88137ab0155e5c38f05d4a41a0f39148.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY6/79e13b231dacf871b2baf610b124b7a7.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY6/7da38b82c0060861bfc4dd569a635d21.png">
+<meta property="og:updated_time" content="2020-07-01T01:30:42.535Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OSPF Neighbor State">
+<meta name="twitter:description" content="OSPF邻居状态机和网络类型 OSPF邻居状态机OSPF路由器需要邻居路由器在几种邻居状态之间转换后，才能形成邻居之间的完全邻接关系。  Down（失效状态）：这是一个邻居会话的初始状态，指明在一个deadinterval的时间内还没有收到来自邻居路由器的hello包。除非在NBMA网络中的那些邻居路由器，否则，hello包不会发送给那些失效的邻居路由器。在NBMA网络环境中，hello包每个po">
+<meta name="twitter:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY6/88137ab0155e5c38f05d4a41a0f39148.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://remil1a.github.io/2018/06/06/CCNPDAY6/"/>
+
+
+
+
+
+  <title>OSPF Neighbor State | Take Your Heart</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Take Your Heart</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/tags/Linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cisco">
+          <a href="/tags/Cisco" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Cisco
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-huawei">
+          <a href="/tags/Huawei" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Huawei
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-h3c">
+          <a href="/tags/H3C" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            H3C
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/tags/Python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docker">
+          <a href="/tags/Docker" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Docker
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://remil1a.github.io/2018/06/06/CCNPDAY6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Remilia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Take Your Heart">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OSPF Neighbor State</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T14:29:04+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>OSPF邻居状态机和网络类型</p>
+<h1 id="OSPF邻居状态机"><a href="#OSPF邻居状态机" class="headerlink" title="OSPF邻居状态机"></a>OSPF邻居状态机</h1><p>OSPF路由器需要邻居路由器在几种邻居状态之间转换后，才能形成邻居之间的完全邻接关系。</p>
+<ul>
+<li>Down（失效状态）：这是一个邻居会话的初始状态，指明在一个deadinterval的时间内还没有收到来自邻居路由器的hello包。除非在NBMA网络中的那些邻居路由器，否则，hello包不会发送给那些失效的邻居路由器。在NBMA网络环境中，hello包每个pollinterval（2倍hello<br>interval）的时间发送一次。</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>Initial（初始状态）：表明在最近的deadinterval时间内收到了来自邻居路由器的hello包，但双向通信仍然没有建立。</li>
+<li>Two-way（双向通信状态）：表明本地路由器已经在来自邻居路由器的hello包中的邻居字段看到了自己的路由器ID，意味双向通信建立成功。在多路访问的网络中，邻居路由器必须在这个状态或者更高状态时才有资格被选为该网络的DR或BDR。</li>
+<li>ExStart（信息交换初始状态）：在这一状态下，本地路由器和它的邻居路由器将建立主/从关系，通过发送空的DBD报文，I/M/MS全部置1，进行主/从的选举，具有最高路由器ID的路由器将成为主路由器。</li>
+<li>Exchange（信息交换状态）：在这一状态下，邻居路由器之间发起DBD包交换，由主路由器发起，从路由器通过使用主路由器的相同序列号进行隐式确认。通过DBD交换，得知本地路由器缺少的LSA，通过向邻居发送LSR请求完整的LSA，邻居路由器收到LSR之后发送LSU包含了请求的LSA，最后LSAck确认。</li>
+<li>Loading（信息加载状态）：在这一状态，本地路由器将会向它的邻居路由器发送LSR，请求最新的LSA。虽然在Exchange状态已经经历这一过程，但是如果LSA条目过多，在Exchange状态没有更新完所有请求的LSA，将在这一阶段完成，也会出现在Exchange状态已经完成了所有的LSA通告，因此没有loading阶段。</li>
+<li>Full（完全邻接状态）：路由器之间建立完全邻接状态，即收敛状态。</li>
+</ul>
+<h1 id="链路状态通告的扩散泛洪"><a href="#链路状态通告的扩散泛洪" class="headerlink" title="链路状态通告的扩散泛洪"></a>链路状态通告的扩散泛洪</h1><p>在路由器形成邻居关系后，需要建立邻接关系的路由器之间需要相互传递链路状态通告（LSA），LSA被发送给每个邻居，路由器保存接收到的LSA，并以此向每个邻居转发，除了发送该LSA的邻居之外。LSA几乎是立刻被转发的，相对于距离矢量路由更新而言，不需要先更新自己的路由表再进行发送，这就是当网络拓扑改变时，链路状态路由协议收敛速度远远快于距离矢量路由协议的原因。</p>
+<p>关于链路状态通告泛洪的两个重要参数：</p>
+<ol>
+<li>序列号</li>
+<li>老化时间</li>
+</ol>
+<p><img src="/2018/06/06/CCNPDAY6/88137ab0155e5c38f05d4a41a0f39148.png" alt=""></p>
+<p>图 2‑1 OSPF LSA泛洪示意图</p>
+<h2 id="序列号"><a href="#序列号" class="headerlink" title="序列号"></a>序列号</h2><p>当路由器A连接的子网172.22.4.0发生故障，因而路由器A向邻居路由器B和路由器D泛洪扩散一个LSA，以便通告该链路的新状态。路由器B和路由器D向它们的邻居扩散该LSA，依次类推。</p>
+<p>路由器C在t1时刻，收到来自路由器B传递的LSA，路由器C将相关信息输入到链路状态数据库（LSDB），并向路由器F转发。在t3时刻，另一份相同的LSA拷贝经过A-D-E-F-C到达路由器C。路由器C发现LSDB中已经存在该LSA，那么路由器C会不会将该LSA继续转发给路由器B呢？答案是不转发，因为路由器C是从邻居路由器B收到这个通告的。</p>
+<p>当路由器A发送LSA时，在每个拷贝中的序列号都是一样的。这个序列号和LSA的其他部分一起被保存在路由器的LSDB中，当路由器收到数据库中已存在的LSA且序列号相同时，路由器将丢弃这些信息。如果信息相同但是序列号更大，则接收的信息和新序列号被保存到数据库中，并且泛洪扩散。</p>
+<p>序列号在数据包中占32bits，防止序列号耗尽问题，采用了棒棒糖形序列号空间。当路由器重启后，路由器发送序列号为最小值的LSA，邻居检查数据库时发现该路由器重启前LSA的序列号为0x00005de3，这时邻居将把这个LSA发给重启的路由器。</p>
+<p>LSA的序列号最小值：0x80000001</p>
+<p>LSA的序列号最大值：0x7FFFFFFF</p>
+<h2 id="老化时间"><a href="#老化时间" class="headerlink" title="老化时间"></a>老化时间</h2><p>老化过程为泛洪扩散过程增加了另一层可靠性，定义了一个最大年龄差距（MaxAgeDiff）值。路由器可能接收到一个LSA的多个拷贝，其中序列号相同，年龄不同。如果年龄的差距小于MaxAgeDiff，则认为是正常的网络延迟造成了年龄差距，因此原有LSDB中的LSA继续保存，忽略新收到的LSA；如果年龄差距大于MaxAgeDiff，则认为网络发生异常，较新的LSA被记录下来，并将数据包扩散出去。OSPF的MaxAgeDiff为15min。</p>
+<h1 id="OSPF接口信息"><a href="#OSPF接口信息" class="headerlink" title="OSPF接口信息"></a>OSPF接口信息</h1><p>Show ip ospf interface f0/0</p>
+<p><img src="/2018/06/06/CCNPDAY6/79e13b231dacf871b2baf610b124b7a7.png" alt=""></p>
+<p>接口状态：up，up</p>
+<p>接口ip地址：12.1.1.1，掩码24位；接口宣告区域0</p>
+<p>Ospf进程号1；路由器ID 1.1.1.1；网络类型：广播；开销：1</p>
+<p>注：ospf开销计算公式：10\^8/接口带宽，10\^8为默认参考值，当网络中拥有100M链路和1000M链路，那么算出来的值都为1，无法区分链路的优劣，如果结果为小数，取整。</p>
+<p>可以修改默认参考值来区分不同链路的开销值<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">R1(config)\#router<span class="built_in"> ospf </span>1</span><br><span class="line"></span><br><span class="line">R1(config-router)\#auto-cost reference-bandwidth 100 （默认为100Mb）</span><br></pre></td></tr></table></figure></p>
+<p>修改开销值：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">R1(config)\#int f0/0</span><br><span class="line"></span><br><span class="line">R1(config-if)\#ip<span class="built_in"> ospf </span>cost 1</span><br></pre></td></tr></table></figure></p>
+<p>传输延迟：1秒，LSA每经过一台路由器老化时间加1</p>
+<p>修改传输延迟：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">R1(config)\#int f0/0</span><br><span class="line"></span><br><span class="line">R1(config-if)\#ip<span class="built_in"> ospf </span>transmit-delay 1</span><br></pre></td></tr></table></figure></p>
+<p>状态：BDR；优先级为1，用于选举DR/BDR</p>
+<p>指定路由器ID：2.2.2.2；接口地址：12.1.1.2</p>
+<p>备份指定路由器ID：1.1.1.1；接口地址：12.1.1.1</p>
+<p>计时器：hello间隔：10秒，无效时间：40秒，等待时间：40秒，重传间隔：5秒（等待时间等于无效时间，在路由器宣告ospf接口后开始计时，等待时间过后开始选举DR/BDR）</p>
+<p>Hello计时器：下一次发送hello的剩余时间</p>
+<p>邻居路由器：形成邻接关系的路由器ID</p>
+<h1 id="OSPF接口状态机"><a href="#OSPF接口状态机" class="headerlink" title="OSPF接口状态机"></a>OSPF接口状态机</h1><ul>
+<li>失效（down）：初始化接口状态。这个阶段，接口上没有任何路由协议的通信</li>
+<li>点到点（point to point）：这种接口状态适用于点到点、点到多点等网络类型的接口</li>
+<li>等待（waiting）：这种接口状态适用于多路访问网络环境，选举DR/BDR前所经历的等待时间就是这个状态。</li>
+<li>指定路由器（DR）：指定路由器</li>
+<li>备份指定路由器（BDR）：备份指定路由器</li>
+<li>DRohter：非DR,BDR的路由器</li>
+</ul>
+<h1 id="OSPF网络类型"><a href="#OSPF网络类型" class="headerlink" title="OSPF网络类型"></a>OSPF网络类型</h1><h2 id="点到点网络"><a href="#点到点网络" class="headerlink" title="点到点网络"></a>点到点网络</h2><p>点到点网络，像PPP,HDLC链路，连接单独一对路由器。在点到点网络上的有效邻居总是可以形成邻接关系的，不选举DR/BDR，使用224.0.0.5发送ospf数据包，hello间隔为10秒。</p>
+<h2 id="广播型网络"><a href="#广播型网络" class="headerlink" title="广播型网络"></a>广播型网络</h2><p>多路访问网络可以连接多于两台的设备，例如以太网，不是所有路由器都形成邻接关系，需要选举DR/BDR，DR/BDR使用224.0.0.5发送ospf数据包给DRother，DRother使用224.0.0.6发送ospf数据包给DR/BDR，hello间隔为10秒。</p>
+<h2 id="非广播多路访问（NBMA）网络"><a href="#非广播多路访问（NBMA）网络" class="headerlink" title="非广播多路访问（NBMA）网络"></a>非广播多路访问（NBMA）网络</h2><p>NBMA网络，例如帧中继，ATM等，可以连接两台以上的路由器，但是没有广播数据包的能力。不是所有路由器都形成邻接关系，需要选举DR/BDR，并且所有的OSPF数据包都为单播，hello间隔为30秒。</p>
+<h2 id="点到多点网络（point-to-multipoint）"><a href="#点到多点网络（point-to-multipoint）" class="headerlink" title="点到多点网络（point-to-multipoint）"></a>点到多点网络（point-to-multipoint）</h2><p>点到多点网络可以看作是多个点到点链路的集合，不需要选举DR/BDR，ospf数据包以组播方式发送给每一个已知邻居，hello间隔为30秒。</p>
+<p>表 5‑1 OSPF网络类型</p>
+<p><img src="/2018/06/06/CCNPDAY6/7da38b82c0060861bfc4dd569a635d21.png" alt=""></p>
+<h1 id="帧中继环境中的ospf"><a href="#帧中继环境中的ospf" class="headerlink" title="帧中继环境中的ospf"></a>帧中继环境中的ospf</h1><p>帧中继交换机：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">Frame-relay switching</span><br><span class="line"></span><br><span class="line">interface Serial0/0</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span><span class="built_in"> ip </span>address</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">clock rate 64000</span><br><span class="line"></span><br><span class="line">frame-relay lmi-type cisco</span><br><span class="line"></span><br><span class="line">frame-relay intf-type dce</span><br><span class="line"></span><br><span class="line">frame-relay<span class="built_in"> route </span>102<span class="built_in"> interface </span>Serial0/1 201</span><br><span class="line"></span><br><span class="line">frame-relay<span class="built_in"> route </span>103<span class="built_in"> interface </span>Serial0/2 301</span><br><span class="line"></span><br><span class="line">interface Serial0/1</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span><span class="built_in"> ip </span>address</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">clock rate 64000</span><br><span class="line"></span><br><span class="line">frame-relay lmi-type cisco</span><br><span class="line"></span><br><span class="line">frame-relay intf-type dce</span><br><span class="line"></span><br><span class="line">frame-relay<span class="built_in"> route </span>201<span class="built_in"> interface </span>Serial0/0 102</span><br><span class="line"></span><br><span class="line">interface Serial0/2</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span><span class="built_in"> ip </span>address</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">clock rate 64000</span><br><span class="line"></span><br><span class="line">frame-relay lmi-type cisco</span><br><span class="line"></span><br><span class="line">frame-relay intf-type dce</span><br><span class="line"></span><br><span class="line">frame-relay<span class="built_in"> route </span>301<span class="built_in"> interface </span>Serial0/0 103</span><br></pre></td></tr></table></figure></p>
+<p>点到多点网络类型：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">R1：</span><br><span class="line"></span><br><span class="line">interface Serial0/0</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> address </span>123.1.1.1 255.255.255.0</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> ospf network </span>point-to-multipoint</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.3 103 broadcast</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.2 102 broadcast</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span> frame-relay inverse-arp</span><br><span class="line"></span><br><span class="line">router<span class="built_in"> ospf </span>1</span><br><span class="line"></span><br><span class="line">router-id 1.1.1.1</span><br><span class="line"></span><br><span class="line">log-adjacency-changes</span><br><span class="line"></span><br><span class="line">network 1.1.1.1 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">network 123.1.1.1 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">R2：</span><br><span class="line"></span><br><span class="line">interface Serial0/0</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> address </span>123.1.1.2 255.255.255.0</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> ospf network </span>point-to-multipoint</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.1 201 broadcast</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span> frame-relay inverse-arp</span><br><span class="line"></span><br><span class="line">router<span class="built_in"> ospf </span>1</span><br><span class="line"></span><br><span class="line">router-id 2.2.2.2</span><br><span class="line"></span><br><span class="line">log-adjacency-changes</span><br><span class="line"></span><br><span class="line">network 2.2.2.2 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">network 123.1.1.2 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">R3：</span><br><span class="line"></span><br><span class="line">interface Serial0/0</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> address </span>123.1.1.3 255.255.255.0</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> ospf network </span>point-to-multipoint</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.1 301 broadcast</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span> frame-relay inverse-arp</span><br><span class="line"></span><br><span class="line">router<span class="built_in"> ospf </span>1</span><br><span class="line"></span><br><span class="line">router-id 3.3.3.3</span><br><span class="line"></span><br><span class="line">log-adjacency-changes</span><br><span class="line"></span><br><span class="line">network 3.3.3.3 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">network 123.1.1.3 0.0.0.0<span class="built_in"> area </span>0</span><br></pre></td></tr></table></figure></p>
+<p>非广播网络类型：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">R1：</span><br><span class="line"></span><br><span class="line">interface Serial0/0</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> address </span>123.1.1.1 255.255.255.0</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.3 103</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.2 102</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span> frame-relay inverse-arp</span><br><span class="line"></span><br><span class="line">router<span class="built_in"> ospf </span>1</span><br><span class="line"></span><br><span class="line">router-id 1.1.1.1</span><br><span class="line"></span><br><span class="line">log-adjacency-changes</span><br><span class="line"></span><br><span class="line">network 1.1.1.1 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">network 123.1.1.1 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">neighbor 123.1.1.2</span><br><span class="line"></span><br><span class="line">neighbor 123.1.1.3</span><br><span class="line"></span><br><span class="line">R2：</span><br><span class="line"></span><br><span class="line">interface Serial0/0</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> address </span>123.1.1.2 255.255.255.0</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> ospf </span>priority 0</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.3 201</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.1 201</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span> frame-relay inverse-arp</span><br><span class="line"></span><br><span class="line">router<span class="built_in"> ospf </span>1</span><br><span class="line"></span><br><span class="line">router-id 2.2.2.2</span><br><span class="line"></span><br><span class="line">log-adjacency-changes</span><br><span class="line"></span><br><span class="line">network 2.2.2.2 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">network 123.1.1.2 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">R3：</span><br><span class="line"></span><br><span class="line">interface Serial0/0</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> address </span>123.1.1.3 255.255.255.0</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> ospf </span>priority 0</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.3 301</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.1 301</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span> frame-relay inverse-arp</span><br><span class="line"></span><br><span class="line">router<span class="built_in"> ospf </span>1</span><br><span class="line"></span><br><span class="line">router-id 3.3.3.3</span><br><span class="line"></span><br><span class="line">log-adjacency-changes</span><br><span class="line"></span><br><span class="line">network 3.3.3.3 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">network 123.1.1.3 0.0.0.0<span class="built_in"> area </span>0</span><br></pre></td></tr></table></figure></p>
+<p>广播型网络：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">R1：</span><br><span class="line"></span><br><span class="line">interface Serial0/0</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> address </span>123.1.1.1 255.255.255.0</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> ospf network </span>broadcast</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.3 103 broadcast</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.2 102 broadcast</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span> frame-relay inverse-arp</span><br><span class="line"></span><br><span class="line">router<span class="built_in"> ospf </span>1</span><br><span class="line"></span><br><span class="line">router-id 1.1.1.1</span><br><span class="line"></span><br><span class="line">log-adjacency-changes</span><br><span class="line"></span><br><span class="line">network 1.1.1.1 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">network 123.1.1.1 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">R2：</span><br><span class="line"></span><br><span class="line">interface Serial0/0</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> address </span>123.1.1.2 255.255.255.0</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> ospf network </span>broadcast</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> ospf </span>priority 0</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.3 201 broadcast</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.1 201 broadcast</span><br><span class="line"></span><br><span class="line"><span class="literal">no</span> frame-relay inverse-arp</span><br><span class="line"></span><br><span class="line">router<span class="built_in"> ospf </span>1</span><br><span class="line"></span><br><span class="line">router-id 2.2.2.2</span><br><span class="line"></span><br><span class="line">log-adjacency-changes</span><br><span class="line"></span><br><span class="line">network 2.2.2.2 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">network 123.1.1.2 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">R3：</span><br><span class="line"></span><br><span class="line">interface Serial0/0</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> address </span>123.1.1.3 255.255.255.0</span><br><span class="line"></span><br><span class="line">encapsulation frame-relay</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> ospf network </span>broadcast</span><br><span class="line"></span><br><span class="line">ip<span class="built_in"> ospf </span>priority 0</span><br><span class="line"></span><br><span class="line">serial restart-delay 0</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.3 301 broadcast</span><br><span class="line"></span><br><span class="line">frame-relay map<span class="built_in"> ip </span>123.1.1.1 301 broadcast</span><br><span class="line"></span><br><span class="line">router<span class="built_in"> ospf </span>1</span><br><span class="line"></span><br><span class="line">router-id 3.3.3.3</span><br><span class="line"></span><br><span class="line">log-adjacency-changes</span><br><span class="line"></span><br><span class="line">network 3.3.3.3 0.0.0.0<span class="built_in"> area </span>0</span><br><span class="line"></span><br><span class="line">network 123.1.1.3 0.0.0.0<span class="built_in"> area </span>0</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Cisco/" rel="tag"># Cisco</a>
+          
+            <a href="/tags/OSPF/" rel="tag"># OSPF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/06/06/CCNPDAY5/" rel="next" title="OSPF BASIC">
+                <i class="fa fa-chevron-left"></i> OSPF BASIC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/06/CCNPDAY7/" rel="prev" title="OSPF LSDB">
+                OSPF LSDB <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Remilia" />
+            
+              <p class="site-author-name" itemprop="name">Remilia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OSPF邻居状态机"><span class="nav-number">1.</span> <span class="nav-text">OSPF邻居状态机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链路状态通告的扩散泛洪"><span class="nav-number">2.</span> <span class="nav-text">链路状态通告的扩散泛洪</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#序列号"><span class="nav-number">2.1.</span> <span class="nav-text">序列号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#老化时间"><span class="nav-number">2.2.</span> <span class="nav-text">老化时间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSPF接口信息"><span class="nav-number">3.</span> <span class="nav-text">OSPF接口信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSPF接口状态机"><span class="nav-number">4.</span> <span class="nav-text">OSPF接口状态机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSPF网络类型"><span class="nav-number">5.</span> <span class="nav-text">OSPF网络类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#点到点网络"><span class="nav-number">5.1.</span> <span class="nav-text">点到点网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#广播型网络"><span class="nav-number">5.2.</span> <span class="nav-text">广播型网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非广播多路访问（NBMA）网络"><span class="nav-number">5.3.</span> <span class="nav-text">非广播多路访问（NBMA）网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#点到多点网络（point-to-multipoint）"><span class="nav-number">5.4.</span> <span class="nav-text">点到多点网络（point-to-multipoint）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#帧中继环境中的ospf"><span class="nav-number">6.</span> <span class="nav-text">帧中继环境中的ospf</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Remilia</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '0bdc0d6f49bfb51e5834',
+          clientSecret: '9306599f43db3af1e58268b660f8fb11fe4771ec',
+          repo: 'git-comments',
+          owner: 'remil1a',
+          admin: ['remil1a'], 
+          id: window.location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

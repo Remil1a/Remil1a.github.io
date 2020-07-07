@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Cisco,OSPF," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OSPF路由协议基础部分 OSPF的概述OSPF是一种链路状态路由协议。不同于距离矢量路由协议依照传闻进行路由选择的工作方式，链路状态路由器从其他路由器那里获取第一手信息。每台路由器会产生一些关于自己、本地直连链路、这些链路的状态和所有直连邻居的信息（LSA）。这些信息从一台路由器传送到另一台路由器，每台路由器都在一份信息拷贝，但绝不改动信息。最终目的是每台路由器都有一个相同的相关网络的信息，并且">
+<meta name="keywords" content="Cisco,OSPF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OSPF BASIC">
+<meta property="og:url" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/index.html">
+<meta property="og:site_name" content="Take Your Heart">
+<meta property="og:description" content="OSPF路由协议基础部分 OSPF的概述OSPF是一种链路状态路由协议。不同于距离矢量路由协议依照传闻进行路由选择的工作方式，链路状态路由器从其他路由器那里获取第一手信息。每台路由器会产生一些关于自己、本地直连链路、这些链路的状态和所有直连邻居的信息（LSA）。这些信息从一台路由器传送到另一台路由器，每台路由器都在一份信息拷贝，但绝不改动信息。最终目的是每台路由器都有一个相同的相关网络的信息，并且">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/6e40fa14fa6154d667948bff3ca3b7eb.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/bb5633ec9be61a396085fa8969f0313a.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/52c12786dd4db2fae0accf13dc538f56.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/5bdb92b8c7ab2958e56b27c248791836.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/01d08984d10e53b18cf52f82c5f5319c.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/2e0ddb7c43ba17bcbd64f9fb99dec1c5.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/918bbd34de401fb354a5d2baa15db59a.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/64363b616340496337e251b52bd49d48.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/5185b5e880a01413053aea9e5c0a6cc8.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/5d070a7a5f78057abef26515e941d86b.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/44685677dd80ff0709919b1a4fd5962d.png">
+<meta property="og:updated_time" content="2020-07-01T01:30:42.528Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OSPF BASIC">
+<meta name="twitter:description" content="OSPF路由协议基础部分 OSPF的概述OSPF是一种链路状态路由协议。不同于距离矢量路由协议依照传闻进行路由选择的工作方式，链路状态路由器从其他路由器那里获取第一手信息。每台路由器会产生一些关于自己、本地直连链路、这些链路的状态和所有直连邻居的信息（LSA）。这些信息从一台路由器传送到另一台路由器，每台路由器都在一份信息拷贝，但绝不改动信息。最终目的是每台路由器都有一个相同的相关网络的信息，并且">
+<meta name="twitter:image" content="http://remil1a.github.io/2018/06/06/CCNPDAY5/6e40fa14fa6154d667948bff3ca3b7eb.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://remil1a.github.io/2018/06/06/CCNPDAY5/"/>
+
+
+
+
+
+  <title>OSPF BASIC | Take Your Heart</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Take Your Heart</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/tags/Linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cisco">
+          <a href="/tags/Cisco" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Cisco
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-huawei">
+          <a href="/tags/Huawei" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Huawei
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-h3c">
+          <a href="/tags/H3C" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            H3C
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/tags/Python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docker">
+          <a href="/tags/Docker" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Docker
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://remil1a.github.io/2018/06/06/CCNPDAY5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Remilia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Take Your Heart">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OSPF BASIC</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T14:12:03+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>OSPF路由协议基础部分</strong></p>
+<h1 id="OSPF的概述"><a href="#OSPF的概述" class="headerlink" title="OSPF的概述"></a>OSPF的概述</h1><p>OSPF是一种链路状态路由协议。不同于距离矢量路由协议依照传闻进行路由选择的工作方式，链路状态路由器从其他路由器那里获取第一手信息。每台路由器会产生一些关于自己、本地直连链路、这些链路的状态和所有直连邻居的信息（LSA）。这些信息从一台路由器传送到另一台路由器，每台路由器都在一份信息拷贝，但绝不改动信息。最终目的是每台路由器都有一个相同的相关网络的信息，并且每台路由器以自己为根独立的计算各自的最优路径。</p>
+<a id="more"></a>
+<p><img src="/2018/06/06/CCNPDAY5/6e40fa14fa6154d667948bff3ca3b7eb.png" alt=""></p>
+<p>图 1‑1 链路状态路由协议收敛过程</p>
+<p>链路状态路由协议包括：</p>
+<ul>
+<li>OSPF</li>
+<li>IS-IS</li>
+</ul>
+<p>OSPF正如它的命名一样，使用Dikstra的最短路径优先（SPF）算法，并且是一个开放的协议，即公有协议。</p>
+<h1 id="OSPF的特点"><a href="#OSPF的特点" class="headerlink" title="OSPF的特点"></a>OSPF的特点</h1><ol>
+<li>使用区域化的概念，这样可以有效的减少算法对CPU和内存的占用，构建一个层次化的网络拓扑。</li>
+<li>支持无类路由，VLSM，CIDR</li>
+<li>支持无大小限制、任意的度量值</li>
+<li>局部更新</li>
+<li>支持多条路径的等价负载均衡</li>
+<li>使用组播地址更新（224.0.0.5和224.0.0.6）</li>
+<li>支持认证</li>
+</ol>
+<h1 id="OSPF区域"><a href="#OSPF区域" class="headerlink" title="OSPF区域"></a>OSPF区域</h1><ul>
+<li>Transit area（backbone area）传输区域或骨干区域</li>
+</ul>
+<p>只有area 0属于传输区域</p>
+<ul>
+<li>Regular areas（nonbackbone areas）常规区域或非骨干区域</li>
+</ul>
+<p>非0区域都属于常规区域</p>
+<p>所有的常规区域必须与骨干区域相连。</p>
+<p><img src="/2018/06/06/CCNPDAY5/bb5633ec9be61a396085fa8969f0313a.png" alt=""></p>
+<p>图 3‑1 OSPF区域</p>
+<p>通过区域的划分减少链路状态信息的泛洪，链路状态信息只在同一区域内同步；通过手工汇总减少路由条目；构造一个层次化的网络。</p>
+<h1 id="路由器类型"><a href="#路由器类型" class="headerlink" title="路由器类型"></a>路由器类型</h1><ul>
+<li>ABR：区域边界路由器(Area Border Router)连接区域0和其他一个或多个区域的路由器</li>
+<li>ASBR：自治系统边界路由器(Autonomous System Boundary<br>Router)连接外部网络的路由器</li>
+<li>内部路由器：R5、R6等</li>
+<li>骨干路由器：R1</li>
+</ul>
+<h1 id="OSPF的数据报文"><a href="#OSPF的数据报文" class="headerlink" title="OSPF的数据报文"></a>OSPF的数据报文</h1><p><img src="/2018/06/06/CCNPDAY5/52c12786dd4db2fae0accf13dc538f56.png" alt=""></p>
+<p>图 5‑1 OSPF报文结构</p>
+<p>OSPF数据包承载在ip之上，协议号为89，分为OSPF数据包头部和OSPF数据包数据部分。</p>
+<h2 id="OSPF报头结构"><a href="#OSPF报头结构" class="headerlink" title="OSPF报头结构"></a>OSPF报头结构</h2><p><img src="/2018/06/06/CCNPDAY5/5bdb92b8c7ab2958e56b27c248791836.png" alt=""></p>
+<p>图 5‑2 OSPF报头结构</p>
+<h3 id="OSPF报头详细描述"><a href="#OSPF报头详细描述" class="headerlink" title="OSPF报头详细描述"></a>OSPF报头详细描述</h3><p>表 5‑1 OSPF报头描述</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>报头内容</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>版本（version）</td>
+<td>版本1用于实验阶段；</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>版本2用于ipv4；</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>版本3用于ipv6。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>类型(type)</td>
+<td>代码1，代表hello包；</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>代码2，代表DBD（数据库描述）包；代码3，代表LSR（链路状态请求）包；代码4，代表LSU（链路状态更新）包；代码5，代表LSack（链路状态确认）包</td>
+</tr>
+<tr>
+<td>3</td>
+<td>数据包长度（Packet Length）</td>
+<td>OSPF数据包长度，包括头部长度</td>
+</tr>
+<tr>
+<td>4</td>
+<td>路由器ID（Router ID）</td>
+<td>始发路由器的ID，唯一性，在启用ospf路由进程的时候选举，因此与选择router-id的接口是否宣告进ospf没有任何关系。</td>
+</tr>
+<tr>
+<td>5</td>
+<td>区域ID（Area ID）</td>
+<td>始发路由器所在的区域</td>
+</tr>
+<tr>
+<td>6</td>
+<td>校验和（Checksum）</td>
+<td>对整个OSPF数据包进行差错校验</td>
+</tr>
+<tr>
+<td>7</td>
+<td>认证类型（AuType）</td>
+<td>正在使用的认证模式，0为不认证，1为明文认证，2为MD5认证</td>
+</tr>
+<tr>
+<td>8</td>
+<td>认证（Authentication）</td>
+<td>如果AuType=0，不检查该字段，如果AuType=1，将包含一个密钥，如果AuType=2，这个认证字段将包含KEY ID、认证数据长度、加密序列号、认证密钥。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="Router-ID"><a href="#Router-ID" class="headerlink" title="Router-ID"></a>Router-ID</h3><p>路由器ID是在OSPF区域内唯一标识一台路由器的ip地址。</p>
+<p>Cisco路由器通过以下方式得到路由器ID：</p>
+<ol>
+<li>使用命令router-id手工配置</li>
+<li>如果没有手工配置，路由器选择最大的环回接口ip地址作为router-id</li>
+<li>如果没有换回接口，则使用最大的物理接口ip地址作为router-id<ol>
+<li>OSPF hello报文</li>
+</ol>
+</li>
+</ol>
+<p>Hello包用于建立ospf邻居关系，并维护邻居关系，在两台路由器形成邻居之前，必须要相互认可几个参数：</p>
+<p><img src="/2018/06/06/CCNPDAY5/01d08984d10e53b18cf52f82c5f5319c.png" alt=""></p>
+<p>图 5‑3 OSPF hello报文结构</p>
+<h3 id="hello报文详细描述"><a href="#hello报文详细描述" class="headerlink" title="hello报文详细描述"></a>hello报文详细描述</h3><p>表 5‑2 OSPF hello报文内容描述</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>报文内容</th>
+<th>描述</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>网络掩码（Network Mask）</td>
+<td>发送ospf hello包的接口网络掩码</td>
+<td>如果这个掩码和接收该hello包的接口网络掩码不匹配，该hello包被丢弃</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Hello时间间隔（hello interval）</td>
+<td>接口发送hello包的间隔时间，对于以太网链路和点到点链路，默认为10秒。非广播多路访问链路和点到多点链路是30秒。</td>
+<td>如果发送和接收路由器没有相同的值，那么它们就不能建立一种邻居关系</td>
+</tr>
+<tr>
+<td>3</td>
+<td>路由器优先级（Router Priority）</td>
+<td>用来选择DR和BDR路由器</td>
+<td>如果该字段设置为0，那么该路由器将没有资格被选举为DR和BDR</td>
+</tr>
+<tr>
+<td>4</td>
+<td>路由器无效时间间隔（Router Dead Interval）</td>
+<td>为hello interval的4倍，如果在这段时间内没有收到邻居路由器的hello包，认为邻居路由器失效。</td>
+<td>如果收到hello包的时间和接收接口配置的deadinterval不匹配，那么这个hello包被丢弃</td>
+</tr>
+<tr>
+<td>5</td>
+<td>指定路由器（DR）</td>
+<td>网络上指定路由器接口的ip地址</td>
+<td>不是指定路由器的路由器ID</td>
+</tr>
+<tr>
+<td>6</td>
+<td>备份指定路由器（BDR）</td>
+<td>网络上备份指定路由器接口的ip地址</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>7</td>
+<td>邻居（Neighbor）</td>
+<td>从网络上收到来自邻居的有效hello包，则会在这个字段列出所有的邻居RID</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="修改ospf的hello-interval和dead-interval"><a href="#修改ospf的hello-interval和dead-interval" class="headerlink" title="修改ospf的hello interval和dead interval"></a>修改ospf的hello interval和dead interval</h3><p>R1(config)#int s0/0</p>
+<p>R1(config-if)#ip ospf hello-interval 10</p>
+<p>R1(config-if)#ip ospf dead-interval 10</p>
+<h3 id="指定路由器（DR）和备份指定路由器（BDR）"><a href="#指定路由器（DR）和备份指定路由器（BDR）" class="headerlink" title="指定路由器（DR）和备份指定路由器（BDR）"></a>指定路由器（DR）和备份指定路由器（BDR）</h3><p>对于OSPF路由协议来说，在多路访问网络中LSA的泛洪存在两个问题：</p>
+<ol>
+<li>构建相关路由器之间的邻接关系时，会创建很多不必要的LSA。</li>
+<li>LSA的泛洪会比较混乱。</li>
+</ol>
+<p>在OSPF网络中，如果要在每一台路由器和它的邻居路由器形成完全网状的OSPF邻接关系，5台路由器需要形成10个邻接关系，产生25条LSA通告</p>
+<p><img src="/2018/06/06/CCNPDAY5/2e0ddb7c43ba17bcbd64f9fb99dec1c5.png" alt=""></p>
+<p>图 5‑4 OSPF建立邻接关系示意图</p>
+<p>为了在多路访问的网络环境中避免这些问题的发生，可以在网络上选举一台指定路由器完成以下工作：</p>
+<ul>
+<li>描述这个多路访问网络和OSPF区域内其余相连的路由器；</li>
+<li>管理这个多路访问网络上的LSA泛洪。</li>
+</ul>
+<p>DR描述一个多路访问网络，网络上的其他路由器都将和这个指定路由器形成邻接关系，而不是所有路由器都相互形成邻接关系。</p>
+<p><img src="/2018/06/06/CCNPDAY5/918bbd34de401fb354a5d2baa15db59a.png" alt=""></p>
+<p>图 5‑5 OSPF DR建立邻接关系示意图</p>
+<p>关于指定路由器的一个重要问题：如果DR失效，就必须重新选举一台新的指定路由器。网络上的所有路由器也要重新的建立邻接关系。为了避免这个问题，网络上除了选举DR之外，还选举BDR。DR和BDR形成邻接关系，当DR失效，BDR将成为新的DR。并且BDR也和其他路由器形成邻接关系，所以当BDR成为新的DR时，无需重新建立邻接关系，将影响降低到最小。</p>
+<p>DR和BDR的选举过程：</p>
+<ol>
+<li>路由器和邻居路由器之间首先要建立two-way状态，接着查看hello包的优先级、DR、BDR字段，列出所有具有DR和BDR选举资格的路由器列表（即优先级要大于0）</li>
+<li>所有路由器都宣称自己是DR和BDR</li>
+<li>通过优先级高的选举为BDR，如果优先级相同选择RID最高的最为BDR</li>
+<li>由于没有DR的存在，BDR成为DR，重新选举BDR。</li>
+</ol>
+<p>在选举成功后，其他的路由器都叫做DRother。即使接入一台优先级更高的路由器，也不会成为新的DR，它只能等待DR失效，原来的BDR成为DR，它再成为BDR。</p>
+<h2 id="数据库描述数据包（DBD）"><a href="#数据库描述数据包（DBD）" class="headerlink" title="数据库描述数据包（DBD）"></a>数据库描述数据包（DBD）</h2><p>DBD包用于正在建立的邻接关系。DBD包的主要目的是描述始发路由器数据库中的LSA摘要信息，以便接收路由器能够确定所收到的LSA在其数据库中是否已经存在这些LSA。LSA的摘要信息只需要列出该LSA的头部即可。</p>
+<p><img src="/2018/06/06/CCNPDAY5/64363b616340496337e251b52bd49d48.png" alt=""></p>
+<p>图 5‑6 OSPF DBD数据报文格式</p>
+<h3 id="DBD报文详细描述"><a href="#DBD报文详细描述" class="headerlink" title="DBD报文详细描述"></a>DBD报文详细描述</h3><p>表 5‑3 DBD报文详细描述</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>报文内容</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>接口MTU（Interface MTU）</td>
+<td>是指在数据包不分片的情况下，始发路由器接口可以发送的最大IP数据包大小</td>
+</tr>
+<tr>
+<td>2</td>
+<td>I位（Initial位）</td>
+<td>当发送DBD包是第一个时，该位置位为1，后续DBD包将该位设置为0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>M位（More位）</td>
+<td>当发送的DBD包不是最后一个包时，该位置位1，最后一个DBD包将该位置0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>MS位（Master/Slave位）</td>
+<td>在数据库同步过程中，该位置1，用来指明始发DBD数据包的路由器是一个主路由器。从路由器将该位置0</td>
+</tr>
+<tr>
+<td>5</td>
+<td>数据库描述序列号（DBD Sequence Number）</td>
+<td>在数据库的同步过程中，确保路由器能够收到完整的数据库描述数据包序列。使用序列号进行隐式确认。</td>
+</tr>
+<tr>
+<td>6</td>
+<td>LSA头部（LSA Header）</td>
+<td>列出始发路由器的链路状态数据库中的LSA头部信息。在LSA头部信息里有足够的信息可以唯一的标识一个LSA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>主从关系的选举：通过Router-ID的比较，Router-id大的为master</p>
+<p>确认机制：</p>
+<ul>
+<li>显式确认：通过ack明确的进行确认。</li>
+<li>隐式确认：从路由器使用主路由器相同的序列号进行确认。<ol>
+<li>链路状态请求包（LSR）</li>
+</ol>
+</li>
+</ul>
+<p>在数据库同步过程中如果收到了DBD包，路由器将会查看DBD里有哪些LSA不在自己的数据库中，或者哪些LSA比自己数据库中的LSA更新。然后将这些LSA记录在链路请求列表中。接着路由器会发送LSR包向它的邻居请求完整的LSA。</p>
+<p><img src="/2018/06/06/CCNPDAY5/5185b5e880a01413053aea9e5c0a6cc8.png" alt=""></p>
+<p>图 5‑7 OSPF LSR报文格式</p>
+<h3 id="LSR报文详细描述"><a href="#LSR报文详细描述" class="headerlink" title="LSR报文详细描述"></a>LSR报文详细描述</h3><p>表 5‑4 LSR报文详细描述</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>报文内容</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>链路状态类型（Link State Type）</td>
+<td>用来指明LSA的类型</td>
+</tr>
+<tr>
+<td>2</td>
+<td>链路状态ID（Link State ID）</td>
+<td>用来指明LSA的名字</td>
+</tr>
+<tr>
+<td>3</td>
+<td>通告路由器（Advertising Router）</td>
+<td>是指发送LSA的路由器的RID</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="链路状态更新包（LSU）"><a href="#链路状态更新包（LSU）" class="headerlink" title="链路状态更新包（LSU）"></a>链路状态更新包（LSU）</h2><p>用于LSA的泛洪和响应LSR请求包。</p>
+<p><img src="/2018/06/06/CCNPDAY5/5d070a7a5f78057abef26515e941d86b.png" alt=""></p>
+<p>图 5‑8 OSPF LSR报文机构</p>
+<p>LSA数量（Number of LSA）：支持这个LSR包中包含的LSA的数量。</p>
+<p>链路状态通告（LSA）：LSU数据包中携带的完整的链路状态通告信息，一个LSU可以携带多个LSA。</p>
+<h2 id="链路状态确认包（LSAck）"><a href="#链路状态确认包（LSAck）" class="headerlink" title="链路状态确认包（LSAck）"></a>链路状态确认包（LSAck）</h2><p>保证LSA可靠的泛洪扩散。一台路由器从它的邻居路由器收到的每一个LSA都必须在LSAck包中进行明确的确认。被确认的LSA是根据在LSAck包里包含它的头部来辨别的，多个LSA可以通过单个SLAck确认。一个LSAck包的组成除了OSPF头部和一个LSA不透的列表之外，没有其他多余的内容了。</p>
+<p><img src="/2018/06/06/CCNPDAY5/44685677dd80ff0709919b1a4fd5962d.png" alt=""></p>
+<p>图 5‑9 OSPF LSAck报文结构</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Cisco/" rel="tag"># Cisco</a>
+          
+            <a href="/tags/OSPF/" rel="tag"># OSPF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/29/CCNPDAY4/" rel="next" title="EIGRP ADVANCED">
+                <i class="fa fa-chevron-left"></i> EIGRP ADVANCED
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/06/CCNPDAY6/" rel="prev" title="OSPF Neighbor State">
+                OSPF Neighbor State <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Remilia" />
+            
+              <p class="site-author-name" itemprop="name">Remilia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OSPF的概述"><span class="nav-number">1.</span> <span class="nav-text">OSPF的概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSPF的特点"><span class="nav-number">2.</span> <span class="nav-text">OSPF的特点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSPF区域"><span class="nav-number">3.</span> <span class="nav-text">OSPF区域</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#路由器类型"><span class="nav-number">4.</span> <span class="nav-text">路由器类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OSPF的数据报文"><span class="nav-number">5.</span> <span class="nav-text">OSPF的数据报文</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OSPF报头结构"><span class="nav-number">5.1.</span> <span class="nav-text">OSPF报头结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OSPF报头详细描述"><span class="nav-number">5.1.1.</span> <span class="nav-text">OSPF报头详细描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Router-ID"><span class="nav-number">5.1.2.</span> <span class="nav-text">Router-ID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hello报文详细描述"><span class="nav-number">5.1.3.</span> <span class="nav-text">hello报文详细描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改ospf的hello-interval和dead-interval"><span class="nav-number">5.1.4.</span> <span class="nav-text">修改ospf的hello interval和dead interval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指定路由器（DR）和备份指定路由器（BDR）"><span class="nav-number">5.1.5.</span> <span class="nav-text">指定路由器（DR）和备份指定路由器（BDR）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库描述数据包（DBD）"><span class="nav-number">5.2.</span> <span class="nav-text">数据库描述数据包（DBD）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DBD报文详细描述"><span class="nav-number">5.2.1.</span> <span class="nav-text">DBD报文详细描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSR报文详细描述"><span class="nav-number">5.2.2.</span> <span class="nav-text">LSR报文详细描述</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链路状态更新包（LSU）"><span class="nav-number">5.3.</span> <span class="nav-text">链路状态更新包（LSU）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链路状态确认包（LSAck）"><span class="nav-number">5.4.</span> <span class="nav-text">链路状态确认包（LSAck）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Remilia</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '0bdc0d6f49bfb51e5834',
+          clientSecret: '9306599f43db3af1e58268b660f8fb11fe4771ec',
+          repo: 'git-comments',
+          owner: 'remil1a',
+          admin: ['remil1a'], 
+          id: window.location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

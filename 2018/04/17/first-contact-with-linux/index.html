@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="写在前面的话个人所用的是虚拟机环境,使用的是RHEL7。大体上应该没有什么太大的关系。机器是两张网卡，一张VMNET10一张VMNET1都是仅主机模式。使用SecureCRT进行连接操作。环境的搭建就不写了。 必须掌握的几个Linux命令我们为什么要学习Linux的命令？初学者上手Linux系统会很懵。不管你是否安装了图形化界面，或者去网上找一些教程。或者一些Linux的应用 总会看到密密麻麻的命">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="First contact with linux">
+<meta property="og:url" content="http://remil1a.github.io/2018/04/17/first-contact-with-linux/index.html">
+<meta property="og:site_name" content="Take Your Heart">
+<meta property="og:description" content="写在前面的话个人所用的是虚拟机环境,使用的是RHEL7。大体上应该没有什么太大的关系。机器是两张网卡，一张VMNET10一张VMNET1都是仅主机模式。使用SecureCRT进行连接操作。环境的搭建就不写了。 必须掌握的几个Linux命令我们为什么要学习Linux的命令？初学者上手Linux系统会很懵。不管你是否安装了图形化界面，或者去网上找一些教程。或者一些Linux的应用 总会看到密密麻麻的命">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://remil1a.github.io/2018/04/17/first-contact-with-linux/1.PNG">
+<meta property="og:image" content="http://remil1a.github.io/2018/04/17/first-contact-with-linux/2.PNG">
+<meta property="og:image" content="http://remil1a.github.io/2018/04/17/first-contact-with-linux/3.PNG">
+<meta property="og:image" content="http://remil1a.github.io/2018/04/17/first-contact-with-linux/4.PNG">
+<meta property="og:updated_time" content="2020-07-01T01:30:42.587Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="First contact with linux">
+<meta name="twitter:description" content="写在前面的话个人所用的是虚拟机环境,使用的是RHEL7。大体上应该没有什么太大的关系。机器是两张网卡，一张VMNET10一张VMNET1都是仅主机模式。使用SecureCRT进行连接操作。环境的搭建就不写了。 必须掌握的几个Linux命令我们为什么要学习Linux的命令？初学者上手Linux系统会很懵。不管你是否安装了图形化界面，或者去网上找一些教程。或者一些Linux的应用 总会看到密密麻麻的命">
+<meta name="twitter:image" content="http://remil1a.github.io/2018/04/17/first-contact-with-linux/1.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://remil1a.github.io/2018/04/17/first-contact-with-linux/"/>
+
+
+
+
+
+  <title>First contact with linux | Take Your Heart</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Take Your Heart</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/tags/Linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cisco">
+          <a href="/tags/Cisco" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Cisco
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-huawei">
+          <a href="/tags/Huawei" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Huawei
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-h3c">
+          <a href="/tags/H3C" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            H3C
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/tags/Python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docker">
+          <a href="/tags/Docker" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Docker
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://remil1a.github.io/2018/04/17/first-contact-with-linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Remilia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Take Your Heart">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">First contact with linux</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T16:45:35+08:00">
+                2018-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h1><p>个人所用的是虚拟机环境,使用的是<strong>RHEL7</strong>。大体上应该没有什么太大的关系。机器是两张网卡，一张VMNET10一张VMNET1都是仅主机模式。使用<strong>SecureCRT</strong>进行连接操作。环境的搭建就不写了。</p>
+<h1 id="必须掌握的几个Linux命令"><a href="#必须掌握的几个Linux命令" class="headerlink" title="必须掌握的几个Linux命令"></a>必须掌握的几个Linux命令</h1><h2 id="我们为什么要学习Linux的命令？"><a href="#我们为什么要学习Linux的命令？" class="headerlink" title="我们为什么要学习Linux的命令？"></a>我们为什么要学习Linux的命令？</h2><p>初学者上手Linux系统会很懵。不管你是否安装了图形化界面，或者去网上找一些教程。或者一些Linux的应用 总会看到密密麻麻的命令。很难得看懂，直接导致一些人放弃学习。这边简单用Windows举个例子吧。</p>
+<a id="more"></a>
+<p>​    例如在Windows中，我们总会打开<strong>我的电脑</strong>或者一些文件夹，能看到这样一种界面：</p>
+<p><img src="/2018/04/17/first-contact-with-linux/1.PNG" alt="1"></p>
+<p>这是windows比较友好的地方。这整个叫做<strong>图形化用户接口</strong>，简称<strong>GUI</strong>。我们可以通过双击某个分区来浏览里面的数据 比方说到D盘的VIDEO里找到Charlotte文件夹,能够看到我下好的动漫 直接双击就可以观看了。</p>
+<p><img src="/2018/04/17/first-contact-with-linux/2.PNG" alt="2"></p>
+<p>这整个过程可以理解为<strong>“你”</strong>在和<strong>“电脑”</strong>交互。你的鼠标双击告诉电脑要切换目录，于是电脑切换到该目录然后显示文件夹里的内容。</p>
+<p>其实在Windows执行这些命令，也是一样的。我们来看一下。</p>
+<p>打开CMD。一个黑乎乎的框框。在这里面我们可以输入命令 来达到同样的效果。</p>
+<p><img src="/2018/04/17/first-contact-with-linux/3.PNG" alt="3"></p>
+<p>没有任何区别 只是通过文字的方法显示出来 让人难免感觉有些别扭。</p>
+<p>直接输入文件名回车就可以运行了。在很久以前的DOS系统想要玩仙剑奇侠传1就是这么弄的。只不过后来逐渐有了图形化界面。</p>
+<p>而Linux系统其实也有很多版本是有桌面环境的。像国产的DEEPIN。国外的UBUNTU。我所用的RHEL其实也可以有桌面环境。但是对于服务器系统来说，桌面环境毕竟还是比较消耗资源的。而且真正用起来，大部分时候命令行还是比图形化界面方便。（前提是你用的比较熟）所以掌握Linux中的命令就显得尤为重要了。就像我们第一次使用电脑的时候，会先学着<strong>打开“我的电脑”</strong> 然后是<strong>安装软件</strong>，<strong>打开浏览器</strong>，<strong>下载软件</strong> 等等等等。在我们初学Linux的时候也是要学习一些基本操作。而这些基本操作都是用命令去完成的。</p>
+<p>接下来一起看一下Linux中一些常用的操作需要哪些命令来完成吧。</p>
+<blockquote>
+<p>  注意：</p>
+<p>  Linux里的每个命令有的必须带选项才能执行 有的可以不带选项执行。有的可以带多个选项。那么我们规定如下</p>
+<ul>
+<li><strong>粗体字</strong>表示实际需要输入的命令和关键字，在实际的配置示例和输出信息(不是一般的命令语法)中，粗体字表示你要手工输入的命令(比如<strong>echo</strong>命令)；</li>
+<li><em>斜体字</em> 表示需要用实际数值替换的参数</li>
+<li>竖线(|)表示在几个选项中选择一项</li>
+<li>方括号[]表示可选的参数;</li>
+<li>大括号{}表示一个必需的选项</li>
+<li>方括号里面带一个大括号[{}]表示在一个可选项中的必选项。</li>
+</ul>
+</blockquote>
+<h1 id="常用基本命令"><a href="#常用基本命令" class="headerlink" title="常用基本命令"></a>常用基本命令</h1><h2 id="echo命令"><a href="#echo命令" class="headerlink" title="echo命令"></a>echo命令</h2><p>echo命令用于在屏幕上输出字符串或者变量提取后的值，格式为</p>
+<p><strong>echo</strong> [<em>字符串</em>|$变量]</p>
+<p>比方说想要在屏幕上显示你好。可以输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# echo hello</span><br><span class="line">hello</span><br><span class="line">[root@remilia ~]#</span><br></pre></td></tr></table></figure>
+<p>如果想要提取一个变量SHELL。则可以输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# echo $SHELL</span><br><span class="line">/bin/bash</span><br><span class="line">[root@remilia ~]#</span><br></pre></td></tr></table></figure>
+<p>我们可以暂时不用管这个SHELL是什么。看结果就可以。</p>
+<p>在测试命令的时候我们尽量不要用中文吧。养成好习惯。</p>
+<p>如果你输入<strong>echo 你好</strong> 可能会出现 <strong>echo ??</strong> 所以尽量使用英文</p>
+<h2 id="date命令"><a href="#date命令" class="headerlink" title="date命令"></a>date命令</h2><p>如果你安装的是没有图形化界面的系统。你会注意到整个界面就像WINDOWS里的CMD一样。除了一个光标在不停闪烁可以说其他的什么都没有</p>
+<p>如果想查看当前的系统时间怎么办呢。这个时候可以使用date命令。</p>
+<p>格式为<strong>date</strong> “[选项] [+指定的格式]”</p>
+<p>只需要在date命令中输入以“+”开头的参数,就可以按照指定的格式来输出系统的时间。</p>
+<p>date常用的参数格式和作用如下</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">%t</td>
+<td style="text-align:center">tab键</td>
+</tr>
+<tr>
+<td style="text-align:center">%H</td>
+<td style="text-align:center">小时(0~23)</td>
+</tr>
+<tr>
+<td style="text-align:center">%I</td>
+<td style="text-align:center">小时(0-12)</td>
+</tr>
+<tr>
+<td style="text-align:center">%M</td>
+<td style="text-align:center">分钟(0-59)</td>
+</tr>
+<tr>
+<td style="text-align:center">%S</td>
+<td style="text-align:center">秒(0-59)</td>
+</tr>
+<tr>
+<td style="text-align:center">%j</td>
+<td style="text-align:center">今年中的第几天</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>比如按照默认的格式输出当前系统时间是这样的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# date</span><br><span class="line">Tue Apr 17 03:45:33 EDT 2018</span><br><span class="line">[root@remilia ~]#</span><br></pre></td></tr></table></figure>
+<p>按照”年-月-日 小时:分钟:秒”的格式查看系统当前时间是这样的</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# date "+%Y-%m-%d %H:%M:%S"</span><br><span class="line">2018-04-17 03:47:16</span><br><span class="line">[root@remilia ~]#</span><br></pre></td></tr></table></figure>
+<p>这边要说明一下Linux中每个命令都不尽相同。而且大部分命令都区分大小写。甚至有的时候%M 和 %m的意义都不一样。这个时候怎么办呢。</p>
+<h2 id="man命令"><a href="#man命令" class="headerlink" title="man命令"></a>man命令</h2><p>man命令会显示某个命令的手册(manual)里面会告诉你每个参数都是什么意义。但是全是英文的。不过稍微有点基础的人都能看懂。学这个要是很抗拒英文的话是学不好的。</p>
+<p>man命令的常用格式如下:</p>
+<p><strong>man</strong> {<em>命令</em>}</p>
+<p>如果直接输入man 则会显示</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# man</span><br><span class="line">What manual page do you want?</span><br></pre></td></tr></table></figure>
+<p>他会直接问你想要获取什么的帮助手册。所以我认为直接man没有啥意义。</p>
+<p>那么拿date来举例。如果想看date的每个参数都是什么意思的话，则输入以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# man date</span><br><span class="line">DATE(1)                          User Commands                         DATE(1)</span><br><span class="line"></span><br><span class="line">NAME</span><br><span class="line">       date - print or set the system date and time</span><br><span class="line"></span><br><span class="line">SYNOPSIS</span><br><span class="line">       date [OPTION]... [+FORMAT]</span><br><span class="line">       date [-u|--utc|--universal] [MMDDhhmm[[CC]YY][.ss]]</span><br><span class="line"></span><br><span class="line">DESCRIPTION</span><br><span class="line">       Display the current time in the given FORMAT, or set the system date.</span><br><span class="line"></span><br><span class="line">       Mandatory  arguments  to  long  options are mandatory for short options</span><br><span class="line">       too.</span><br><span class="line"></span><br><span class="line">       -d, --date=STRING</span><br><span class="line">              display time described by STRING, not 'now'</span><br><span class="line"></span><br><span class="line">       -f, --file=DATEFILE</span><br><span class="line">              like --date once for each line of DATEFILE</span><br><span class="line"></span><br><span class="line">       -I[TIMESPEC], --iso-8601[=TIMESPEC]</span><br><span class="line">              output date/time in ISO 8601 format.  TIMESPEC='date'  for  date</span><br><span class="line"> Manual page date(1) line 1 (press h for help or q to quit)</span><br></pre></td></tr></table></figure>
+<p>这个手册内容太多了 一页显示不完。所以可以通过按下回车下翻一行，通过空格下翻一页。按q退出</p>
+<p>稍微下翻一下以后会发现大量参数和说明。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">FORMAT controls the output.  Interpreted sequences are:</span><br><span class="line"></span><br><span class="line">     %%     a literal %</span><br><span class="line"></span><br><span class="line">     %a     locale's abbreviated weekday name (e.g., Sun)</span><br><span class="line"></span><br><span class="line">     %A     locale's full weekday name (e.g., Sunday)</span><br><span class="line"></span><br><span class="line">     %b     locale's abbreviated month name (e.g., Jan)</span><br><span class="line"></span><br><span class="line">     %B     locale's full month name (e.g., January)</span><br><span class="line"></span><br><span class="line">     %c     locale's date and time (e.g., Thu Mar  3 23:05:25 2005)</span><br><span class="line"></span><br><span class="line">     %C     century; like %Y, except omit last two digits (e.g., 20)</span><br><span class="line"></span><br><span class="line">     %d     day of month (e.g., 01)</span><br><span class="line"></span><br><span class="line">     %D     date; same as %m/%d/%y</span><br><span class="line"></span><br><span class="line">     %e     day of month, space padded; same as %_d</span><br></pre></td></tr></table></figure>
+<p>比方说这边有%d的解释 解释是 <strong>“day of month”</strong>翻译过来就算一个月的某一天。后面的<strong>(e.g., 01)</strong>其中的eg代表for example 也就是他给你的例子。比方说01</p>
+<p>那么我们来试一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# date "+%d"</span><br><span class="line">17</span><br><span class="line">[root@remilia ~]#</span><br></pre></td></tr></table></figure>
+<p>今天确实是17号。如果你稍微找一找就能发现<code>date &quot;+%Y-%m-%d %H:%M:%S&quot;</code>这个可以有如下解释</p>
+<ul>
+<li><p>%Y     year</p>
+</li>
+<li><p>%m     month (01..12)</p>
+</li>
+<li><p>%d     day of month (e.g., 01)</p>
+</li>
+<li><p>%H     hour (00..23)</p>
+</li>
+<li><p>%M     minute (00..59)</p>
+</li>
+<li><p>%S     second (00..60)</p>
+<p>以及你会发现一些其他的。类似：</p>
+</li>
+<li><p>%F     full date; same as %Y-%m-%d</p>
+</li>
+<li><p>%T     time; same as %H:%M:%S</p>
+<p>虽然不太明白 但是这个意思好像是%F就等于%Y-%m-%d，然后%T就等于%H:%M:%S</p>
+<p>那么我们的<code>date &quot;+%Y-%m-%d %H:%M:%S&quot;</code>能不能写成<code>date &quot;+%F %T&quot;</code>呢。</p>
+<p>试一下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# date "+%F %T"</span><br><span class="line">2018-04-17 04:07:19</span><br><span class="line">[root@remilia ~]# date "+%Y-%m-%d %H:%M:%S"</span><br><span class="line">2018-04-17 04:07:42</span><br><span class="line">[root@remilia ~]#</span><br></pre></td></tr></table></figure>
+<p>​</p>
+<p>​</p>
+</li>
+</ul>
+<p>就结果来看 确实是一样的。这里应该是给了简写的方法。所以遇到陌生的命令可以尝试使用man去了解命令的基本用法。</p>
+<h2 id="reboot命令"><a href="#reboot命令" class="headerlink" title="reboot命令"></a>reboot命令</h2><p>reboot命令用于重启系统，其格式为<strong>reboot</strong></p>
+<p>由于重启计算机这种操作会涉及硬件资源的管理权限，因此默认只能使用root管理员来重启。</p>
+<p>其命令如下:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# reboot</span><br></pre></td></tr></table></figure>
+<p>回车之后就重启了。</p>
+<h2 id="poweroff命令"><a href="#poweroff命令" class="headerlink" title="poweroff命令"></a>poweroff命令</h2><p>poweroff命令用于关闭系统,其格式为<strong>poweroff</strong></p>
+<p>该命令与reboot命令相同，都会涉及硬件资源的管理权限，因此默认只有root管理员才可以关闭电脑，其命令如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# poweroff</span><br></pre></td></tr></table></figure>
+<p>敲了就关机了</p>
+<h2 id="wget命令"><a href="#wget命令" class="headerlink" title="wget命令"></a>wget命令</h2><p>wget命令用于下载网络中的文件。格式为 <strong>wget</strong> [参数]  {<em>下载地址</em>}</p>
+<p>如果没有Linux系统的管理经验，当前只需了解一下wget命令的参数以及作用，然后看一下下面的演示实验即可，切记不要急于求成。后面章节将逐步讲解Linux系统的配置管理方法，可以等您掌握了网卡的配置方法后再来进行这个实验操作。下表所示为wget命令的参数以及参数的作用。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-b</td>
+<td style="text-align:center">后台下载模式</td>
+</tr>
+<tr>
+<td style="text-align:center">-P</td>
+<td style="text-align:center">下载到指定目录</td>
+</tr>
+<tr>
+<td style="text-align:center">-t</td>
+<td style="text-align:center">最大尝试次数</td>
+</tr>
+<tr>
+<td style="text-align:center">-c</td>
+<td style="text-align:center">断点续传</td>
+</tr>
+<tr>
+<td style="text-align:center">-p</td>
+<td style="text-align:center">下载页面内所有资源，包括图片视频等</td>
+</tr>
+<tr>
+<td style="text-align:center">-r</td>
+<td style="text-align:center">递归下载</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>例如，尝试使用wget命令下载163镜像站中的某个RPM包。这个文件完整路径为</p>
+<p><a href="http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/GitPython-1.0.1-5.el7.noarch.rpm" target="_blank" rel="noopener">http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/GitPython-1.0.1-5.el7.noarch.rpm</a></p>
+<p>命令如下:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# wget http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/GitPython-1.0.1-5.el7.noarch.rpm</span><br><span class="line">--2018-04-17 05:56:44--  http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/GitPython-1.0.1-5.el7.noarch.rpm</span><br><span class="line">Resolving mirrors.163.com (mirrors.163.com)... 59.111.0.251</span><br><span class="line">Connecting to mirrors.163.com (mirrors.163.com)|59.111.0.251|:80... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 513076 (501K) [application/x-redhat-package-manager]</span><br><span class="line">Saving to: ‘GitPython-1.0.1-5.el7.noarch.rpm’</span><br><span class="line"></span><br><span class="line"><span class="meta">100%</span><span class="bash">[======================================&gt;] 513,076     1.82MB/s   <span class="keyword">in</span> 0.3s   </span></span><br><span class="line"></span><br><span class="line">2018-04-17 05:56</span><br></pre></td></tr></table></figure>
+<p>接下来尝试用wget递归下载该镜像源力的某个文件夹里的所有数据，然后会保存在当前目录下mirros.163.com文件夹中。执行该操作的命令为</p>
+<p>wget -r -p <a href="http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/repodata/" target="_blank" rel="noopener">http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/repodata/</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# wget -r -p http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/repodata/</span><br><span class="line">--2018-04-17 06:01:35--  http://mirrors.163.com/centos/7/cloud/x86_64/openstack-queens/repodata/</span><br><span class="line">Resolving mirrors.163.com (mirrors.163.com)... 59.111.0.251</span><br><span class="line">Connecting to mirrors.163.com (mirrors.163.com)|59.111.0.251|:80... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">省略下载过程</span><br></pre></td></tr></table></figure>
+<h2 id="ps命令"><a href="#ps命令" class="headerlink" title="ps命令"></a>ps命令</h2><p>ps命令</p>
+<p>ps命令用于查看系统中的进程状态，格式为<strong>ps</strong> [参数]</p>
+<p>ps命令一般和管道符一起使用,用来抓取某个服务进程对应的PID值。在windows中可以使用<code>ctrl+shift+esc</code>呼出任务管理器。直接查看某个进程的PID。如图：</p>
+<p><img src="/2018/04/17/first-contact-with-linux/4.PNG" alt=""></p>
+<p>而Linux就需要通过命令来看了。常见的参数和作用如下表所示</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-a</td>
+<td style="text-align:center">显示所有进程(包括其他用户)</td>
+</tr>
+<tr>
+<td style="text-align:center">-u</td>
+<td style="text-align:center">用户及其他详细信息</td>
+</tr>
+<tr>
+<td style="text-align:center">-x</td>
+<td style="text-align:center">显示没有终端控制的进程</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Linux系统中时刻运行着许多进程，如果能够合理地管理它们，则可以优化系统的性能。在Linux系统中，有5种常见的进程状态，分别为运行、中断、不可中断、僵死与停止，其各自含义如下所示。</p>
+<ul>
+<li>R(运行):进程正在运行或在运行队列中等待</li>
+<li>S(中断):进程处于休眠。当某个条件形成后或者接收到信号的时候，则脱离休眠状态</li>
+<li>D(不可中断):进程不响应系统异步信号,即使用kill也不能将其中断。</li>
+<li>Z(僵死):进程已经终止,但进程描述符亦然存在，直到父进程调用wait4()系统函数后将进程释放</li>
+<li>T(停止):进程收到停止信号后停止运行</li>
+</ul>
+<p>在执行 ps -aux之后会看到如下结果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# ps -aux</span><br><span class="line">USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span><br><span class="line">root          1  0.1  0.3  50796  7212 ?        Ss   02:45   0:01 /usr/lib/systemd/systemd --swi</span><br><span class="line">root          2  0.0  0.0      0     0 ?        S    02:45   0:00 [kthreadd]</span><br><span class="line">root          3  0.0  0.0      0     0 ?        S    02:45   0:00 [ksoftirqd/0]</span><br><span class="line">root          5  0.0  0.0      0     0 ?        S&lt;   02:45   0:00 [kworker/0:0H]</span><br><span class="line">root          7  0.0  0.0      0     0 ?        S    02:45   0:00 [migration/0]</span><br><span class="line">root          8  0.0  0.0      0     0 ?        S    02:45   0:00 [rcu_bh]</span><br><span class="line">root          9  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/0]</span><br><span class="line">root         10  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/1]</span><br><span class="line">root         11  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/2]</span><br><span class="line">root         12  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/3]</span><br><span class="line">root         13  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/4]</span><br><span class="line">root         14  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/5]</span><br><span class="line">root         15  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/6]</span><br><span class="line">root         16  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/7]</span><br><span class="line">root         17  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/8]</span><br><span class="line">root         18  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/9]</span><br><span class="line">root         19  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/10]</span><br><span class="line">root         20  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/11]</span><br><span class="line">root         21  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/12]</span><br><span class="line">root         22  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/13]</span><br><span class="line">root         23  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/14]</span><br><span class="line">root         24  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/15]</span><br><span class="line">root         25  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/16]</span><br><span class="line">root         26  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/17]</span><br><span class="line">root         27  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/18]</span><br><span class="line">root         28  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/19]</span><br><span class="line">root         29  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/20]</span><br><span class="line">root         30  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/21]</span><br><span class="line">root         31  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/22]</span><br><span class="line">root         32  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/23]</span><br><span class="line">root         33  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/24]</span><br><span class="line">root         34  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/25]</span><br><span class="line">root         35  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/26]</span><br><span class="line">root         36  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/27]</span><br><span class="line">root         37  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/28]</span><br><span class="line">root         38  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/29]</span><br><span class="line">root         39  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/30]</span><br><span class="line">root         40  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/31]</span><br><span class="line">root         41  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/32]</span><br><span class="line">root         42  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/33]</span><br><span class="line">root         43  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/34]</span><br><span class="line">root         44  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/35]</span><br><span class="line">root         45  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/36]</span><br><span class="line">root         46  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/37]</span><br><span class="line">root         47  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/38]</span><br><span class="line">root         48  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/39]</span><br><span class="line">root         49  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/40]</span><br><span class="line">root         50  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/41]</span><br><span class="line">root         51  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/42]</span><br><span class="line">root         52  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/43]</span><br><span class="line">root         53  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/44]</span><br><span class="line">root         54  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/45]</span><br><span class="line">root         55  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/46]</span><br><span class="line">root         56  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/47]</span><br><span class="line">root         57  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/48]</span><br><span class="line">root         58  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/49]</span><br><span class="line">root         59  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/50]</span><br><span class="line">root         60  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/51]</span><br><span class="line">root         61  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/52]</span><br><span class="line">root         62  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/53]</span><br><span class="line">root         63  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/54]</span><br><span class="line">root         64  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/55]</span><br><span class="line">root         65  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/56]</span><br><span class="line">root         66  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/57]</span><br><span class="line">root         67  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/58]</span><br><span class="line">root         68  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/59]</span><br><span class="line">root         69  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/60]</span><br><span class="line">root         70  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/61]</span><br><span class="line">root         71  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/62]</span><br><span class="line">root         72  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/63]</span><br><span class="line">root         73  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/64]</span><br><span class="line">root         74  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/65]</span><br><span class="line">root         75  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/66]</span><br><span class="line">root         76  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/67]</span><br><span class="line">root         77  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/68]</span><br><span class="line">root         78  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/69]</span><br><span class="line">root         79  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/70]</span><br><span class="line">root         80  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/71]</span><br><span class="line">root         81  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/72]</span><br><span class="line">root         82  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/73]</span><br><span class="line">root         83  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/74]</span><br><span class="line">root         84  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/75]</span><br><span class="line">root         85  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/76]</span><br><span class="line">root         86  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/77]</span><br><span class="line">root         87  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/78]</span><br><span class="line">root         88  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/79]</span><br><span class="line">root         89  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/80]</span><br><span class="line">root         90  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/81]</span><br><span class="line">root         91  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/82]</span><br><span class="line">root         92  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/83]</span><br><span class="line">root         93  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/84]</span><br><span class="line">root         94  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/85]</span><br><span class="line">root         95  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/86]</span><br><span class="line">root         96  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/87]</span><br><span class="line">root         97  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/88]</span><br><span class="line">root         98  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/89]</span><br><span class="line">root         99  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/90]</span><br><span class="line">root        100  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/91]</span><br><span class="line">root        101  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/92]</span><br><span class="line">root        102  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/93]</span><br><span class="line">root        103  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/94]</span><br><span class="line">root        104  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/95]</span><br><span class="line">root        105  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/96]</span><br><span class="line">root        106  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/97]</span><br><span class="line">root        107  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/98]</span><br><span class="line">root        108  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/99]</span><br><span class="line">root        109  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/100]</span><br><span class="line">root        110  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/101]</span><br><span class="line">root        111  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/102]</span><br><span class="line">root        112  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/103]</span><br><span class="line">root        113  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/104]</span><br><span class="line">root        114  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/105]</span><br><span class="line">root        115  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/106]</span><br><span class="line">root        116  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/107]</span><br><span class="line">root        117  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/108]</span><br><span class="line">root        118  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/109]</span><br><span class="line">root        119  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/110]</span><br><span class="line">root        120  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/111]</span><br><span class="line">root        121  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/112]</span><br><span class="line">root        122  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/113]</span><br><span class="line">root        123  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/114]</span><br><span class="line">root        124  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/115]</span><br><span class="line">root        125  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/116]</span><br><span class="line">root        126  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/117]</span><br><span class="line">root        127  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/118]</span><br><span class="line">root        128  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/119]</span><br><span class="line">root        129  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/120]</span><br><span class="line">root        130  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/121]</span><br><span class="line">root        131  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/122]</span><br><span class="line">root        132  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/123]</span><br><span class="line">root        133  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/124]</span><br><span class="line">root        134  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/125]</span><br><span class="line">root        135  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/126]</span><br><span class="line">root        136  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuob/127]</span><br><span class="line">root        137  0.0  0.0      0     0 ?        R    02:45   0:00 [rcu_sched]</span><br><span class="line">root        138  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/0]</span><br><span class="line">root        139  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/1]</span><br><span class="line">root        140  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/2]</span><br><span class="line">root        141  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/3]</span><br><span class="line">root        142  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/4]</span><br><span class="line">root        143  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/5]</span><br><span class="line">root        144  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/6]</span><br><span class="line">root        145  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/7]</span><br><span class="line">root        146  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/8]</span><br><span class="line">root        147  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/9]</span><br><span class="line">root        148  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/10]</span><br><span class="line">root        149  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/11]</span><br><span class="line">root        150  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/12]</span><br><span class="line">root        151  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/13]</span><br><span class="line">root        152  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/14]</span><br><span class="line">root        153  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/15]</span><br><span class="line">root        154  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/16]</span><br><span class="line">root        155  0.0  0.0      0     0 ?        S    02:45   0:00 [rcuos/17]</span><br><span class="line">省略部分输出...</span><br></pre></td></tr></table></figure>
+<p>其中的一些参数意义如下表格</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th><strong>USER</strong></th>
+<th><strong>PID</strong></th>
+<th><strong>%CPU</strong></th>
+<th><strong>%MEM</strong></th>
+<th><strong>VSZ</strong></th>
+<th><strong>RSS</strong></th>
+<th><strong>TTY</strong></th>
+<th><strong>STAT</strong></th>
+<th><strong>START</strong></th>
+<th><strong>TIME</strong></th>
+<th><strong>COMMAND</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>进程的所有者</td>
+<td>进程ID号</td>
+<td>运算器占用率</td>
+<td>内存占用率</td>
+<td>虚拟内存使用量（单位是KB）</td>
+<td>占用的固定内存量（单位是KB）</td>
+<td>所在终端</td>
+<td>进程  状态</td>
+<td>被启动  的时间</td>
+<td>实际使用  CPU的时间</td>
+<td>命令名称与参数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="top命令"><a href="#top命令" class="headerlink" title="top命令"></a>top命令</h2><p>top命令用于动态地监视进程活动与系统负载信息等。其格式为<strong>top</strong></p>
+<p>top命令非常强大。可以看作是Linux中的任务管理器。由于运行了top之后其中的数据会不断变换，这里只截取一次，实际是不停变化的。按q可退出。结果如下:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# top</span><br><span class="line">top - 03:02:24 up 16 min,  1 user,  load average: 0.00, 0.01, 0.05</span><br><span class="line">Tasks: 418 total,   1 running, 417 sleeping,   0 stopped,   0 zombie</span><br><span class="line"><span class="meta">%</span><span class="bash">Cpu(s):  0.0 us,  0.2 sy,  0.0 ni, 99.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span></span><br><span class="line">KiB Mem:   1870784 total,   285556 used,  1585228 free,      784 buffers</span><br><span class="line">KiB Swap:  2097148 total,        0 used,  2097148 free.    91104 cached Mem</span><br><span class="line"></span><br><span class="line">   PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                    </span><br><span class="line">   714 root      20   0       0      0      0 S   0.3  0.0   0:00.06 xfsaild/dm-0               </span><br><span class="line">     1 root      20   0   50796   7220   2484 S   0.0  0.4   0:01.42 systemd                    </span><br><span class="line">     2 root      20   0       0      0      0 S   0.0  0.0   0:00.02 kthreadd                   </span><br><span class="line">     3 root      20   0       0      0      0 S   0.0  0.0   0:00.00 ksoftirqd/0                </span><br><span class="line">     5 root       0 -20       0      0      0 S   0.0  0.0   0:00.00 kworker/0:0H               </span><br><span class="line">     7 root      rt   0       0      0      0 S   0.0  0.0   0:00.34 migration/0                </span><br><span class="line">     8 root      20   0       0      0      0 S   0.0  0.0   0:00.00 rcu_bh</span><br></pre></td></tr></table></figure>
+<p>在如上的结果中，前5行为系统整体的统计信息。其所代表的含义如下</p>
+<ul>
+<li>第1行：系统时间、运行时间、登录终端数、系统负载（三个数值分别为1分钟、5分钟、15分钟内的平均值，数值越小意味着负载越低）。</li>
+<li>第2行：进程总数、运行中的进程数、睡眠中的进程数、停止的进程数、僵死的进程数。</li>
+<li>第3行：用户占用资源百分比、系统内核占用资源百分比、改变过优先级的进程资源百分比、空闲的资源百分比等。</li>
+</ul>
+<blockquote>
+<p>  注:第3行中的数据均为CPU数据并以百分比格式显示，例如“97.1 id”意味着有97.1%的CPU处理器资源处于空闲。</p>
+</blockquote>
+<ul>
+<li><p>第4行：物理内存总量、内存使用量、内存空闲量、作为内核缓存的内存量。</p>
+</li>
+<li><p>第5行：虚拟内存总量、虚拟内存使用量、虚拟内存空闲量、已被提前加载的内存量。</p>
+</li>
+</ul>
+<h2 id="pidof命令"><a href="#pidof命令" class="headerlink" title="pidof命令"></a>pidof命令</h2><p>pidof命令用于查询某个指定服务进程的PID值，格式为“<strong>pidof</strong> {[参数][<em>服务名称</em>]}”。<br>每个进程的进程号码值（PID）是唯一的，因此可以通过PID来区分不同的进程。例如，可以使用如下命令来查询本机上sshd服务程序的PID：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# pidof sshd</span><br><span class="line">2156</span><br></pre></td></tr></table></figure></p>
+<h2 id="kill命令"><a href="#kill命令" class="headerlink" title="kill命令"></a>kill命令</h2><p>kill命令用于终止某个指定PID的服务进程，格式为“<strong>kill</strong> [参数][<em>进程PID</em>]”。<br>接下来，我们使用kill命令把上面用pidof命令查询到的PID所代表的进程终止掉，其命令如下所示。这种操作的效果等同于强制停止sshd服务。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# kill 2156</span><br></pre></td></tr></table></figure></p>
+<h2 id="killall命令"><a href="#killall命令" class="headerlink" title="killall命令"></a>killall命令</h2><p>killall命令用于终止某个指定名称的服务所对应的全部进程，格式为：“<strong>killall</strong> [参数][<em>进程名称</em>]”。<br>通常来讲，复杂软件的服务程序会有多个进程协同为用户提供服务，如果逐个去结束这些进程会比较麻烦，此时可以使用killall命令来批量结束某个服务程序带有的全部进程。下面以httpd服务程序为例，来结束其全部进程。由于RHEL7系统默认没有安装httpd服务程序，因此此时只需看操作过程和输出结果即可。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# pidof httpd</span><br><span class="line">13581 13580 13579 13578 13577 13576</span><br><span class="line">[root@remilia ~]# killall httpd</span><br><span class="line">[root@remilia ~]# pidof httpd</span><br><span class="line">[root@remilia ~]#</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>  注：    </p>
+<p>  如果我们在系统终端中执行一个命令后想立即停止它，可以同时按下Ctrl + C组合键（生产环境中比较常用的一个快捷键），这样将立即终止该命令的进程。或者，如果有些命令在执行时不断地在屏幕上输出信息，影响到后续命令的输入，则可以在执行命令时在末尾添加上一个&amp;符号，这样命令将进入系统后台来执行。</p>
+</blockquote>
+<h1 id="系统状态检测命令"><a href="#系统状态检测命令" class="headerlink" title="系统状态检测命令"></a>系统状态检测命令</h1><p>作为一名合格的运维人员，想要更快、更好地了解Linux服务器，必须具备快速查看Linux系统运行状态的能力，因此接下来会逐个说明与网卡网络、系统内核、系统负载、内存使用情况、当前启用终端数量、历史登录记录、命令执行记录以及救援诊断等相关命令的使用方法。这些命令都超级实用。是必须掌握的命令。</p>
+<h2 id="ifconfig命令"><a href="#ifconfig命令" class="headerlink" title="ifconfig命令"></a>ifconfig命令</h2><p>ifconfig命令用于获取网卡配置与网络状态等信息，格式为“<strong>ifconfig</strong> [网络设备][参数]”。</p>
+<p>使用ifconfig命令来查看本机当前的网卡配置与网络状态等信息时，其实主要查看的就是网卡名称、inet参数后面的IP地址、ether参数后面的网卡物理地址（又称为MAC地址），以及RX、TX的接收数据包与发送数据包的个数及累计流量：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# ifconfig</span><br><span class="line"></span><br><span class="line">eno16777728: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line"></span><br><span class="line">        inet 192.168.10.10  netmask 255.255.255.0  broadcast 192.168.10.255</span><br><span class="line"></span><br><span class="line">        inet6 fe80::20c:29ff:fec4:a409  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line"></span><br><span class="line">        ether 00:0c:29:c4:a4:09  txqueuelen 1000  (Ethernet)</span><br><span class="line"></span><br><span class="line">        RX packets 36  bytes 3176 (3.1 KiB)</span><br><span class="line"></span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line"></span><br><span class="line">        TX packets 38  bytes 4757 (4.6 KiB)</span><br><span class="line"></span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line"></span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line"></span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line"></span><br><span class="line">        loop  txqueuelen 0  (Local Loopback)</span><br><span class="line"></span><br><span class="line">        RX packets 386  bytes 32780 (32.0 KiB)</span><br><span class="line"></span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line"></span><br><span class="line">        TX packets 386  bytes 32780 (32.0 KiB)</span><br><span class="line"></span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure>
+<h2 id="uname命令"><a href="#uname命令" class="headerlink" title="uname命令"></a>uname命令</h2><p>uname命令用于查看系统内核与系统版本等信息，格式为“<strong>uname</strong> [-a]”。</p>
+<p>在使用uname命令时，一般会固定搭配上-a参数来完整地查看当前系统的内核名称、主机名、内核发行版本、节点名、系统时间、硬件名称、硬件平台、处理器类型以及操作系统名称等信息。</p>
+ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# uname -a</span><br><span class="line">Linux remilia.com 3.10.0-123.el7.x86_64 #1 SMP Mon May 5 11:16:57 EDT 2017 </span><br><span class="line">x86_64 x86_64 x86_64 GNU/Linux</span><br></pre></td></tr></table></figure>
+<p>顺带一提，如果要查看当前系统版本的详细信息，则需要查看redhat-release文件，其命令以及相应的结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# cat /etc/redhat-release</span><br><span class="line">Red Hat Enterprise Linux Server release 7.0 (Maipo)</span><br></pre></td></tr></table></figure>
+<h2 id="free命令"><a href="#free命令" class="headerlink" title="free命令"></a>free命令</h2><p>free用于显示当前系统中内存的使用量信息，格式为“<strong>free</strong> [-h]”。</p>
+<p>为了保证Linux系统不会因资源耗尽而突然宕机，运维人员需要时刻关注内存的使用量。在使用free命令时，可以结合使用-h参数以更人性化的方式输出当前内存的实时使用量信息。表2-8所示为在的电脑上执行free -h命令之后的输出信息。需要注意的是，输出信息中的中文注释是额外添加的内容，实际输出时没有相应的参数解释。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>内存总量</th>
+<th>已用量</th>
+<th>可用量</th>
+<th>进程共享的内存量</th>
+<th>磁盘缓存的内存量</th>
+<th>缓存的  内存量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>total</td>
+<td>used</td>
+<td>free</td>
+<td>shared</td>
+<td>buffers</td>
+<td>cached</td>
+</tr>
+<tr>
+<td>Mem</td>
+<td>1.8GB</td>
+<td>1.3GB</td>
+<td>542MB</td>
+<td>9.8MB</td>
+<td>1.6MB</td>
+<td>413MB</td>
+</tr>
+<tr>
+<td>-/+ buffers/cache</td>
+<td></td>
+<td>869MB</td>
+<td>957MB</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Swap</td>
+<td>2.0GB</td>
+<td>0</td>
+<td>2.0GB</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="who命令"><a href="#who命令" class="headerlink" title="who命令"></a>who命令</h2><p>who用于查看当前登入主机的用户终端信息，格式为“<strong>who</strong> [参数]”。</p>
+<p>这三个简单的字母可以快速显示出所有正在登录本机的用户的名称以及他们正在开启的终端信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# who</span><br></pre></td></tr></table></figure>
+<p>​                                                     执行who命令的结果</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>登录的用户名</th>
+<th>终端设备</th>
+<th>登录到系统的时间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>root</td>
+<td>:0</td>
+<td>2018-04-24 17:52  (:0)</td>
+</tr>
+<tr>
+<td>root</td>
+<td>pts/0</td>
+<td>2018-04-24 17:52  (:0)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="last命令"><a href="#last命令" class="headerlink" title="last命令"></a>last命令</h2><p>last命令用于查看所有系统的登录记录，格式为“<strong>last</strong> [参数]”。</p>
+<p>使用last命令可以查看本机的登录记录。但是，由于这些信息都是以日志文件的形式保存在系统中，因此入侵者可以很容易地对内容进行篡改。千万不要单纯以该命令的输出信息而判断系统有无被恶意入侵！</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# last</span><br><span class="line">root       pts/0       :0               Mon Aug  24 17:52   still  logged in</span><br><span class="line">root       :0          :0               Mon Aug  24 17:52   still  logged in</span><br><span class="line">(unknown   :0          :0               Mon Aug  24 17:50 - 17:52   (00:02)</span><br><span class="line">reboot     system boot 3.10.0-123.el7.x Tue Aug  25 01:49 - 18:17   (-7:-32)</span><br><span class="line">root       pts/0       :0               Mon Aug  24 15:40 - 08:54   (7+17:14)</span><br><span class="line">root       pts/0       :0               Fri Jul  10 10:49 - 15:37   (45+04:47)</span><br><span class="line">………………省略部分登录信息………………</span><br></pre></td></tr></table></figure>
+<h2 id="history命令"><a href="#history命令" class="headerlink" title="history命令"></a>history命令</h2><p>history命令用于显示历史执行过的命令，格式为“<strong>history</strong> [-c]”。</p>
+<p>执行history命令能显示出当前用户在本地计算机中执行过的最近1000条命令记录。如果觉得1000不够用，还可以自定义/etc/profile文件中的HISTSIZE变量值。在使用history命令时，如果使用-c参数则会清空所有的命令历史记录。还可以使用“!编码数字”的方式来重复执行某一次的命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# history</span><br><span class="line">1 tar xzvf VMwareTools-9.9.0-2304977.tar.gz</span><br><span class="line">2 cd vmware-tools-distrib/</span><br><span class="line">3 ls</span><br><span class="line">4 ./vmware-install.pl -d</span><br><span class="line">5 reboot</span><br><span class="line">6 df -h</span><br><span class="line">7 cd /run/media/</span><br><span class="line">8 ls</span><br><span class="line">9 cd root/</span><br><span class="line">10 ls</span><br><span class="line">11 cd VMware\ Tools/</span><br><span class="line">12 ls</span><br><span class="line">13 cp VMwareTools-9.9.0-2304977.tar.gz /home</span><br><span class="line">14 cd /home</span><br><span class="line">15 ls</span><br><span class="line">16 tar xzvf VMwareTools-9.9.0-2304977.tar.gz</span><br><span class="line">17 cd vmware-tools-distrib/</span><br><span class="line">18 ls</span><br><span class="line">19 ./vmware-install.pl -d</span><br><span class="line">20 reboot</span><br><span class="line">21 history</span><br><span class="line">[root@remilia ~]# !15</span><br><span class="line">anaconda-ks.cfg  Documents  initial-setup-ks.cfg  Pictures  Templates</span><br><span class="line">Desktop          Downloads  Music                 Public    Videos</span><br></pre></td></tr></table></figure>
+<p>历史命令会被保存到用户家目录中的.bash_history文件中。Linux系统中以点（.）开头的文件均代表隐藏文件，这些文件大多数为系统服务文件，可以用cat命令查看其文件内容。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# cat ~/.bash_history</span><br></pre></td></tr></table></figure>
+<p>要清空当前用户在本机上执行的Linux命令历史记录信息，可执行如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# history -c</span><br></pre></td></tr></table></figure>
+<h2 id="sosreport命令"><a href="#sosreport命令" class="headerlink" title="sosreport命令"></a>sosreport命令</h2><p>sosreport命令用于收集系统配置及架构信息并输出诊断文档，格式为sosreport。</p>
+<p>当Linux系统出现故障需要联系技术支持人员时，大多数时候都要先使用这个命令来简单收集系统的运行状态和服务配置信息，以便让技术支持人员能够远程解决一些小问题，亦或让他们能提前了解某些复杂问题。在下面的输出信息中，加粗的部分是收集好的资料压缩文件以及校验码，将其发送给技术支持人员即可：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# sosreport</span><br><span class="line">sosreport (version 3.0)</span><br><span class="line">This command will collect diagnostic and configuration information from</span><br><span class="line">this Red Hat Enterprise Linux system and installed applications.</span><br><span class="line"></span><br><span class="line">An archive containing the collected information will be generated in</span><br><span class="line">/var/tmp and may be provided to a Red Hat support representative.</span><br><span class="line">Any information provided to Red Hat will be treated in accordance with</span><br><span class="line">the published support policies at:</span><br><span class="line">https://access.redhat.com/support/</span><br><span class="line">The generated archive may contain data considered sensitive and its</span><br><span class="line">content should be reviewed by the originating organization before being</span><br><span class="line">passed to any third party.</span><br><span class="line"></span><br><span class="line">No changes will be made to system configuration.</span><br><span class="line">Press ENTER to continue, or CTRL-C to quit. 此处敲击回车来确认收集信息</span><br><span class="line"></span><br><span class="line">Please enter your first initial and last name [remilia.com]: 此处敲击回车来确认主机编号</span><br><span class="line">Please enter the case number that you are generating this report for: 此处敲击回车来确认主机编号</span><br><span class="line"></span><br><span class="line">Running plugins. Please wait ...</span><br><span class="line">Running 70/70: yum...</span><br><span class="line">Creating compressed archive...</span><br><span class="line">Your sosreport has been generated and saved in:</span><br><span class="line"></span><br><span class="line">/var/tmp/sosreport-remilia.com-20170905230631.tar.xz</span><br><span class="line">The checksum is: 79436cdf791327040efde48c452c6322</span><br><span class="line">Please send this file to your support representative.</span><br></pre></td></tr></table></figure>
+<h1 id="工作目录切换命令"><a href="#工作目录切换命令" class="headerlink" title="工作目录切换命令"></a>工作目录切换命令</h1><p>工作目录指的是用户当前在系统中所处的位置。由于工作目录会牵涉系统存储结构相关的知识，因此后面将详细讲解这部分内容。现在只需简单了解一下这里的操作实验即可，如果不能完全掌握也没有关系，毕竟Linux系统的知识体系太过庞大，每一位初学人员都需要经历这么一段时期。</p>
+<h2 id="pwd命令"><a href="#pwd命令" class="headerlink" title="pwd命令"></a>pwd命令</h2><p>pwd命令用于显示用户当前所处的工作目录，格式为“<strong>pwd</strong> [选项]”。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia etc]# pwd</span><br><span class="line">/etc</span><br></pre></td></tr></table></figure>
+<h2 id="cd命令"><a href="#cd命令" class="headerlink" title="cd命令"></a>cd命令</h2><p>cd命令用于切换工作路径，格式为<strong>cd</strong> [目录名称]</p>
+<p>这个命令应该是最常用的一个Linux命令了。可以通过cd命令迅速、灵活地切换到不同的工作目录。除了常见的切换目录方式，还可以使用“cd -”命令返回到上一次所处的目录，使用“cd..”命令进入上级目录，以及使用“cd ~”命令切换到当前用户的家目录，亦或使用“cd ~username”切换到其他用户的家目录。例如，可以使用“cd 路径”的方式切换进<strong>/etc</strong>目录中和<strong>/bin</strong>目录中,如果想返回上次切换的目录还可以通过<strong>“cd -”</strong>来实现。若想快速切换到当前用户家目录 可以通过<strong>cd ~</strong>实现</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia bin]# cd /etc/</span><br><span class="line">[root@remilia etc]# cd /bin</span><br><span class="line">[root@remilia bin]# cd -</span><br><span class="line">/etc</span><br><span class="line">[root@remilia etc]# cd ~</span><br><span class="line">[root@remilia ~]#</span><br></pre></td></tr></table></figure>
+<h2 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h2><p>ls命令用于显示目录中的文件信息，格式为<strong>“ls [选项] [文件] “</strong></p>
+<p>所处的工作目录不同，当前工作目录的文件也不同。使用<strong>-a</strong>参数可以看到所有文件（包括隐藏的文件）。使用<strong>“-l”</strong>参数可以查看文件属性，大小等详细信息。将这两个结合起来就像这样</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# ls -al</span><br><span class="line">total 556</span><br><span class="line">dr-xr-x---.  3 root root   4096 May  2 03:09 .</span><br><span class="line">drwxr-xr-x. 19 root root   4096 May  2 03:05 ..</span><br><span class="line">-rw-------.  1 root root    871 Mar  1 19:49 anaconda-ks.cfg</span><br><span class="line">-rw-------.  1 root root   7158 May  2 03:56 .bash_history</span><br><span class="line">-rw-r--r--.  1 root root     18 Dec 28  2013 .bash_logout</span><br><span class="line">-rw-r--r--.  1 root root    176 Dec 28  2013 .bash_profile</span><br><span class="line">-rw-r--r--.  1 root root    176 Dec 28  2013 .bashrc</span><br><span class="line">-rw-r--r--.  1 root root    100 Dec 28  2013 .cshrc</span><br><span class="line">-rwxr--r--.  1 root root     60 May  2 03:09 example.sh</span><br><span class="line">-rw-r--r--.  1 root root 513076 Feb 28 04:36 GitPython-1.0.1-5.el7.noarch.rpm</span><br><span class="line">-rw-------.  1 root root     46 Mar  1 21:07 .lesshst</span><br><span class="line">drwxr-xr-x.  3 root root     36 Apr 17 06:01 mirrors.163.com</span><br><span class="line">-rw-r--r--.  1 root root    129 Dec 28  2013 .tcshrc</span><br><span class="line">-rw-------.  1 root root    808 Mar  1 21:24 .viminfo</span><br></pre></td></tr></table></figure>
+<p>如果想查看某个目录的属性信息。就要加上-d参数。例如查看/etc的目录权限和属性信息:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# ls -ld /etc/</span><br><span class="line">drwxr-xr-x. 77 root root 8192 May  2 03:05 /etc/</span><br></pre></td></tr></table></figure>
+<h1 id="文件文本编辑命令"><a href="#文件文本编辑命令" class="headerlink" title="文件文本编辑命令"></a>文件文本编辑命令</h1><p>在Linux中，有着著名的<strong>“一切皆文件”</strong>的说法。而对服务程序进行配置自然也就是编辑程序的配置文件。本节将讲解几条用于查看文本文件内容的命令。至于编辑器使用起来比较复杂，因此将放到第4章与Shell脚本内容一起讲解。</p>
+<h2 id="cat命令"><a href="#cat命令" class="headerlink" title="cat命令"></a>cat命令</h2><p>cat命令用于查看纯文本文件（内容较少的），格式为“<strong>cat</strong> [选项] {文件}”。</p>
+<p>Linux系统中有多个用于查看文本内容的命令，每个命令都有自己的特点，比如这个cat命令就是用于查看内容较少的纯文本文件的。</p>
+<p>如果在查看文本的时候顺便还想显示行号的话。可以加上-n参数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# cat -n anaconda-ks.cfg </span><br><span class="line">     1  #version=RHEL7</span><br><span class="line">     2  # System authorization information</span><br><span class="line">     3  auth --enableshadow --passalgo=sha512</span><br><span class="line">     4</span><br><span class="line">     5  # Use CDROM installation media</span><br><span class="line">     6  cdrom</span><br><span class="line">     7  # Run the Setup Agent on first boot</span><br><span class="line">     8  firstboot --enable</span><br><span class="line">     9  ignoredisk --only-use=sda</span><br><span class="line">    10  # Keyboard layouts</span><br><span class="line">    11  keyboard --vckeymap=us --xlayouts='us'</span><br><span class="line">    12  # System language</span><br><span class="line">    13  lang en_US.UTF-8</span><br><span class="line">    14</span><br><span class="line">    15  # Network information</span><br><span class="line">    16  network  --bootproto=dhcp --device=eno16777736 --ipv6=auto --activate</span><br><span class="line">    17  network  --bootproto=dhcp --device=eno33554960 --onboot=off --ipv6=auto</span><br><span class="line">    18  network  --hostname=remilia</span><br><span class="line">    19  # Root password</span><br><span class="line">    20  rootpw --iscrypted $6$4nqD7ZOlxIeZbUyb$K6./B9FtCU4481YL713K50c40xuHJlglpsv2zFfF7YKY6dXYMoYiDr4blyjNl0Kqekxa6rkonWIT7MxFYPxJL.</span><br><span class="line">    21  # System timezone</span><br><span class="line">    22  timezone America/New_York --isUtc</span><br><span class="line">    23  # System bootloader configuration</span><br><span class="line">    24  bootloader --location=mbr --boot-drive=sda</span><br><span class="line">    25  autopart --type=lvm</span><br><span class="line">    26  # Partition clearing information</span><br><span class="line">    27  clearpart --none --initlabel </span><br><span class="line">    28</span><br><span class="line">    29  %packages</span><br><span class="line">    30  @core</span><br><span class="line">    31</span><br><span class="line">    32  %end</span><br><span class="line">    33</span><br></pre></td></tr></table></figure>
+<h2 id="more命令"><a href="#more命令" class="headerlink" title="more命令"></a>more命令</h2><p>more命令用于查看纯文本文件（内容较多的），格式为“<strong>more</strong> [选项] {文件}”。</p>
+<p>如果需要阅读长篇小说或者非常长的配置文件，那么cat就真的不适合了。因为一旦使用cat命令阅读长篇的文本内容，信息就会在屏幕上快速翻滚，导致自己还没有来得及看到，内容就已经翻篇了。因此对于长篇的文本内容，推荐使用more命令来查看。more命令会在最下面使用百分比的形式来提示你已经阅读了多少内容。你还可以使用空格键或回车键向下翻页：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# more anaconda-ks.cfg </span><br><span class="line"><span class="meta">#</span><span class="bash">version=RHEL7</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> System authorization information</span></span><br><span class="line">auth --enableshadow --passalgo=sha512</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Use CDROM installation media</span></span><br><span class="line">cdrom</span><br><span class="line"><span class="meta">#</span><span class="bash"> Run the Setup Agent on first boot</span></span><br><span class="line">firstboot --enable</span><br><span class="line">ignoredisk --only-use=sda</span><br><span class="line"><span class="meta">#</span><span class="bash"> Keyboard layouts</span></span><br><span class="line">keyboard --vckeymap=us --xlayouts='us'</span><br><span class="line"><span class="meta">#</span><span class="bash"> System language</span></span><br><span class="line">lang en_US.UTF-8</span><br><span class="line"><span class="meta">--More--(34%</span><span class="bash">)</span></span><br></pre></td></tr></table></figure>
+<h2 id="head命令"><a href="#head命令" class="headerlink" title="head命令"></a>head命令</h2><p>head命令用于查看格式为“<strong>head</strong>[选项] {文件}。</p>
+<p>在阅读文本内容时，谁也难以保证会按照从头到尾的顺序往下看完整个文件。如果只想查看文本中前5行的内容，该怎么办呢？head命令可以派上用场了：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# head -n 5 anaconda-ks.cfg </span><br><span class="line"><span class="meta">#</span><span class="bash">version=RHEL7</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> System authorization information</span></span><br><span class="line">auth --enableshadow --passalgo=sha512</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Use CDROM installation media</span></span><br></pre></td></tr></table></figure>
+<h2 id="tail命令"><a href="#tail命令" class="headerlink" title="tail命令"></a>tail命令</h2><p>tail命令用于查看纯文本文档的后N行或持续刷新内容，格式为“<strong>tai</strong>l [选项] {文件}”。</p>
+<p>我们可能还会遇到另外一种情况，比如需要查看文本内容的最后20行，这时就需要用到tail命令了。tail命令的操作方法与head命令非常相似，只需要执行“tail -n 20 文件名”命令就可以达到这样的效果。tail命令最强悍的功能是可以持续刷新一个文件的内容，当想要实时查看最新日志文件时，这特别有用，此时的命令格式为“<strong>tail</strong> -f {文件名}”：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@Remilia ~]# tail -f /var/log/messages </span><br><span class="line">May 15 09:34:30 Remilia chronyd[969]: System clock wrong by 0.777201 seconds, adjustment started</span><br><span class="line">May 15 09:34:30 Remilia chronyd[969]: Out of order sample detected, discarding history for 5.79.108.34</span><br><span class="line">May 15 09:34:30 Remilia chronyd[969]: Can't synchronise: no reachable sources</span><br><span class="line">May 15 09:34:30 Remilia chronyd[969]: Selected source 85.199.214.101</span><br><span class="line">May 15 09:34:30 Remilia chronyd[969]: Out of order sample detected, discarding history for 85.199.214.101</span><br><span class="line">May 15 09:34:30 Remilia chronyd[969]: Can't synchronise: no reachable sources</span><br><span class="line">May 15 09:34:33 Remilia chronyd[969]: Selected source 108.59.2.24</span><br><span class="line">May 15 09:34:42 Remilia systemd-logind: New session 2 of user root.</span><br><span class="line">May 15 09:34:42 Remilia systemd: Starting Session 2 of user root.</span><br><span class="line">May 15 09:34:42 Remilia systemd: Started Session 2 of user root.</span><br></pre></td></tr></table></figure>
+<h2 id="tr命令"><a href="#tr命令" class="headerlink" title="tr命令"></a>tr命令</h2><p>tr命令用于替换文本文件中的字符，格式为“<strong>tr</strong> {原始字符} {目标字符}”。</p>
+<p>在很多时候，我们想要快速地替换文本中的一些词汇，又或者把整个文本内容都进行替换，如果进行手工替换，难免工作量太大，尤其是需要处理大批量的内容时，进行手工替换更是不现实。这时，就可以先使用cat命令读取待处理的文本，然后通过管道符把这些文本内容传递给tr命令进行替换操作即可。例如，把某个文本内容中的英文全部替换为大写：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">[root@Remilia ~]# cat anaconda-ks.cfg | tr [a-z] [A-Z]</span><br><span class="line"><span class="meta">#</span><span class="bash">VERSION=RHEL7</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> SYSTEM AUTHORIZATION INFORMATION</span></span><br><span class="line">AUTH --ENABLESHADOW --PASSALGO=SHA512</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> USE CDROM INSTALLATION MEDIA</span></span><br><span class="line">CDROM</span><br><span class="line"><span class="meta">#</span><span class="bash"> RUN THE SETUP AGENT ON FIRST BOOT</span></span><br><span class="line">FIRSTBOOT --ENABLE</span><br><span class="line">IGNOREDISK --ONLY-USE=SDA</span><br><span class="line"><span class="meta">#</span><span class="bash"> KEYBOARD LAYOUTS</span></span><br><span class="line">KEYBOARD --VCKEYMAP=US --XLAYOUTS='US'</span><br><span class="line"><span class="meta">#</span><span class="bash"> SYSTEM LANGUAGE</span></span><br><span class="line">LANG EN_US.UTF-8</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> NETWORK INFORMATION</span></span><br><span class="line">NETWORK --BOOTPROTO=DHCP --DEVICE=ENO16777728 --ONBOOT=OFF --IPV6=AUTO</span><br><span class="line">NETWORK --HOSTNAME=LOCALHOST.LOCALDOMAIN</span><br><span class="line"><span class="meta">#</span><span class="bash"> ROOT PASSWORD</span></span><br><span class="line">ROOTPW --ISCRYPTED $6$PDJJF42G8C6PL069$II.PX/YFAQPO0ENW2PA7MOMKJLYOAE2ZJMZ2UZJ7</span><br><span class="line">BH3UO4OWTR1.WK/HXZ3XIGMZGJPCS/MGPYSSOI8HPCT8B/</span><br><span class="line"><span class="meta">#</span><span class="bash"> SYSTEM TIMEZONE</span></span><br><span class="line">TIMEZONE AMERICA/NEW_YORK --ISUTC</span><br><span class="line">USER --NAME=LINUXPROBE --PASSWORD=$6$A9V3INSTNBWEIR7D$JEGFYWBCDOOOKJ9SODECCDO.</span><br><span class="line">ZLF4OSH2AZ2SS2R05B6LZ2A0V2K.RJWSBALL2FEKQVGF640OA/TOK6J.7GUTO/ --ISCRYPTED --</span><br><span class="line">GECOS="LINUXPROBE"</span><br><span class="line"><span class="meta">#</span><span class="bash"> X WINDOW SYSTEM CONFIGURATION INFORMATION</span></span><br><span class="line">XCONFIG --STARTXONBOOT</span><br><span class="line"><span class="meta">#</span><span class="bash"> SYSTEM BOOTLOADER CONFIGURATION</span></span><br><span class="line">BOOTLOADER --LOCATION=MBR --BOOT-DRIVE=SDA</span><br><span class="line">AUTOPART --TYPE=LVM</span><br><span class="line"><span class="meta">#</span><span class="bash"> PARTITION CLEARING INFORMATION</span></span><br><span class="line">CLEARPART --NONE --INITLABEL </span><br><span class="line"></span><br><span class="line"><span class="meta">%</span><span class="bash">PACKAGES</span></span><br><span class="line">@BASE</span><br><span class="line">@CORE</span><br><span class="line">@DESKTOP-DEBUGGING</span><br><span class="line">@DIAL-UP</span><br><span class="line">@FONTS</span><br><span class="line">@GNOME-DESKTOP</span><br><span class="line">@GUEST-AGENTS</span><br><span class="line">@GUEST-DESKTOP-AGENTS</span><br><span class="line">@INPUT-METHODS</span><br><span class="line">@INTERNET-BROWSER</span><br><span class="line">@MULTIMEDIA</span><br><span class="line">@PRINT-CLIENT</span><br><span class="line">@X11</span><br><span class="line"></span><br><span class="line"><span class="meta">%</span><span class="bash">END</span></span><br></pre></td></tr></table></figure>
+<h2 id="wc命令"><a href="#wc命令" class="headerlink" title="wc命令"></a>wc命令</h2><p>wc命令用于统计指定文本的行数、字数、字节数，格式为“<strong>wc</strong> [参数] {文本}”。</p>
+<p>wc的参数以及作用:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-l</td>
+<td>只显示行数</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>只显示单词数</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>只显示字节数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>在Linux系统中，passwd是用于保存系统账户信息的文件，要统计当前系统中有多少个用户，可以使用下面的命令来进行查询</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@Remilia ~]# wc -l /etc/passwd</span><br><span class="line">38 /etc/passwd</span><br></pre></td></tr></table></figure>
+<h2 id="stat命令"><a href="#stat命令" class="headerlink" title="stat命令"></a>stat命令</h2><p>stat命令用于查看文件的具体存储信息和时间等信息，格式为“<strong>stat</strong> {文件名称}”。</p>
+<p>stat命令可以用于查看文件的存储信息和时间等信息，命令<code>stat anaconda-ks.cfg</code>会显示出文件的三种时间状态：Access、Modify、Change。这三种时间的区别将在下面的touch命令中详细详解：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@Remilia ~]# stat anaconda-ks.cfg </span><br><span class="line">  File: ‘anaconda-ks.cfg’</span><br><span class="line">  Size: 922             Blocks: 8          IO Block: 4096   regular file</span><br><span class="line">Device: fd00h/64768d    Inode: 67919995    Links: 1</span><br><span class="line">Access: (0600/-rw-------)  Uid: (    0/    root)   Gid: (    0/    root)</span><br><span class="line">Context: system_u:object_r:admin_home_t:s0</span><br><span class="line">Access: 2018-02-27 09:06:00.730409939 +0800</span><br><span class="line">Modify: 2018-02-27 09:06:00.731424138 +0800</span><br><span class="line">Change: 2018-02-27 09:06:00.732438336 +0800</span><br><span class="line"> Birth: -</span><br><span class="line">[root@Remilia ~]#</span><br></pre></td></tr></table></figure>
+<h2 id="cut命令"><a href="#cut命令" class="headerlink" title="cut命令"></a>cut命令</h2><p>cut命令用于按“列”提取文本字符，格式为“<strong>cut</strong> [参数] {文本}”。</p>
+<p>在Linux系统中，如何准确地提取出最想要的数据，这也是我们应该重点学习的内容。一般而言，按基于<strong>“行”</strong>的方式来提取数据是比较简单的，只需要设置好要搜索的关键词即可。但是如果按列搜索，不仅要使用<strong>-f</strong>参数来设置需要看的列数，还需要使用<strong>-d</strong>参数来设置间隔符号。passwd在保存用户数据信息时，用户信息的每一项值之间是采用冒号来间隔的，接下来我们使用下述命令尝试提取出passwd文件中的用户名信息，即提取以冒号（：）为间隔符号的第一列内容：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@Remilia ~]# cut -d: -f1 /etc/passwd</span><br><span class="line">root</span><br><span class="line">bin</span><br><span class="line">daemon</span><br><span class="line">adm</span><br><span class="line">lp</span><br><span class="line">sync</span><br><span class="line">shutdown</span><br><span class="line">halt</span><br><span class="line">mail</span><br><span class="line">operator</span><br><span class="line">games</span><br><span class="line">ftp</span><br><span class="line">nobody</span><br><span class="line">dbus</span><br><span class="line">polkitd</span><br><span class="line">avahi</span><br><span class="line">avahi-autoipd</span><br><span class="line">postfix</span><br><span class="line">sshd</span><br><span class="line">chrony</span><br><span class="line">[root@Remilia ~]#</span><br></pre></td></tr></table></figure>
+<h2 id="diff命令"><a href="#diff命令" class="headerlink" title="diff命令"></a>diff命令</h2><p>diff命令用于比较多个文本文件的差异，格式为“<strong>diff</strong> [参数] {文件}”。</p>
+<p>在使用diff命令时，不仅可以使用<strong>—brief</strong>参数来确认两个文件是否不同，还可以使用<strong>-c</strong>参数来详细比较出多个文件的差异之处，这绝对是判断文件是否被篡改的有力神器。例如，先使用cat命令分别查看diffa和diffb文件的内容，然后进行比较：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@Remilia ~]# echo welcom &gt; diffa</span><br><span class="line">[root@Remilia ~]# echo welcome &gt; diffb</span><br><span class="line"></span><br><span class="line">[root@Remilia ~]# cat diffa</span><br><span class="line">welcom</span><br><span class="line">[root@Remilia ~]# cat diffb</span><br><span class="line">welcome</span><br><span class="line">[root@Remilia ~]#</span><br></pre></td></tr></table></figure>
+<p>接下来使用diff —brief命令显示比较后的结果，判断文件是否相同： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@Remilia ~]# diff --brief diffa diffb</span><br><span class="line">Files diffa and diffb differ</span><br></pre></td></tr></table></figure>
+<p>最后使用带有-c参数的diff命令来描述文件内容具体的不同： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@Remilia ~]# diff -c diffa diffb</span><br><span class="line">*** diffa       2018-05-15 09:44:14.941323235 +0800</span><br><span class="line">--- diffb       2018-05-15 09:44:29.308260323 +0800</span><br><span class="line">***************</span><br><span class="line">*** 1 ****</span><br><span class="line">! welcom</span><br><span class="line">--- 1 ----</span><br><span class="line">! welcome</span><br><span class="line">[root@Remilia ~]#</span><br></pre></td></tr></table></figure>
+<h1 id="文件目录管理命令"><a href="#文件目录管理命令" class="headerlink" title="文件目录管理命令"></a>文件目录管理命令</h1><p>在Linux系统的日常运维工作中，还需要掌握对文件的创建、修改、复制、剪切、更名与删除等操作。 </p>
+<h2 id="touch命令"><a href="#touch命令" class="headerlink" title="touch命令"></a>touch命令</h2><p>touch命令用于创建空白文件或设置文件的时间，格式为“<strong>touch</strong> [选项] {文件}”。<br>在创建空白的文本文件方面，这个touch命令相当简捷，简捷到没有必要特别去研究。比如，touch test命令可以创建出一个名为test的空白文本文件。对touch命令来讲，有难度的操作主要是体现在设置文件内容的修改时间（mtime）、文件权限或属性的更改时间（ctime）与文件的读取时间（atime）上面。touch命令的参数及其作用如下</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td>仅修改“读取时间”（atime）</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>仅修改“修改时间”（mtime）</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>同时修改atime与mtime</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>接下来，我们先使用ls命令查看一个文件的修改时间，然后修改这个文件，最后再通过touch命令把修改后的文件时间设置成修改之前的时间 :</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@Remilia ~]# ls -l anaconda-ks.cfg </span><br><span class="line">-rw-------. 1 root root 922 Feb 27 09:06 anaconda-ks.cfg</span><br><span class="line">[root@Remilia ~]# echo `test` &gt;&gt; anaconda-ks.cfg </span><br><span class="line">[root@Remilia ~]# ls -l anaconda-ks.cfg </span><br><span class="line">-rw-------. 1 root root 923 May 15 09:49 anaconda-ks.cfg</span><br><span class="line">[root@Remilia ~]# touch -d "2012-05-15 9:50" anaconda-ks.cfg </span><br><span class="line">[root@Remilia ~]# ls -l anaconda-ks.cfg </span><br><span class="line">-rw-------. 1 root root 923 May 15  2012 anaconda-ks.cfg</span><br></pre></td></tr></table></figure>
+<h2 id="mkdir命令"><a href="#mkdir命令" class="headerlink" title="mkdir命令"></a>mkdir命令</h2><p>mkdir命令用于创建空白的目录，格式为“<strong>mkdir</strong> [选项] {目录}”。</p>
+<p>在Linux系统中，文件夹是最常见的文件类型之一。除了能创建单个空白目录外，mkdir命令还可以结合<strong>-p</strong>参数来递归创建出具有嵌套叠层关系的文件目录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@Remilia ~]# mkdir -p a/b/c/d</span><br><span class="line">[root@Remilia ~]# cd a</span><br><span class="line">[root@Remilia a]# cd b</span><br><span class="line">[root@Remilia b]# cd c</span><br><span class="line">[root@Remilia c]# cd d</span><br><span class="line">[root@Remilia d]# pwd</span><br><span class="line">/root/a/b/c/d</span><br><span class="line">[root@Remilia d]#</span><br></pre></td></tr></table></figure>
+<h2 id="cp命令"><a href="#cp命令" class="headerlink" title="cp命令"></a>cp命令</h2><p>cp命令用于复制文件或目录，格式为“<strong>cp</strong> [选项] {源文件} {目标文件}”。</p>
+<p>大家对文件复制操作应该不陌生，在Linux系统中，复制操作具体分为3种情况：</p>
+<ul>
+<li><p>如果目标文件是目录，则会把源文件复制到该目录中；</p>
+</li>
+<li><p>如果目标文件也是普通文件，则会询问是否要覆盖它；</p>
+</li>
+<li><p>如果目标文件不存在，则执行正常的复制操作。</p>
+<p> cp命令常用参数如下:</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-p</td>
+<td>保留原始文件的属性</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>若对象为“链接文件”，则保留该“链接文件”的属性</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归持续复制（用于目录）</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>若目标文件存在则询问是否覆盖</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>相当于-pdr（p、d、r为上述参数）</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/12/CCNPDAY3/" rel="next" title="EIGRP BASIC">
+                <i class="fa fa-chevron-left"></i> EIGRP BASIC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/25/basic-shell-script/" rel="prev" title="Shell script basic">
+                Shell script basic <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Remilia" />
+            
+              <p class="site-author-name" itemprop="name">Remilia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#写在前面的话"><span class="nav-number">1.</span> <span class="nav-text">写在前面的话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#必须掌握的几个Linux命令"><span class="nav-number">2.</span> <span class="nav-text">必须掌握的几个Linux命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#我们为什么要学习Linux的命令？"><span class="nav-number">2.1.</span> <span class="nav-text">我们为什么要学习Linux的命令？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#常用基本命令"><span class="nav-number">3.</span> <span class="nav-text">常用基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#echo命令"><span class="nav-number">3.1.</span> <span class="nav-text">echo命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#date命令"><span class="nav-number">3.2.</span> <span class="nav-text">date命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#man命令"><span class="nav-number">3.3.</span> <span class="nav-text">man命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reboot命令"><span class="nav-number">3.4.</span> <span class="nav-text">reboot命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#poweroff命令"><span class="nav-number">3.5.</span> <span class="nav-text">poweroff命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wget命令"><span class="nav-number">3.6.</span> <span class="nav-text">wget命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ps命令"><span class="nav-number">3.7.</span> <span class="nav-text">ps命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#top命令"><span class="nav-number">3.8.</span> <span class="nav-text">top命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pidof命令"><span class="nav-number">3.9.</span> <span class="nav-text">pidof命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kill命令"><span class="nav-number">3.10.</span> <span class="nav-text">kill命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#killall命令"><span class="nav-number">3.11.</span> <span class="nav-text">killall命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统状态检测命令"><span class="nav-number">4.</span> <span class="nav-text">系统状态检测命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ifconfig命令"><span class="nav-number">4.1.</span> <span class="nav-text">ifconfig命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uname命令"><span class="nav-number">4.2.</span> <span class="nav-text">uname命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#free命令"><span class="nav-number">4.3.</span> <span class="nav-text">free命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#who命令"><span class="nav-number">4.4.</span> <span class="nav-text">who命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#last命令"><span class="nav-number">4.5.</span> <span class="nav-text">last命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#history命令"><span class="nav-number">4.6.</span> <span class="nav-text">history命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sosreport命令"><span class="nav-number">4.7.</span> <span class="nav-text">sosreport命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#工作目录切换命令"><span class="nav-number">5.</span> <span class="nav-text">工作目录切换命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pwd命令"><span class="nav-number">5.1.</span> <span class="nav-text">pwd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cd命令"><span class="nav-number">5.2.</span> <span class="nav-text">cd命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ls命令"><span class="nav-number">5.3.</span> <span class="nav-text">ls命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件文本编辑命令"><span class="nav-number">6.</span> <span class="nav-text">文件文本编辑命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cat命令"><span class="nav-number">6.1.</span> <span class="nav-text">cat命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#more命令"><span class="nav-number">6.2.</span> <span class="nav-text">more命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#head命令"><span class="nav-number">6.3.</span> <span class="nav-text">head命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tail命令"><span class="nav-number">6.4.</span> <span class="nav-text">tail命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tr命令"><span class="nav-number">6.5.</span> <span class="nav-text">tr命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wc命令"><span class="nav-number">6.6.</span> <span class="nav-text">wc命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stat命令"><span class="nav-number">6.7.</span> <span class="nav-text">stat命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cut命令"><span class="nav-number">6.8.</span> <span class="nav-text">cut命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diff命令"><span class="nav-number">6.9.</span> <span class="nav-text">diff命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文件目录管理命令"><span class="nav-number">7.</span> <span class="nav-text">文件目录管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#touch命令"><span class="nav-number">7.1.</span> <span class="nav-text">touch命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mkdir命令"><span class="nav-number">7.2.</span> <span class="nav-text">mkdir命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cp命令"><span class="nav-number">7.3.</span> <span class="nav-text">cp命令</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Remilia</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '0bdc0d6f49bfb51e5834',
+          clientSecret: '9306599f43db3af1e58268b660f8fb11fe4771ec',
+          repo: 'git-comments',
+          owner: 'remil1a',
+          admin: ['remil1a'], 
+          id: window.location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML""></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

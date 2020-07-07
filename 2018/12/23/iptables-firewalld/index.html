@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux包过滤防火墙概述 netfilter 位于Linux内核中的包过滤功能体系 这个叫Linux防火墙的“内核态”   iptables 位于/sbin/iptables，用来管理防火墙规则的工具 这个叫“用户态”    Linux中的防火墙主要针对于网络层以及IP数据包，可以处理IP地址，端口等信息 当然在更新到7版本后，出现了firewalld。其实跟iptables是类似的。它们只是一">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iptables&amp;firewalld">
+<meta property="og:url" content="http://remil1a.github.io/2018/12/23/iptables-firewalld/index.html">
+<meta property="og:site_name" content="Take Your Heart">
+<meta property="og:description" content="Linux包过滤防火墙概述 netfilter 位于Linux内核中的包过滤功能体系 这个叫Linux防火墙的“内核态”   iptables 位于/sbin/iptables，用来管理防火墙规则的工具 这个叫“用户态”    Linux中的防火墙主要针对于网络层以及IP数据包，可以处理IP地址，端口等信息 当然在更新到7版本后，出现了firewalld。其实跟iptables是类似的。它们只是一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://remil1a.github.io/2018/12/23/iptables-firewalld/2.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/12/23/iptables-firewalld/1.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/12/23/iptables-firewalld/3.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/12/23/iptables-firewalld/4.png">
+<meta property="og:updated_time" content="2020-07-01T01:30:42.591Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iptables&amp;firewalld">
+<meta name="twitter:description" content="Linux包过滤防火墙概述 netfilter 位于Linux内核中的包过滤功能体系 这个叫Linux防火墙的“内核态”   iptables 位于/sbin/iptables，用来管理防火墙规则的工具 这个叫“用户态”    Linux中的防火墙主要针对于网络层以及IP数据包，可以处理IP地址，端口等信息 当然在更新到7版本后，出现了firewalld。其实跟iptables是类似的。它们只是一">
+<meta name="twitter:image" content="http://remil1a.github.io/2018/12/23/iptables-firewalld/2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://remil1a.github.io/2018/12/23/iptables-firewalld/"/>
+
+
+
+
+
+  <title>iptables&firewalld | Take Your Heart</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Take Your Heart</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/tags/Linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cisco">
+          <a href="/tags/Cisco" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Cisco
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-huawei">
+          <a href="/tags/Huawei" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Huawei
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-h3c">
+          <a href="/tags/H3C" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            H3C
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/tags/Python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docker">
+          <a href="/tags/Docker" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Docker
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://remil1a.github.io/2018/12/23/iptables-firewalld/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Remilia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Take Your Heart">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iptables&firewalld</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-23T19:51:53+08:00">
+                2018-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux包过滤防火墙概述"><a href="#Linux包过滤防火墙概述" class="headerlink" title="Linux包过滤防火墙概述"></a>Linux包过滤防火墙概述</h1><ul>
+<li>netfilter<ul>
+<li>位于Linux内核中的包过滤功能体系</li>
+<li>这个叫Linux防火墙的“内核态”</li>
+</ul>
+</li>
+<li>iptables<ul>
+<li>位于/sbin/iptables，用来管理防火墙规则的工具</li>
+<li>这个叫“用户态”</li>
+</ul>
+</li>
+</ul>
+<p>Linux中的防火墙主要针对于网络层以及IP数据包，可以处理IP地址，端口等信息</p>
+<p>当然在更新到7版本后，出现了firewalld。其实跟iptables是类似的。它们只是一种服务。iptables服务会把配置好的防火墙策略交由内核层面的netfilter网络过滤器来处理，而firewalld服务则是把配置好的防火墙策略交由内核层面的nftables包过滤框架来处理。这边先介绍iptables。</p>
+<a id="more"></a>
+<h1 id="iptables中的表、链结构"><a href="#iptables中的表、链结构" class="headerlink" title="iptables中的表、链结构"></a>iptables中的表、链结构</h1><p>iptables service是一种静态的防火墙管理工具，用户可以通过命令将规则写入/etc/sysconfig/iptables中，再执行reload。其实reload是对旧的规则进行了清空，再写入新的规则。这种哪怕写入一条规则也要reload生效的防火墙叫静态防火墙。</p>
+<ul>
+<li>规则链<ul>
+<li>规则：可以对数据包进行过滤或处理</li>
+<li>链：容纳各种规则</li>
+<li>链的分类：根据处理包的不同时机有不同的链分类</li>
+</ul>
+</li>
+<li>默认的5种规则链<ul>
+<li>INPUT：入站数据包</li>
+<li>OUTPUT：出站数据包</li>
+<li>FORWARD：处理转发数据包</li>
+<li>POSTROUTING：路由选择后的包</li>
+<li>PREROUTING：路由选择前的包</li>
+</ul>
+</li>
+</ul>
+<p>当然用户还可以自定义链。这个放在后面再说。如果文字看的不太明白 可以看下图</p>
+<p><img src="/2018/12/23/iptables-firewalld/2.png" alt="1"></p>
+<ul>
+<li><p>规则表</p>
+<ul>
+<li>表：表用来容纳各种规则链</li>
+</ul>
+</li>
+<li><p>默认有4种规则表</p>
+<h1 id="raw表：是否对该数据包进行状态追踪"><a href="#raw表：是否对该数据包进行状态追踪" class="headerlink" title="raw表：是否对该数据包进行状态追踪"></a>raw表：是否对该数据包进行状态追踪</h1><h1 id="mangle表：为数据包设置标记"><a href="#mangle表：为数据包设置标记" class="headerlink" title="mangle表：为数据包设置标记"></a>mangle表：为数据包设置标记</h1><h1 id="nat表：修改数据包中的源、目IP地址或端口"><a href="#nat表：修改数据包中的源、目IP地址或端口" class="headerlink" title="nat表：修改数据包中的源、目IP地址或端口"></a>nat表：修改数据包中的源、目IP地址或端口</h1><h1 id="filter表：确定是否放行该数据包"><a href="#filter表：确定是否放行该数据包" class="headerlink" title="filter表：确定是否放行该数据包"></a>filter表：确定是否放行该数据包</h1></li>
+</ul>
+<p>规则表之间以 <strong>raw mangle nat filter</strong>的顺序进行匹配</p>
+<p>以下是默认表、链结构示意图：</p>
+<p><img src="/2018/12/23/iptables-firewalld/1.png" alt="2"></p>
+<p>规则链内会进行顺序匹配，有匹配到则停止，若没有匹配上，就会按默认规则处理。</p>
+<h1 id="iptables基本语法"><a href="#iptables基本语法" class="headerlink" title="iptables基本语法"></a>iptables基本语法</h1><ul>
+<li><p>语法构成</p>
+<h1 id="iptables-t-表名-选项-链名-条件-j-控制类型"><a href="#iptables-t-表名-选项-链名-条件-j-控制类型" class="headerlink" title="iptables [-t 表名] 选项 [链名][条件] [-j 控制类型]"></a>iptables [-t 表名] 选项 [链名][条件] [-j 控制类型]</h1></li>
+</ul>
+<h2 id="使用REJECT拒绝ICMP"><a href="#使用REJECT拒绝ICMP" class="headerlink" title="使用REJECT拒绝ICMP"></a>使用REJECT拒绝ICMP</h2><p>下面简单做个实验来体验一下iptables。先看一下拓扑图。</p>
+<p><img src="/2018/12/23/iptables-firewalld/3.png" alt="3"></p>
+<p>图中的cloud-1就是centos7主机。有两块网卡，eth0和eth1，IP如图所示。R1和R2分别用两台cisco 3725模拟主机。R1和R2都配置了默认路由指向Linux主机。那么先来做一下测试吧。</p>
+<blockquote>
+<p>注意，如果要让Linux主机能够有数据包的转发功能，要修改一个配置文件，在/etc/sysctl.conf中将net.ipv4.ip_forward的值修改为1.如下所示，顺便再清空一下iptables，完毕以后可以使用iptables -L查看</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# vi /etc/sysctl.conf </span><br><span class="line">net.ipv4.ip_forward = 1</span><br><span class="line">[root@remilia ~]# iptables -F \\删除所有链中的规则</span><br><span class="line">[root@remilia ~]# iptables -X \\删除所有用户自定义链</span><br><span class="line">[root@remilia ~]# iptables -Z \\把所有链的计数器清空（归归归归零）</span><br></pre></td></tr></table></figure>
+<p>完毕以后我们来看一下R1和R2 以及R1与Linux主机，R2与Linux主机之间能否互通吧。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">R1(config)#</span><span class="bash"><span class="keyword">do</span> ping 192.168.80.10 \\R1 ping Linux主机</span></span><br><span class="line"></span><br><span class="line">Type escape sequence to abort.</span><br><span class="line">Sending 5, 100-byte ICMP Echos to 192.168.80.10, timeout is 2 seconds:</span><br><span class="line">!!!!!</span><br><span class="line">Success rate is 100 percent (5/5), round-trip min/avg/max = 8/12/24 ms</span><br><span class="line"><span class="meta">R1(config)#</span><span class="bash"><span class="keyword">do</span> ping 192.168.10.10 \\R1 ping R2</span></span><br><span class="line"></span><br><span class="line">Type escape sequence to abort.</span><br><span class="line">Sending 5, 100-byte ICMP Echos to 192.168.10.10, timeout is 2 seconds:</span><br><span class="line">!!!!!</span><br><span class="line">Success rate is 100 percent (5/5), round-trip min/avg/max = 16/22/28 ms</span><br></pre></td></tr></table></figure>
+<p>现在图中应该是网络全通的。那么我们先写一个规则，让R1 ping不通Linux主机。</p>
+<p>现在先来分析一下，R1如果要Ping Linux主机，使用的是ICMP，以及这算是入站，所以应该是input，然后如果不想让这个包通过，应该是属于filter表。那么命令就出来了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# iptables -t filter -I INPUT -p icmp -j REJECT</span><br><span class="line">[root@remilia ~]# iptables -L -t filter</span><br><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line">REJECT     icmp --  anywhere             anywhere             reject-with icmp-port-unreachable</span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination</span><br></pre></td></tr></table></figure>
+<p>其中 -I 代表 insert 插入 这条规则默认会在规则链的最上面添加,也可以使用 -I 后面跟序列号指定序号。-A则是在末尾添加。</p>
+<blockquote>
+<p>注意，reject和drop的区别在于，reject会有明确的错误提示，而drop只是丢弃，对于icmp来说，就会显示超时。</p>
+</blockquote>
+<p>来看看这么写会有什么效果</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">R1(config)#</span><span class="bash"><span class="keyword">do</span> ping 192.168.80.10</span></span><br><span class="line"></span><br><span class="line">Type escape sequence to abort.</span><br><span class="line">Sending 5, 100-byte ICMP Echos to 192.168.80.10, timeout is 2 seconds:</span><br><span class="line">UUUUU</span><br><span class="line">Success rate is 0 percent (0/5)</span><br></pre></td></tr></table></figure>
+<p>很明显，这里出现U代表不可达，而且出现的很快 明显看得出来是被拒绝了。</p>
+<h2 id="使用DROP拒绝ICMP"><a href="#使用DROP拒绝ICMP" class="headerlink" title="使用DROP拒绝ICMP"></a>使用DROP拒绝ICMP</h2><p>那么如果使用drop呢,我们可以先用删除命令把刚才写的规则删掉写一个新的，或者使用-I添加在最前面。我这边就先把之前写的删除再添加吧。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# iptables -D INPUT 1</span><br><span class="line">[root@remilia ~]# iptables -L</span><br><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination</span><br></pre></td></tr></table></figure>
+<p>可以看到之前的规则已经被清空了。</p>
+<p>接下来看看用DROP会有什么不同</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# iptables -t filter -I INPUT -p icmp -j DROP</span><br><span class="line">[root@remilia ~]# iptables -L</span><br><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line">DROP       icmp --  anywhere             anywhere            </span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination</span><br></pre></td></tr></table></figure>
+<p>规则写好了 接下来用R1来测试一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">R1(config)#</span><span class="bash"><span class="keyword">do</span> ping 192.168.80.10</span></span><br><span class="line"></span><br><span class="line">Type escape sequence to abort.</span><br><span class="line">Sending 5, 100-byte ICMP Echos to 192.168.80.10, timeout is 2 seconds:</span><br><span class="line">.....</span><br><span class="line">Success rate is 0 percent (0/5)</span><br></pre></td></tr></table></figure>
+<p>可以看到这边由于linux主机那边的操作是<strong>DROP</strong>而非<strong>REJECT</strong>导致R1发出去的包根本没有任何提示。直接被丢弃了。而R1并不知道，还在等待对方回复，思科路由器默认超过两秒以后就属于超时，所以出现的是<strong>“…..”</strong>代表超时</p>
+<p>当然 还可以使用<code>iptables -t filter -P</code>来设置默认策略 例如<code>iptables -t filter -P FORWARD DROP</code>代表将FORWARD的默认策略设置为丢弃。这边就不再演示了。在上面的命令中，每次iptables -L显示出来的内容中的（policy ）中的内容就代表默认策略。</p>
+<h2 id="使用SNAT和DNAT做地址转换"><a href="#使用SNAT和DNAT做地址转换" class="headerlink" title="使用SNAT和DNAT做地址转换"></a>使用SNAT和DNAT做地址转换</h2><p>iptables中还有一个很重要的内容是地址转换。跟网络中的NAT有点类似。还是刚才的拓扑图，我将在Linux主机上做SNAT（源地址网络地址转换）把R1 Ping向R2的包 源地址变为200.1.1.1 。那么R2会认为是200.1.1.1给他发了ICMP echo request 他需要回复 ICMP echo reply，那么回包就变成了 SIP R2的IP DIP 200.1.1.1 这个时候查表转发，有一条默认路由 指向Linux主机 那么Linux主机便会收到这个包，这个时候再做一个DNAT（目标网络地址转换）。将 DIP 200.1.1.1 变为R1的IP 这样就能够实现ping通了。同时我会在 R2上开启 debug 。当然 要先在Linux主机上做两次NAT。</p>
+<p>照惯例会先清空iptables，这边就不再演示了。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# iptables -t nat -I POSTROUTING -s 192.168.80.0/24 -o eth1 -j SNAT --to-source 200.1.1.1</span><br><span class="line">[root@remilia ~]# iptables -L -t nat </span><br><span class="line">Chain PREROUTING (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain POSTROUTING (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line">SNAT       all  --  192.168.80.0/24      anywhere             to:200.1.1.1</span><br></pre></td></tr></table></figure>
+<p>这边解释一下命令-s代表源地址 相当于我们在路由交换中做NAT的时候的那个ACL,-o是 out interface 就是出接口的意思。那么源地址转换做好了。按照刚才的分析 我们还需要做目标地址转换。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@remilia ~]# iptables -t nat -I PREROUTING -i eth1 -d 200.1.1.1 -p icmp -j DNAT --to-destination 192.168.80.80</span><br><span class="line">[root@remilia ~]# iptables -L -t nat</span><br><span class="line">Chain PREROUTING (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line">DNAT       icmp --  anywhere             200.1.1.1            to:192.168.80.80</span><br><span class="line"></span><br><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain POSTROUTING (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line">SNAT       all  --  192.168.80.0/24      anywhere             to:200.1.1.1</span><br></pre></td></tr></table></figure>
+<p>这个就比较简单了 解释一下 -i 代表 接受包的接口 </p>
+<blockquote>
+<p> 参考自iptables的man手册:-i :Name of an interface via which a packet was received (only for packets entering the INPUT, FORWARD and  PREROUTING  chains).</p>
+</blockquote>
+<p>那么来看一下效果吧</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">R1(config)#</span><span class="bash"><span class="keyword">do</span> ping 192.168.10.10 \\在R1上ping R2 能通</span></span><br><span class="line"></span><br><span class="line">Type escape sequence to abort.</span><br><span class="line">Sending 5, 100-byte ICMP Echos to 192.168.10.10, timeout is 2 seconds:</span><br><span class="line">!!!!!</span><br><span class="line">Success rate is 100 percent (5/5), round-trip min/avg/max = 20/21/24 ms</span><br><span class="line"></span><br><span class="line"><span class="meta">R2#</span><span class="bash">debug ip icmp </span></span><br><span class="line">ICMP packet debugging is on</span><br><span class="line"><span class="meta">R2#</span><span class="bash"></span></span><br><span class="line">*Mar  1 04:04:15.698: ICMP: echo reply sent, src 192.168.10.10, dst 200.1.1.1</span><br><span class="line">*Mar  1 04:04:15.734: ICMP: echo reply sent, src 192.168.10.10, dst 200.1.1.1</span><br><span class="line">*Mar  1 04:04:15.754: ICMP: echo reply sent, src 192.168.10.10, dst 200.1.1.1</span><br><span class="line">*Mar  1 04:04:15.778: ICMP: echo reply sent, src 192.168.10.10, dst 200.1.1.1</span><br><span class="line">*Mar  1 04:04:15.798: ICMP: echo reply sent, src 192.168.10.10, dst 200.1.1.1</span><br><span class="line"><span class="meta">R2#</span><span class="bash"></span></span><br><span class="line"></span><br><span class="line">\\此时可以看出R2认为是200.1.1.1在ping他。</span><br></pre></td></tr></table></figure>
+<h1 id="Firewalld"><a href="#Firewalld" class="headerlink" title="Firewalld"></a>Firewalld</h1><ul>
+<li>在CentOS7.0以后的版本中，加入了新的Firewalld服务。以下是firewalld的简介。</li>
+</ul>
+<p>Firewalld提供了动态的防火墙管理，支持区域的定义，为网络和及其关联的接口或源分配信任级别。它支持IPv4，IPv6，以太桥。它的配置分为实时的和永久的，同时它也为应用程序和服务提供了接口，可以直接将规则添加进iptables和ip6tables等。</p>
+<blockquote>
+<p> firewalld provides a dynamically managed firewall with support for network/firewall “zones” to assign a level of trust to a network and its associated connections, interfaces or sources. It has support for IPv4, IPv6, Ethernet bridges and also for IPSet firewall settings. There is a separation of the runtime and permanent configuration options. It also provides an interface for services or applications to add iptables, ip6tables and ebtables rules directly. </p>
+</blockquote>
+<p><img src="/2018/12/23/iptables-firewalld/4.png" alt="3"></p>
+<p>firewalld架构如图所示。首先能看到图中也出现了iptables。要注意的是，firewalld是动态防火墙。可以回顾上面提到的iptables service静态防火墙的概念。</p>
+<blockquote>
+<p>用户可以通过命令将规则写入<code>/etc/sysconfig/iptables</code>中，再执行reload。其实reload是对旧的规则进行了清空，再写入新的规则。这种哪怕写入一条规则也要reload生效的防火墙叫静态防火墙。</p>
+</blockquote>
+<p>而人们经常提到的firewalld取代了iptables只是取代了iptables的service部分，其backends（后端，或者说底层）还是依靠iptables。firewalld动态的好处在于，每次创建，改变，删除时，不需要重启进程就可以应用规则。我们可以把iptables的服务关掉，然后把firewalld打开（系统应该是默认打开的），之后使用<code>iptables -L</code> 查看，依然可以看到很多规则。</p>
+<blockquote>
+<p>Being dynamic, it enables creating, changing, and deleting the rules without the necessity to restart the firewall daemon each time the rules are changed.</p>
+</blockquote>
+<h2 id="区域（Zones）"><a href="#区域（Zones）" class="headerlink" title="区域（Zones）"></a>区域（Zones）</h2><p>Firewalld使用区域来将网络划分到不同的安全级别的区域（Zones）中。一个接口只能属于一个区域，但是一个区域能够有多个网络接口。系统预设了多个防火墙区域。预设的防火墙区域配置放在<code>/usr/lib/firewalld/zones/</code>中。生效的放在<code>/etc/firewalld/zones</code>中</p>
+<p>firewalld基本语法是这样的：<code>firewall-cmd [OPTIONS...]</code> </p>
+<p>例如我们可以通过firewall-cmd查看系统预设的区域：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@oolong-tea ~]# firewall-cmd --get-zones</span><br><span class="line">block dmz drop external home internal public trusted work</span><br></pre></td></tr></table></figure>
+<p>能够看到系统本身就预设了很多区域。那么我们可以先来认识一下这些预设的区域。</p>
+<h3 id="block-阻塞"><a href="#block-阻塞" class="headerlink" title="block(阻塞)"></a>block(阻塞)</h3><p>任何连入的ipv4连接都会贝icmp-host-prohibited消息拒绝，ipv6连接都会被icmp6-adm-prohibited拒绝。</p>
+<blockquote>
+<p>Any incoming network connections are rejected with an icmp-host-prohibited message for <code>IPv4</code> and icmp6-adm-prohibited for <code>IPv6</code>. Only network connections initiated from within the system are possible.</p>
+</blockquote>
+<h3 id="dmz"><a href="#dmz" class="headerlink" title="dmz"></a>dmz</h3><p>用户定义的区域，可以被公共接入，也可以有限制的访问内部网络。仅接受经过选择的连接</p>
+<blockquote>
+<p>For computers in your demilitarized zone that are publicly-accessible with limited access to your internal network. Only selected incoming connections are accepted.</p>
+</blockquote>
+<h3 id="drop（丢弃）"><a href="#drop（丢弃）" class="headerlink" title="drop（丢弃）"></a>drop（丢弃）</h3><p>任何接收的网络数据包都被丢弃，没有任何回复。仅能有发送出去的网络连接。</p>
+<blockquote>
+<p>Any incoming network packets are dropped without any notification. Only outgoing network connections are possible.</p>
+</blockquote>
+<h3 id="external（外部）"><a href="#external（外部）" class="headerlink" title="external（外部）"></a>external（外部）</h3><p>特别为路由器使用的伪装区域，不信任这个区域的设备，认为这个区域的设备会危害你的电脑，只放行经过选择的连接</p>
+<blockquote>
+<p>For use on external networks with masquerading enabled, especially for routers. You do not trust the other computers on the network to not harm your computer. Only selected incoming connections are accepted</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/09/Python-Basic/" rel="next" title="Python_Basic">
+                <i class="fa fa-chevron-left"></i> Python_Basic
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/24/Device-Management-For-AAA/" rel="prev" title="Device Management For AAA">
+                Device Management For AAA <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Remilia" />
+            
+              <p class="site-author-name" itemprop="name">Remilia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux包过滤防火墙概述"><span class="nav-number">1.</span> <span class="nav-text">Linux包过滤防火墙概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iptables中的表、链结构"><span class="nav-number">2.</span> <span class="nav-text">iptables中的表、链结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#raw表：是否对该数据包进行状态追踪"><span class="nav-number">3.</span> <span class="nav-text">raw表：是否对该数据包进行状态追踪</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mangle表：为数据包设置标记"><span class="nav-number">4.</span> <span class="nav-text">mangle表：为数据包设置标记</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nat表：修改数据包中的源、目IP地址或端口"><span class="nav-number">5.</span> <span class="nav-text">nat表：修改数据包中的源、目IP地址或端口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#filter表：确定是否放行该数据包"><span class="nav-number">6.</span> <span class="nav-text">filter表：确定是否放行该数据包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iptables基本语法"><span class="nav-number">7.</span> <span class="nav-text">iptables基本语法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iptables-t-表名-选项-链名-条件-j-控制类型"><span class="nav-number">8.</span> <span class="nav-text">iptables [-t 表名] 选项 [链名][条件] [-j 控制类型]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用REJECT拒绝ICMP"><span class="nav-number">8.1.</span> <span class="nav-text">使用REJECT拒绝ICMP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用DROP拒绝ICMP"><span class="nav-number">8.2.</span> <span class="nav-text">使用DROP拒绝ICMP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用SNAT和DNAT做地址转换"><span class="nav-number">8.3.</span> <span class="nav-text">使用SNAT和DNAT做地址转换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Firewalld"><span class="nav-number">9.</span> <span class="nav-text">Firewalld</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#区域（Zones）"><span class="nav-number">9.1.</span> <span class="nav-text">区域（Zones）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#block-阻塞"><span class="nav-number">9.1.1.</span> <span class="nav-text">block(阻塞)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dmz"><span class="nav-number">9.1.2.</span> <span class="nav-text">dmz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drop（丢弃）"><span class="nav-number">9.1.3.</span> <span class="nav-text">drop（丢弃）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#external（外部）"><span class="nav-number">9.1.4.</span> <span class="nav-text">external（外部）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Remilia</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '0bdc0d6f49bfb51e5834',
+          clientSecret: '9306599f43db3af1e58268b660f8fb11fe4771ec',
+          repo: 'git-comments',
+          owner: 'remil1a',
+          admin: ['remil1a'], 
+          id: window.location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

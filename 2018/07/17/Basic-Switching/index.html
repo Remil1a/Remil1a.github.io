@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Cisco,Huawei,H3C," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="交换机工作原理以太网交换机，在不做特别说明的情况下，一般指的是二层交换机。这种设备工作在OSI参考模型的第二层。依靠二层消息中的源和目标转发数据，可以提供多个接口，让各种设备互相连接起来。">
+<meta name="keywords" content="Cisco,Huawei,H3C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Basic Switching">
+<meta property="og:url" content="http://remil1a.github.io/2018/07/17/Basic-Switching/index.html">
+<meta property="og:site_name" content="Take Your Heart">
+<meta property="og:description" content="交换机工作原理以太网交换机，在不做特别说明的情况下，一般指的是二层交换机。这种设备工作在OSI参考模型的第二层。依靠二层消息中的源和目标转发数据，可以提供多个接口，让各种设备互相连接起来。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Basic-Switching/1.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Basic-Switching/2.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Basic-Switching/3.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Basic-Switching/4.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Basic-Switching/5.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/07/17/Basic-Switching/6.png">
+<meta property="og:updated_time" content="2020-07-01T01:30:42.483Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Basic Switching">
+<meta name="twitter:description" content="交换机工作原理以太网交换机，在不做特别说明的情况下，一般指的是二层交换机。这种设备工作在OSI参考模型的第二层。依靠二层消息中的源和目标转发数据，可以提供多个接口，让各种设备互相连接起来。">
+<meta name="twitter:image" content="http://remil1a.github.io/2018/07/17/Basic-Switching/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://remil1a.github.io/2018/07/17/Basic-Switching/"/>
+
+
+
+
+
+  <title>Basic Switching | Take Your Heart</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Take Your Heart</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/tags/Linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cisco">
+          <a href="/tags/Cisco" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Cisco
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-huawei">
+          <a href="/tags/Huawei" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Huawei
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-h3c">
+          <a href="/tags/H3C" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            H3C
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/tags/Python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docker">
+          <a href="/tags/Docker" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Docker
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://remil1a.github.io/2018/07/17/Basic-Switching/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Remilia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Take Your Heart">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Basic Switching</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T14:50:58+08:00">
+                2018-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="交换机工作原理"><a href="#交换机工作原理" class="headerlink" title="交换机工作原理"></a>交换机工作原理</h1><p>以太网交换机，在不做特别说明的情况下，一般指的是二层交换机。这种设备工作在OSI参考模型的第二层。依靠二层消息中的源和目标转发数据，可以提供多个接口，让各种设备互相连接起来。</p>
+<a id="more"></a>
+<p>交换机主要有三个功能</p>
+<ul>
+<li>地址学习</li>
+<li>帧的转发和过滤</li>
+<li>环路防止</li>
+</ul>
+<h2 id="地址学习"><a href="#地址学习" class="headerlink" title="地址学习"></a>地址学习</h2><p><img src="/2018/07/17/Basic-Switching/1.png" alt="1"></p>
+<p>首先在刚开机时，MAC地址表是空的。交换机依靠这张表转发数据。可是在刚开机时，这张表里没有任何信息。这里以思科的设备为例。在设备上使用show mac address-table查看mac地址表</p>
+<p><img src="/2018/07/17/Basic-Switching/2.png" alt="2"></p>
+<p>这张表根据设备的不同，存储条目的上限也有不同。交换机学习mac地址的过程如下：</p>
+<p>假设主机A发送数据帧给主机C。会带着自己的源mac地址发送数据。这里先不管目标mac是多少，交换机会先从E0接口学习到一个条目。那就是E0接口连接的设备mac地址是0260.8c01.1111.这是由源地址学习过来的。那么交换机上的mac表这时会多一个条目，变成如下所示的样子。</p>
+<p><img src="/2018/07/17/Basic-Switching/3.png" alt="3"></p>
+<p>但是这个时候给C的消息由于mac表中依然没有对应C的条目，所以这个时候交换机会做一个操作叫做泛洪。泛洪是指，当交换机收到未知的单播帧（目标mac地址在mac表中没有对应条目）时，将会把这个数据发送给除了收到这个帧的接口的所有接口，在图中，交换机会将从E0收到的未知单播帧发给E1，E2，E3。这样一来C一定会收到这个消息。C在回复A的时候由于之前已经记录过一次MAC地址，所以回复的帧不会泛洪，并且同时可以由E2学习到C的MAC地址。</p>
+<h2 id="帧的过滤"><a href="#帧的过滤" class="headerlink" title="帧的过滤"></a>帧的过滤</h2><p><img src="/2018/07/17/Basic-Switching/4.png" alt="4"></p>
+<h1 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h1><p>由于交换机在不做任何配置的情况下，收到广播会往所有接口转发，这样一来，广播域的范围便是整个交换机本身。会带来不便与管理和安全隐患。所以人们希望能够通过某种技术在交换机上逻辑地分隔广播范围。VLAN技术便应运而生了。</p>
+<ul>
+<li>一个VLAN中的所有设备都是在同一广播域内，不同VLAN为不同的广播域。</li>
+<li>VLAN之间相互隔离，广播不能跨越VLAN传播，所以不同的VLAN之间的设备一般需要通过三层设备实现互相通信</li>
+<li>一个VLAN一般就是一个子网。</li>
+<li>VLAN的成员大多数是基于端口划分的。划分VLAN就是对交换机的端口划分。</li>
+<li>VLAN工作在二层</li>
+</ul>
+<h2 id="VLAN工作原理"><a href="#VLAN工作原理" class="headerlink" title="VLAN工作原理"></a>VLAN工作原理</h2><p>交换机内部的数据一律带有VLAN Tag，当一个数据进入交换机端口时，如果没有带VLAN Tag，且该端口配置了PVID（Port VLAN ID）那么该数据就会被标记上端口的PVID。如果该数据已经带了VLAN Tag，那么即使该端口已经配置了PVID，交换机也不会再给数据帧标记VLAN Tag.PVID是指“端口缺省ID”的意思。</p>
+<p>交换机端口类型一共有三种，由于端口类型不同所以对帧的处理过程也不同。</p>
+<ol>
+<li><p>Access端口处理帧的流程：</p>
+<p>1） 收到一个二层帧</p>
+<p>2） 判断该帧有没有VLAN tag</p>
+<ul>
+<li>没有，则标记上Access端口的PVID，进行第三步</li>
+<li>有Tag，则比较该Tag和端口的PVID是否一致。若一致，进行第三步，否则丢弃。</li>
+</ul>
+<p>3） 根据帧的目标MAC地址和VLAN ID查找VLAN配置信息，决定从哪个端口把帧发送出去。</p>
+<p>4） 交换机根据查到的出接口发送帧。</p>
+<ul>
+<li>当数据从access接口发出时，交换机先剥离VLAN Tag。然后再发送出去。</li>
+<li>当数据帧从Trunk接口发出时，直接发送帧。</li>
+<li>当数据从Hybrid接口发出时，交换机先判断VLAN在本端口的属性时Untag还是Tag。如果是Untag，则剥离VLAN Tag之后再发送，如果是Tag，则直接发送帧。</li>
+</ul>
+</li>
+<li><p>Trunk端口处理帧的过程</p>
+<p>1） 收到一个二层帧。</p>
+<p>2） 判断帧是否有VLAN Tag。</p>
+<ul>
+<li>没有Tag，则标记上Trunk端口的PVID，进行下一步处理。</li>
+<li>有Tag，则判断该trunk接口是否允许该Tag通过，允许则进行下一步处理，否则丢弃。</li>
+</ul>
+<p>3） 二层交换机根据目标MAC和VLAN ID，查找VLAN信息并把帧转发出去。</p>
+<p>4） 交换机根据查到的出接口转发数据帧。</p>
+<ul>
+<li>当数据从access接口发出时，先剥离VLAN tag 再发送出去。</li>
+<li>当数据从trunk接口发出时，直接发送帧。</li>
+<li>当数据从hybird接口发出时，交换机先判断该接口的属性时tag还是untag。如果是tag则直接发送，如果是untag则剥离标签后再发送。</li>
+</ul>
+</li>
+</ol>
+<h1 id="Native-Vlan"><a href="#Native-Vlan" class="headerlink" title="Native Vlan"></a>Native Vlan</h1><p>在802.1q中，Native Vlan是不打标签的Vlan。默认的Native Vlan是Vlan1。建议将一个生僻的Vlan设置为Native Vlan。两个互联的交换机的Native Vlan必须一致。否则将会出现流量互串的问题。</p>
+<p><img src="/2018/07/17/Basic-Switching/5.png" alt="5"></p>
+<p>如上图，首先两边的vlan2互相通信肯定是没有问题的，但是当vlan3，vlan4通信时就会出现问题了。首先假设vlan3的用户发送一个数据，到了左边交换机的trunk接口，发现vlan3时native vlan 不打标签，就直接出去了。到了右边的交换机，由于native vlan为4，右边的交换机会认为这个流量属于vlan4。</p>
+<h1 id="私有VLAN（PVLAN）"><a href="#私有VLAN（PVLAN）" class="headerlink" title="私有VLAN（PVLAN）"></a>私有VLAN（PVLAN）</h1><ol>
+<li><p>私有VLAN的概念</p>
+<ul>
+<li>将一个vlan划分为几个单独的vlan，这些vlan都是用同一个ip段</li>
+<li>尽管网络设备都处于同一子网中，但是它们属于不同的pvlan，pvlan之间的通信还是需要通过默认网关实现。</li>
+<li>每个pvlan包括一个<strong>主vlan</strong>和多个<strong>辅助vlan</strong>。所有辅助vlan都映射到主vlan。</li>
+<li>辅助vlan分为<strong>团体vlan</strong>和<strong>隔离vlan</strong>。</li>
+<li>相同团体vlan能够互通，但是团体vlan之间必须通过设置SVI或者Vlan-if或者路由器接口才能通信。</li>
+<li>相同vlan内部以及隔离vlan之间都是不能互通的，只能与混杂接口通信。</li>
+<li><strong>一个主vlan只能有一个isolate vlan</strong></li>
+</ul>
+</li>
+<li><p>PVLAN端口类型</p>
+<ul>
+<li><p>isolate（隔离）</p>
+<p>只能和混杂模式的端口通信</p>
+</li>
+<li><p>promiscuous（混杂）</p>
+<p>可以和任意其他端口通信</p>
+</li>
+<li><p>community（团体）</p>
+<p>只能和混杂端口和属于同一团体的端口通信</p>
+</li>
+</ul>
+</li>
+<li><p>配置实例</p>
+<p><img src="/2018/07/17/Basic-Switching/6.png" alt="6"></p>
+<p>如图，DNS WWW SMTP服务器属于同一子网，两台DNS服务器属于同一个community vlan，所以能够互通。www和smtp属于isolate vlan。因此彼此无法互访。只能和混杂模式的路由器通信。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Cisco/" rel="tag"># Cisco</a>
+          
+            <a href="/tags/Huawei/" rel="tag"># Huawei</a>
+          
+            <a href="/tags/H3C/" rel="tag"># H3C</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/14/IPv4-Address/" rel="next" title="IPv4 Address">
+                <i class="fa fa-chevron-left"></i> IPv4 Address
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/17/Spanning-Tree/" rel="prev" title="Spanning Tree">
+                Spanning Tree <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Remilia" />
+            
+              <p class="site-author-name" itemprop="name">Remilia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#交换机工作原理"><span class="nav-number">1.</span> <span class="nav-text">交换机工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#地址学习"><span class="nav-number">1.1.</span> <span class="nav-text">地址学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#帧的过滤"><span class="nav-number">1.2.</span> <span class="nav-text">帧的过滤</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VLAN"><span class="nav-number">2.</span> <span class="nav-text">VLAN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VLAN工作原理"><span class="nav-number">2.1.</span> <span class="nav-text">VLAN工作原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Native-Vlan"><span class="nav-number">3.</span> <span class="nav-text">Native Vlan</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#私有VLAN（PVLAN）"><span class="nav-number">4.</span> <span class="nav-text">私有VLAN（PVLAN）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Remilia</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '0bdc0d6f49bfb51e5834',
+          clientSecret: '9306599f43db3af1e58268b660f8fb11fe4771ec',
+          repo: 'git-comments',
+          owner: 'remil1a',
+          admin: ['remil1a'], 
+          id: window.location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

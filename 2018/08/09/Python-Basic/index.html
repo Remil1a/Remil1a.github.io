@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python为何这么火Python的定位非常明确，它是一种简单易用但又专业严谨的语言。或者说叫胶水语言。普通人也很容易入门。Python可以把各个基本程序拼接在一起协同运作。任何一个人只要愿意学习，可以在几天的时间内学会Python的基础部分。然后做很多很多事情，这种投入产出比是任何其他语言无法具备的。">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python_Basic">
+<meta property="og:url" content="http://remil1a.github.io/2018/08/09/Python-Basic/index.html">
+<meta property="og:site_name" content="Take Your Heart">
+<meta property="og:description" content="Python为何这么火Python的定位非常明确，它是一种简单易用但又专业严谨的语言。或者说叫胶水语言。普通人也很容易入门。Python可以把各个基本程序拼接在一起协同运作。任何一个人只要愿意学习，可以在几天的时间内学会Python的基础部分。然后做很多很多事情，这种投入产出比是任何其他语言无法具备的。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://remil1a.github.io/2018/08/09/Python-Basic/1.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/08/09/Python-Basic/2.png">
+<meta property="og:image" content="http://remil1a.github.io/2018/08/09/Python-Basic/2.png">
+<meta property="og:updated_time" content="2020-07-01T01:30:42.578Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python_Basic">
+<meta name="twitter:description" content="Python为何这么火Python的定位非常明确，它是一种简单易用但又专业严谨的语言。或者说叫胶水语言。普通人也很容易入门。Python可以把各个基本程序拼接在一起协同运作。任何一个人只要愿意学习，可以在几天的时间内学会Python的基础部分。然后做很多很多事情，这种投入产出比是任何其他语言无法具备的。">
+<meta name="twitter:image" content="http://remil1a.github.io/2018/08/09/Python-Basic/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://remil1a.github.io/2018/08/09/Python-Basic/"/>
+
+
+
+
+
+  <title>Python_Basic | Take Your Heart</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Take Your Heart</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-linux">
+          <a href="/tags/Linux" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Linux
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-cisco">
+          <a href="/tags/Cisco" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Cisco
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-huawei">
+          <a href="/tags/Huawei" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Huawei
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-h3c">
+          <a href="/tags/H3C" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            H3C
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-python">
+          <a href="/tags/Python" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Python
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-docker">
+          <a href="/tags/Docker" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Docker
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://remil1a.github.io/2018/08/09/Python-Basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Remilia">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Take Your Heart">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python_Basic</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-09T16:01:55+08:00">
+                2018-08-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Python为何这么火"><a href="#Python为何这么火" class="headerlink" title="Python为何这么火"></a>Python为何这么火</h2><p>Python的定位非常明确，它是一种<strong>简单易用</strong>但又<strong>专业严谨</strong>的语言。或者说叫胶水语言。普通人也很容易入门。Python可以把各个基本程序拼接在一起协同运作。任何一个人只要愿意学习，可以在几天的时间内学会Python的基础部分。然后做很多很多事情，这种投入产出比是任何其他语言无法具备的。</p>
+<a id="more"></a>
+<p>打个比方 我们都知道C语言和C++ Java这种语言比较常用，那么如果我们以造一辆车做比喻，C是从头开始造。先造发动机，再造挡风玻璃，车门，雨刮，轮胎。甚至连一颗螺丝钉都是完全为这辆车打造的。最后造出来的是一辆独一无二的车。这个开发周期可能要一到两年。</p>
+<p>而如果使用Python造一辆车，轮子不用自己造，有很多轮子别人已经帮你写好了。这些轮子可能是拿C语言写的。你只需要选一个适合你的。同理，底盘，挡风玻璃等都可以选别人造好的。这样造车，周期会非常短。可能只需要一个星期就能跑起来。当然，这辆车肯定相对来说没有C语言造出来的车要好。毕竟人家是定制的。我这个是拼接的。但是如果不合适我可以把轮子直接换一个。非常灵活。</p>
+<p>如果有人说，Python开发的程序没有C开发的程序跑得快，执行效率低。我想说的是，很多Python的模块就是拿C写的。打个比方，Python做的事情就是指挥这些模块去做事。是个指挥者的角色。我们做的很多时候都是逻辑。而不是方法。例如，一个数据来了 交给某个Python模块，这个模块是拿C写的，然后返回给你结果，你再拿到这个结果给另一个模块处理。很少有纯Python的程序。执行效率当然没有纯C写出来的程序高。但是也差不了多少。</p>
+<h2 id="Python内置类型"><a href="#Python内置类型" class="headerlink" title="Python内置类型"></a>Python内置类型</h2><p>Python的程序分为<strong>模块</strong> <strong>语句</strong> <strong>表达式</strong> 和<strong>对象</strong></p>
+<ul>
+<li>程序由模块组成</li>
+<li>模块包含语句，条件，循环….等等</li>
+<li>语句包含表达式</li>
+<li><p>表达式创建和处理对象。</p>
+<p>为什么使用内置对象呢，内置对象是程序自带的，本身就支持的东西。比方说数字，字符，列表等等。并且可以基于内建对象创建新对象。</p>
+</li>
+</ul>
+<p>那么内置对象有哪些呢？下面列出了常用的内置对象。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>对象类型</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Numbers（数字）</td>
+<td>1234，3.1415926，0b111，3+4j</td>
+</tr>
+<tr>
+<td>Strings（字符串）</td>
+<td>‘remilia’，‘ipconfig’，’\r\n’</td>
+</tr>
+<tr>
+<td>Lists（列表）</td>
+<td>[1,2,[12,3]],[1,’1’,’Playstation’],list[range(10)]</td>
+</tr>
+<tr>
+<td>Dictionaries（字典）</td>
+<td>{‘food’:’Hamburg’,’PS4’:’Playstation4’,’1’:123}</td>
+</tr>
+<tr>
+<td>Tuples（元组）</td>
+<td>(1,’test’,4,6)</td>
+</tr>
+<tr>
+<td>Files（文件）</td>
+<td>open(‘dns.txt’),open(r’D:\Learn\ccna.ppt’)</td>
+</tr>
+<tr>
+<td>Sets（集合）</td>
+<td>set(‘abc’),{‘a’,’b’,’c’}</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>大部分都是我们熟悉的。接下来看第一个 数字。这个是我们生活中也会用到的。Python中处理的每个东西都是对象。所以这些很关键。</p>
+<p>Python的安装就不去说了。Windows版在官网上的都能找到。MacOS和Linux都能在官网上找到。安装过程网上都有教程。</p>
+<h2 id="Python内置类型-数字"><a href="#Python内置类型-数字" class="headerlink" title="Python内置类型-数字"></a>Python内置类型-数字</h2><p>首先每个对象我都会用以下这张表来概述特点。这些特点需要牢记。数字类型的特点如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>分类</th>
+<th>可变</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number（数字）</td>
+<td>Numeric（数值）</td>
+<td>不可变</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>那么来解释一下吧</p>
+<ul>
+<li>类型：就是对象的类型 在内置类型里列出了常用的类型。现在说明的是数字。</li>
+<li>分类：或者说特征，数字类型的特点就是里面只能放数值。常见的数值有整数，浮点数和虚数等。</li>
+<li>可变：对象一旦定义就是不可变的。比方说定义了A=999 那么除非重新再赋值A=666 不然是没办法改变其中的值的。这个可以跟下面要讲的字符串做对比。先这么记着。</li>
+</ul>
+<p>接下来来看一下数字类型的对象能够接受的值吧。</p>
+<ul>
+<li>1234，-24，0，999999   这些都是<strong>整数</strong>。</li>
+<li>1.23，1.5666，3.1415926   4E210 这些都是<strong>浮点数</strong>。</li>
+<li>0o177，0x12a，ob1010101011   这些分别是<strong>八进制</strong>，<strong>十六进制</strong>和<strong>二进制数</strong>。</li>
+<li>3+4j，3.0+4j 这些都是<strong>复数</strong></li>
+<li>set(‘test’)，{1,2,3,4} 这些是集合</li>
+<li>Decimal(‘1.0’)，Fraction(1,3) 小数和分数 右边那个是$\frac{1}{3}$</li>
+<li>bool(X),True,False 布尔和常量 布尔值就像 真，假这种。</li>
+</ul>
+<p>那么下面列出一些数字对象的基本操作</p>
+<ul>
+<li>表达式操作符</li>
+</ul>
+<p>+(加)，-(减)，*(乘)，/(除)，**(乘方)，&gt;&gt; 移位</p>
+<p>这里要说明一下移位。移位是指将数字往前或者往后移动一位。例如算IP地址的时候经常会记下面的一串数字</p>
+<p>64 32 16 8 4 2 1</p>
+<p>那么例如8往后移动2位应该是2</p>
+<p>下面来实际操作一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span>+<span class="number">2</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span>**<span class="number">2</span></span><br><span class="line"><span class="number">9</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6</span>*<span class="number">5</span></span><br><span class="line"><span class="number">30</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">8</span><span class="number">-2</span></span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">8</span><span class="number">-9</span></span><br><span class="line"><span class="number">-1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">8</span> &gt;&gt; <span class="number">2</span></span><br><span class="line"><span class="number">2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">8</span> &lt;&lt; <span class="number">2</span></span><br><span class="line"><span class="number">32</span></span><br></pre></td></tr></table></figure>
+<h3 id="内建数学函数"><a href="#内建数学函数" class="headerlink" title="内建数学函数"></a>内建数学函数</h3><p>内建数学函数可以理解为Python自带的数学函数例如</p>
+<p>pow()乘方，abs()求绝对值，round()四舍五入，int, hex,oct,bin等等</p>
+<p>那么我们也通过实际操作感受一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>pow(<span class="number">4</span>,<span class="number">2</span>) \\四的二次方</span><br><span class="line"><span class="number">16</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>abs(<span class="number">-100</span>) \\求<span class="number">100</span>的绝对值</span><br><span class="line"><span class="number">100</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">4.6</span>) \\四舍五入<span class="number">4.6</span></span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">4.4</span>) \\四舍五入<span class="number">4.4</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">4.5</span>) \\四舍五入<span class="number">4.5</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>int(<span class="number">0b01101</span>) \\将<span class="number">0b01101</span>(二进制<span class="number">01101</span>)转换成int(十进制数)</span><br><span class="line"><span class="number">13</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>hex(<span class="number">15</span>) \\将十进制的<span class="number">15</span>转换成<span class="number">16</span>进制数</span><br><span class="line"><span class="string">'0xf'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>oct(<span class="number">0x0fab</span>) \\将十六进制数的<span class="number">0x0fab</span>转换成八进制数</span><br><span class="line"><span class="string">'0o7653'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="工具模块"><a href="#工具模块" class="headerlink" title="工具模块"></a>工具模块</h3><p>之前也有说过Python有很多别人写好的模块。这里直接导入别人写好的模块 随机数模块random。</p>
+<p>然后我们来看看用随机数模块如何快速生成随机数。这个如果有学过C语言应该知道 让计算机生成随机数可以调用rand()函数，但是每次生成的序列是一样的。而且还要有种子值之类的。写起来还比较麻烦。下面看看Python怎么做的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> random</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randint(<span class="number">1</span>,<span class="number">100</span>)</span><br><span class="line"><span class="number">20</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randint(<span class="number">1</span>,<span class="number">100</span>)</span><br><span class="line"><span class="number">80</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randint(<span class="number">1</span>,<span class="number">100</span>)</span><br><span class="line"><span class="number">75</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randint(<span class="number">1</span>,<span class="number">100</span>)</span><br><span class="line"><span class="number">14</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.randint(<span class="number">1</span>,<span class="number">100</span>)</span><br><span class="line"><span class="number">92</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>接下来我们来对比一下C语言生成随机数怎么写</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">include &lt;stdio.h&gt; </span><br><span class="line">include &lt;stdlib.h&gt; </span><br><span class="line">include &lt;time.h&gt; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">float</span> s; </span><br><span class="line">    srand((<span class="keyword">int</span>)time(<span class="number">0</span>)); </span><br><span class="line">    s = (<span class="keyword">float</span>)rand() / RAND_MAX; </span><br><span class="line">    s = <span class="number">3</span> + (<span class="number">5</span><span class="number">-3</span>) * s; </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%f\n"</span>, s); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相比之下C语言就复杂的多了。这是我们第一次接触模块，后面还会经常用到。</p>
+<p>再来看一组实例吧，我刚开始学C语言的时候，老师会出一个题，要求给定几个数，让程序返回最大值。这个看似简单的任务真的当时做的头都是大的。写的很复杂。先来看用C怎么写的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">include&lt;stdio.h&gt;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">maxfun</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">int</span> i,j,N;</span><br><span class="line"> <span class="keyword">int</span> sum = <span class="number">0</span>,max = <span class="number">0</span>; </span><br><span class="line"> <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;N);</span><br><span class="line"> <span class="keyword">int</span> a[N];</span><br><span class="line"> <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;N; i++)&#123;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">  <span class="keyword">if</span>(a[i]&gt;max)&#123;</span><br><span class="line">   max = a[i];</span><br><span class="line">   sum = i;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="built_in">printf</span>(<span class="string">"%d %d"</span>,N,sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再来看，这么复杂的程序，在python里，只需要简单的几行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>max([<span class="number">3</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">1</span>,<span class="number">4</span>,])</span><br><span class="line"><span class="number">9</span></span><br></pre></td></tr></table></figure>
+<p>其中用[]框起来的是列表 后面我们会提到。总之python实现排序是如此简单，别人已经跟你写好了。你只需要告诉他需要干嘛就行了。非常好用。不需要了解实现方法。python有很多很多模块，都是已经写好了的。你只需要关心 把什么东西传进去，把得到的东西再给什么模块处理就行了，不需要关心他到底是怎么找的。这就是python在写起来很快的原因。当然，前提条件是你要知道有这么个东西。比方说数学模块其实有很多东西的。</p>
+<p><img src="/2018/08/09/Python-Basic/1.png" alt="1"></p>
+<p>前提是你要很懂数学 才能很好的去利用这些工具和模块</p>
+<h2 id="Python内置类型-字符串"><a href="#Python内置类型-字符串" class="headerlink" title="Python内置类型-字符串"></a>Python内置类型-字符串</h2><p>字符串的特点如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>特点</th>
+<th>是否可变</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String（字符）</td>
+<td>序列</td>
+<td>不可变</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>字符串应该是用的比较多的。待会儿解释一下什么叫序列类型。以及不可变是什么概念。</p>
+<p>字符串是可以单引号，双引号和三引号框起来。反过来说，用这些符号框起来的就代表里面的是字符串。先体验一下吧。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Playstation3'</span></span><br><span class="line"><span class="string">'Playstation3'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"Playstation3"</span></span><br><span class="line"><span class="string">'Playstation3'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">"""Playstation4"""</span></span><br><span class="line"><span class="string">'Playstation4'</span></span><br></pre></td></tr></table></figure>
+<p>那么除了我们常用的英文字母，数字，中文等字符串，还有一些特殊的东西我们要了解</p>
+<h3 id="转意符号"><a href="#转意符号" class="headerlink" title="转意符号\"></a>转意符号\</h3><p>我们都知道单引号有特殊的意义 用于把字符串引起来，但是如果我想要输出正常的单引号又该怎么办呢？这个时候就需要使用转意符号，告诉程序这里的单引号没有特殊意义。就是一个普通的字符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Python'</span>Cisco<span class="string">'</span></span><br><span class="line"><span class="string">  File "&lt;stdin&gt;", line 1</span></span><br><span class="line"><span class="string">    '</span>Python<span class="string">'Cisco'</span></span><br><span class="line">                ^</span><br><span class="line">SyntaxError: invalid syntax</span><br></pre></td></tr></table></figure>
+<p>如果这么去做 会直接报错。那么现在在Python和Cisco之间的单引号前面加一个转意符号\</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Python\'Cisco'</span></span><br><span class="line"><span class="string">"Python'Cisco"</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>除了上述这种情况，其实很多时候我们会碰到\t \r\n这种特殊符号。这个\t代表一个tab \r代表回车\n代表换行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'Cisco\tHuawei'</span>)</span><br><span class="line">Cisco	Huawei</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>你会发现中间空了一块出来，这就是制表符（table）的效果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'Cisco\nHuawei'</span>)</span><br><span class="line">Cisco</span><br><span class="line">Huawei</span><br></pre></td></tr></table></figure>
+<p>\n就是回车。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'Cisco\rHuawei'</span>)</span><br><span class="line">Huawei</span><br></pre></td></tr></table></figure>
+<p>\r为换行。</p>
+<blockquote>
+<p>换行和回车的区别：</p>
+<p>在计算机还没有出现之前，有一种叫做电传打字机（Teletype Model 33）的机械打字机，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。</p>
+<p>于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界，不卷动滚筒；另一个叫做“换行”，告诉打字机把滚筒卷一格，不改变水平位置。</p>
+<p>这就是“换行”和“回车”的由来。</p>
+<p>后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。</p>
+<p>回车 \r 本义是光标重新回到本行开头，r的英文return，控制字符可以写成CR，即Carriage Return</p>
+<p>换行 \n 本义是光标往下一行（不一定到下一行行首），n的英文newline，控制字符可以写成LF，即Line Feed</p>
+<p>符号    ASCII码      意义</p>
+<p>\n        10        换行NL</p>
+<p>\r        13        回车CR</p>
+<p>在不同的操作系统这几个字符表现不同，比如在WIN系统下，这两个字符就是表现的本义，在UNIX类系统，换行\n就表现为光标下一行并回到行首，在MAC上，\r就表现为回到本行开头并往下一行，至于ENTER键的定义是与操作系统有关的。通常用的Enter是两个加起来。</p>
+<p>不同操作系统下的含义：</p>
+<p>\n:  UNIX 系统行末结束符</p>
+<p>\r\n: window 系统行末结束符</p>
+<p>\r:  MAC OS 系统行末结束符</p>
+</blockquote>
+<h3 id="原始字符串r"><a href="#原始字符串r" class="headerlink" title="原始字符串r"></a>原始字符串r</h3><p>如果我们想输出一个Windows里的路径例如D:\World of Warcraft\test\WoW64.exe 这里面会有多个斜杠。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'D:\World of Warcraft\test\WoW64.exe'</span>)</span><br><span class="line">D:\World of Warcraft	est\WoW64.exe</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>你会发现这边\test由于出现了\t，程序会认为这是一个制表符。我们也不能保证Windows里的路径一定不出现这种特殊的东西。有两种办法解决。第一种是在每个斜杠前面加上\转意，来表示后面的斜杠没有特殊意义。这样比较麻烦。另一种办法就是使用r 原始字符串，代表后面的所有内容均是普通字符串，没有任何其他意义。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">r'D:\World of Warcraft\test\WoW64.exe'</span>)</span><br><span class="line">D:\World of Warcraft\test\WoW64.exe</span><br></pre></td></tr></table></figure>
+<h3 id="什么叫有序或者说序列类型"><a href="#什么叫有序或者说序列类型" class="headerlink" title="什么叫有序或者说序列类型"></a>什么叫有序或者说序列类型</h3><p>之前提到了字符串是一种有序的类型，什么叫有序呢？就是字符串里的每个字符都有对应的位置。可以通过索引的办法提取出来。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>String = <span class="string">'Playstation4'</span> \\将Playstation4的值赋予给变量String</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>String[<span class="number">0</span>]  \\提取变量String的第<span class="number">0</span>号位置的值</span><br><span class="line"><span class="string">'P'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>String[<span class="number">3</span>] \\提取变量String的第<span class="number">3</span>号位置的值</span><br><span class="line"><span class="string">'y'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>计算机数数都是从0开始的。所以Playstation4对应的位置就是</p>
+<p><img src="/2018/08/09/Python-Basic/2.png" alt="2"></p>
+<h3 id="什么叫可变类型"><a href="#什么叫可变类型" class="headerlink" title="什么叫可变类型"></a>什么叫可变类型</h3><p>刚才提到了序列，接下来谈谈可变。字符串的类型是不可变，也就是说你不能更改字符串里的某一个字的值。要想更改，只能重新整个赋值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>String = <span class="string">'Playstation4'</span> \\将Playstation4赋值给变量String</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>String[<span class="number">3</span>] = <span class="string">'O'</span> \\将String变量的第三位更改成字符串O</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: <span class="string">'str'</span> object does <span class="keyword">not</span> support item assignment</span><br></pre></td></tr></table></figure>
+<p>这边报错了 。代表字符串确实是不可变的，后面在讲列表的时候这种操作就是可以被执行的。</p>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>python的多态说法非常多。这边直接拿实际操作举例吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(<span class="string">'-'</span>*<span class="number">10</span>)</span><br><span class="line">----------</span><br></pre></td></tr></table></figure>
+<p>上面代码的意思是 打印- 后面*10代表 -乘10。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Cisco'</span>*<span class="number">4</span></span><br><span class="line"><span class="string">'CiscoCiscoCiscoCisco'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span>*<span class="number">2</span></span><br><span class="line"><span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p>如果是C语言这种 直接拿字符串乘一个数字是肯定会报错的。但是python这种语言的多态特性就可以做到这种事情</p>
+<h3 id="循环迭代"><a href="#循环迭代" class="headerlink" title="循环迭代"></a>循环迭代</h3><p>只要是序列类型 都可以用For循环进行迭代处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>str = <span class="string">'Cisco'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> str:</span><br><span class="line"><span class="meta">... </span>    print(x)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line">C</span><br><span class="line">i</span><br><span class="line">s</span><br><span class="line">c</span><br><span class="line">o</span><br></pre></td></tr></table></figure>
+<p>第一次循环会迭代str里的第一个值C 然后打印出来 回车，第二次会迭代第二个值 i 打印出来 然后回车。以此类推。 每次循环迭代出的内容就会赋值给x。for循环可以对<strong>序列类型</strong>对象进行迭代。把每次迭代的结果进行输出。如果输出的时候不想要自动换行。可以这样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> x <span class="keyword">in</span> str:</span><br><span class="line"><span class="meta">... </span>    print(x,end=<span class="string">''</span>)</span><br><span class="line"><span class="meta">... </span></span><br><span class="line">Cisco&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>其中end=’’代表每次迭代以空为结束。</p>
+<h3 id="索引和切片"><a href="#索引和切片" class="headerlink" title="索引和切片"></a>索引和切片</h3><p><strong>所有的序列类型都可以索引和切片</strong></p>
+<p>拿字符串Playstation4来说。</p>
+<p><img src="/2018/08/09/Python-Basic/2.png" alt="2"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>String = <span class="string">'Playstation4'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>String[<span class="number">3</span>]</span><br><span class="line"><span class="string">'y'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>这是提取String字符串中3号位置的示例。[3]代表3号位置 这种方式叫索引。</p>
+<p>也可以倒过来提取</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>String[<span class="number">-1</span>]</span><br><span class="line"><span class="string">'4'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>除了索引，我们还可以进行切片</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>String[<span class="number">1</span>:<span class="number">7</span>]</span><br><span class="line"><span class="string">'laysta'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p> 对比上面的位置 我们会发现处于7号位置的’t’并没有出现。1号位的’l’出现了。</p>
+<p>这种切片方式，左边的叫下边缘，右边的叫上边缘。默认上边缘是不要的。也就是输出了不包含上边缘</p>
+<p>其他的切片方式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>String[:<span class="number">7</span>] \\从<span class="number">0</span>位开始到<span class="number">6</span></span><br><span class="line"><span class="string">'Playsta'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>String[<span class="number">-2</span>:] \\从<span class="number">-2</span>开始一直到后面的所有位</span><br><span class="line"><span class="string">'n4'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>String[:<span class="number">-2</span>] \\从头开始到<span class="number">-2</span>位（<span class="number">-2</span>位不要）</span><br><span class="line"><span class="string">'Playstatio'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>String[:] \\所有都要</span><br><span class="line"><span class="string">'Playstation4'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="字符串的拼接格式问题"><a href="#字符串的拼接格式问题" class="headerlink" title="字符串的拼接格式问题"></a>字符串的拼接格式问题</h3><p>例如我们想把字符串拼一起</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Play'</span> + <span class="string">'Station'</span></span><br><span class="line"><span class="string">'PlayStation'</span></span><br></pre></td></tr></table></figure>
+<p>字符串之间的拼接是没问题的。</p>
+<p>如果再来一个4呢</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Play'</span> + <span class="string">'Station'</span> + <span class="number">4</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"&lt;stdin&gt;"</span>, line <span class="number">1</span>, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">TypeError: can only concatenate str (<span class="keyword">not</span> <span class="string">"int"</span>) to str</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>你会发现报错 并且提示字符串不能和数字相加。这个时候需要做转换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Play'</span> + <span class="string">'Station'</span> + str(<span class="number">4</span>)</span><br><span class="line"><span class="string">'PlayStation4'</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p><code>str(4)</code>代表将括号里的内容转换成字符串。这样就可以拼接了。</p>
+<h2 id="字符串格式化表达式和方法"><a href="#字符串格式化表达式和方法" class="headerlink" title="字符串格式化表达式和方法"></a>字符串格式化表达式和方法</h2><p>在输出字符串的时候我们希望能够把字符串做格式化，显示出来干净整齐，格式统一。这就是字符串格式表达式的目的。</p>
+<p>字符串格式化有两种方法。第一种是传统表达式方法，第二种是新方法。来体验一下</p>
+<h3 id="传统方法（表达式）"><a href="#传统方法（表达式）" class="headerlink" title="传统方法（表达式）"></a>传统方法（表达式）</h3><p>String formatting expressions: ‘…%s…’(values)</p>
+<p>%左边是一个格式化的字符串，包含一个或多个嵌套的转换目标，每个目标用%开始。</p>
+<p>%右边提供一个或者多个对象(多个对象需要放在元组中)，这些对象用来替换%左边的转换对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'Playstation%d is %s'</span>%(<span class="number">4</span>,<span class="string">'belong to sony'</span>)</span><br><span class="line"><span class="string">'Playstation4 is belong to sony'</span></span><br></pre></td></tr></table></figure>
+<p>能够看到。整个语句用%分隔开，分成左边和右边。左边是已经格式化了的字符串，右边是用来替换%d和%s的内容。</p>
+<p>其中%d这个地方要替换的是整数</p>
+<p>%s代表这个地方要替换的是字符串。</p>
+<p>要替换的值放在元组里，元组在后面会介绍。其实就是用小括号括起来的东西。</p>
+<p>一般%后面就会用到三个</p>
+<p>%d—-整数</p>
+<p>%s—-字符串</p>
+<p>%f—-浮点</p>
+<h4 id="完整表达式语法"><a href="#完整表达式语法" class="headerlink" title="完整表达式语法"></a>完整表达式语法</h4><p>%[(keyname)][flags][width][.precision]typecode</p>
+<ul>
+<li>keyname代表%后面其实还可以放一个字典的键值，由于字典还没有涉及到，这边先放着</li>
+<li>flags可以指明字符串是左对齐(-)还是右对齐还是用0补齐,默认右对齐。</li>
+<li>width代表整体宽度</li>
+<li>如果是小数还可以用.后面跟数字来表示小数点位数 例如.2f表示保留小数点后2位的浮点数</li>
+</ul>
+<p>还是来实操感受一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>example = <span class="string">'...%d....%-10d....%10d...%010d'</span>%(int,int,int,int)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(example)</span><br><span class="line">..<span class="number">.98765</span>...<span class="number">.98765</span>     ....     <span class="number">98765.</span>.<span class="number">.0000098765</span></span><br></pre></td></tr></table></figure>
+<p>第一个%d代表直接输出</p>
+<p>第二个%-10d代表左对齐输出，宽度10</p>
+<p>第三个%10d代表右对齐输出，宽度10</p>
+<p>%010d代表右对齐输出，宽度10，不足的位置用0补齐</p>
+<p>得出的结果就如上所示了。</p>
+<p>接下来看看关于浮点数的输出</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>float = <span class="number">6.123151253464567</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>example = <span class="string">'%f|%.2f|%010.3f|%5.2f'</span>%(float,float,float,float)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(example)</span><br><span class="line"><span class="number">6.123151</span>|<span class="number">6.12</span>|<span class="number">000006.123</span>| <span class="number">6.12</span></span><br></pre></td></tr></table></figure>
+<p>第一个%f啥也不做</p>
+<p>第二个%.2f代表保留小数点后2位</p>
+<p>第三个%010.3f代表右对齐，长度10位，不够的用0补齐</p>
+<p>第四个%5.2f代表右对齐，保留小数点后2位并且占5位长度</p>
+<h3 id="新方法"><a href="#新方法" class="headerlink" title="新方法"></a>新方法</h3><p>String formatting method calls:’…{}…’.format(values)</p>
+<p>刚才讲的是传统的方法。现在来看一下新方法。</p>
+<h4 id="完整语法"><a href="#完整语法" class="headerlink" title="完整语法"></a>完整语法</h4><p>{fieldname component !conversionflag :formatspec}</p>
+<ul>
+<li>Filename是指定参数的关键字或数字，后面跟可选的’.name’(属性)或者’[index]’(键值)成分引用</li>
+<li>conversionflag可以是r,s或者a分别是该值上对repr，str，ascii内置函数的一次调用</li>
+<li>formatspec指定如何表示该值，包括宽度，对齐方式，补零，小数点精确度等。</li>
+</ul>
+<p>还是来实操一下吧</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'&#123;0&#125;,&#123;1&#125;,and &#123;2&#125;'</span>.format(<span class="string">'Playstation'</span>,<span class="string">'Nintendo'</span>,<span class="string">'Mircosoft'</span>)</span><br><span class="line"><span class="string">'Playstation,Nintendo,and Mircosoft'</span></span><br></pre></td></tr></table></figure>
+<p>这是基于位置的方法，意思是0号位置是playstation，1号位置是nintendo，2号位置是microsoft。还有基于名字的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="string">'&#123;Playstation4&#125;,&#123;Switch&#125;,&#123;XboxOne&#125;'</span></span><br><span class="line">str.format(Playstation4=Sony,Switch=Nintendo,XboxOne=Microsoft)</span><br><span class="line">str.format(Playstation4=<span class="string">'Sony'</span>,Switch=<span class="string">'Nintendo'</span>,XboxOne=<span class="string">'Microsoft'</span>)</span><br><span class="line"><span class="string">'Sony,Nintendo,Microsoft'</span></span><br></pre></td></tr></table></figure>
+<p>这就相当于有Playstation位，Switch位和XboxOne位。</p>
+<p>当然 这两种方法可以混合起来用。</p>
+<p>刚才提到了老方法可以控制宽度，小数点位数等。新方法当然也可以。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">'&#123;Sony:10&#125;,&#123;Microsoft:10&#125;,&#123;Nintendo:10&#125;'</span></span><br><span class="line">str.format(Sony=<span class="string">'Playstation4'</span>,Microsoft=<span class="string">'XboxOne'</span>,Nintendo=<span class="string">'Switch'</span>)</span><br><span class="line"><span class="string">'Playstation4,XboxOne   ,Switch    '</span></span><br></pre></td></tr></table></figure>
+<p>跟老方法一样，:10代表宽度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">'&#123;Sony:10&#125;,&#123;Microsoft:^10&#125;,&#123;Nintendo:&lt;10&#125;'</span></span><br><span class="line">str.format(Sony=<span class="string">'Playstation4'</span>,Microsoft=<span class="string">'XboxOne'</span>,Nintendo=<span class="string">'Switch'</span>)</span><br><span class="line"><span class="string">'Playstation4, XboxOne  ,Switch    '</span></span><br></pre></td></tr></table></figure>
+<p>^代表居中。</p>
+<p>&lt;代表左对齐</p>
+<p>>代表右对齐</p>
+<p>关于小数的操作方法和老方法一样，就不再赘述了。</p>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p>正则表达式较为复杂。我参考了</p>
+<p><a href="http://www.regexlab.com/zh/regref.htm" target="_blank" rel="noopener">这里</a>和<a href="https://zh.wikipedia.org/wiki/正则表达式" target="_blank" rel="noopener">这里</a>来写。</p>
+<p>正则表达式可以用来匹配一些特定的字符串。其实在BGP就有用到正则表达式。BGP的AS-PATH就是使用正则表达式来匹配AS号。</p>
+<h3 id="如何匹配各种字符"><a href="#如何匹配各种字符" class="headerlink" title="如何匹配各种字符"></a>如何匹配各种字符</h3><p>在Python中想使用正则表达式需要引入re模块。使用<code>import re</code>来引入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> re</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">'explorer.exe'</span>,<span class="string">'explorereexe'</span>)</span><br><span class="line">&lt;re.Match object; span=(<span class="number">0</span>, <span class="number">12</span>), match=<span class="string">'explorereexe'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">'explorer.exe'</span>,<span class="string">'fjdlskajlf'</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>最简单的使用方法就像上面这样。</p>
+<p>re.match代表使用re模块里面的match动作，括号中左边的就是正则表达式，用逗号隔开之后右边就是要匹配的东西。如果有匹配上，程序就会返回值。这边能看到确实匹配上了，匹配上的内容是0到12位。如果匹配不上就不会返回任何值。</p>
+<p>这边能匹配上可能会有问题。我匹配的条件是<strong>explorer.exe</strong>给他匹配的东西是<strong>explorereexe</strong>。但是还是匹配上了。明明有个点不一样，为什么还是能匹配上？这边就需要了解正则表达式中符号的特殊意义。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>能匹配的东西</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\d</td>
+<td>任意数字，即0～9</td>
+</tr>
+<tr>
+<td>\w</td>
+<td>任意字母，下划线或者数字就是A~Z,a-z,0~9以及_</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>包括空格、制表符、回车换行等空字符</td>
+</tr>
+<tr>
+<td>.</td>
+<td>除了换行符号\n以外的所有字符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>所以难怪上面能匹配上了。点可以匹配除了换行以外的任意字符。</p>
+<p>那如果只想匹配explorer.exe怎么办？这边就需要用到转意符。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">'explorer\.exe'</span>,<span class="string">'explorer.exe'</span>)</span><br><span class="line">&lt;re.Match object; span=(<span class="number">0</span>, <span class="number">12</span>), match=<span class="string">'explorer.exe'</span>&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">'explorer\.exe'</span>,<span class="string">'exploreraexe'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="匹配多种字符的表达式"><a href="#匹配多种字符的表达式" class="headerlink" title="匹配多种字符的表达式"></a>匹配多种字符的表达式</h3><p>使用方括号[]扩起来一些字符，能够匹配其中的任意一个字符；用[^]扩起来一些字符，能够匹配除了其中这些字符之外的任意字符。只能匹配其中的一个或者除开其中的一个，不能是多个。下面看一些例子。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>可匹配</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[abc5@]</td>
+<td>a,b,c,5,@</td>
+</tr>
+<tr>
+<td><sup><a href="#fn_abc" id="reffn_abc">abc</a></sup></td>
+<td>除了a，b，c之外的任意字符</td>
+</tr>
+<tr>
+<td>[a-k]</td>
+<td>a-k之间的任意字母</td>
+</tr>
+<tr>
+<td><sup><a href="#fn_A-F0-3" id="reffn_A-F0-3">A-F0-3</a></sup></td>
+<td>除了A到F和0-3之间的任意字符</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>下面来看几个实例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">'[bcd][bcd]'</span>,<span class="string">'bc123'</span>)</span><br><span class="line">&lt;re.Match object; span=(<span class="number">0</span>, <span class="number">2</span>), match=<span class="string">'bc'</span>&gt; \\匹配上的是bc</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">'[^abc]'</span>,<span class="string">'123'</span>)</span><br><span class="line">&lt;re.Match object; span=(<span class="number">0</span>, <span class="number">1</span>), match=<span class="string">'1'</span>&gt; \\匹配上的是<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="修饰匹配次数"><a href="#修饰匹配次数" class="headerlink" title="修饰匹配次数"></a>修饰匹配次数</h3><p> 前面章节中讲到的表达式，无论是只能匹配一种字符的表达式，还是可以匹配多种字符其中任意一个的表达式，都只能匹配一次。如果使用表达式再加上修饰匹配次数的特殊符号，那么不用重复书写表达式就可以重复匹配。</p>
+<p>使用方法是：”次数修饰”放在”被修饰的表达式”后边。比如：”[bcd][bcd]” 可以写成 “[bcd]{2}”。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{n}</td>
+<td>表达式重复n次</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>表达式至少重复m次，最多重复n次</td>
+</tr>
+<tr>
+<td>{m,}</td>
+<td>表达式至少重复m次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>匹配表达式至少出现0或者1次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>表达式至少出现1次</td>
+</tr>
+<tr>
+<td>*</td>
+<td>表达式不出现或者出现任意次</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>下面来看一组例子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">'[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;\.[0-9]&#123;1,3&#125;'</span>,<span class="string">'192.168.1.100'</span>)</span><br><span class="line">&lt;re.Match object; span=(<span class="number">0</span>, <span class="number">13</span>), match=<span class="string">'192.168.1.100'</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>可以用上述的表达式匹配IPv4地址。</p>
+<p>IPv4的地址每8位都用点来分隔，数字的范围是0到9则用[0-9]匹配。 出现至少一次，最多三次，就用{1,3}匹配。小数点本身需要有\.来匹配。当然 这样写非常长。也不太好看。有没有简单方法呢。</p>
+<h3 id="表示抽象意义的符号"><a href="#表示抽象意义的符号" class="headerlink" title="表示抽象意义的符号"></a>表示抽象意义的符号</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>^</td>
+<td>于字符串开始的地方匹配，本身无意义</td>
+</tr>
+<tr>
+<td>$</td>
+<td>于字符串结束的地方匹配，本身无意义</td>
+</tr>
+<tr>
+<td>()</td>
+<td>在被修饰匹配次数的时候，括号中的表达式可以作为整体被修饰</td>
+</tr>
+<tr>
+<td>\</td>
+<td></td>
+<td>左右表达式之间是或的关系，匹配左边或者右边。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>来看两组例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">re.match(<span class="string">'([0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;'</span>,<span class="string">'192.168.1.1'</span>)</span><br><span class="line">&lt;re.Match object; span=(<span class="number">0</span>, <span class="number">11</span>), match=<span class="string">'192.168.1.1'</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.match(<span class="string">'^aaa'</span>,<span class="string">'aaafdafadfawfa'</span>)</span><br><span class="line">&lt;re.Match object; span=(<span class="number">0</span>, <span class="number">3</span>), match=<span class="string">'aaa'</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>第一个例子是将上面的匹配IPv4地址进行了简化。用括号将[0-9]{1,3}\.扩起来。然后后面跟上{3}代表出现3次。后面再单独写[0-9]{1,3} 代表不带点 在单独出现一次。这样一来就能匹配到完整的IPv4地址</p>
+<p>后面的则是^aaa,代表字符串必须以aaa开头。至于后面是什么不管。</p>
+<h2 id="列表和字典"><a href="#列表和字典" class="headerlink" title="列表和字典"></a>列表和字典</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>对象</th>
+<th>类型</th>
+<th>可变</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List(列表)</td>
+<td>Sequence(序列)</td>
+<td>可变</td>
+</tr>
+<tr>
+<td>Dictionaries(字典)</td>
+<td>Mapping(映射)</td>
+<td>可变</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>一看到序列类型，我们就知道，一定可以根据索引提取内容，可以切片。可以改的。字符串我们体会过，根据某个位置去改值 是不行的。但是列表就可以。</p>
+<p>列表的主要属性有以下几个：</p>
+<ul>
+<li><strong>任意</strong>对象的<strong>有序集合</strong></li>
+<li>通过<strong>偏移</strong>读取</li>
+<li>可变长度，异构以及任意嵌套</li>
+<li>属于<strong>可变序列</strong>的分类</li>
+<li>对象引用数组</li>
+</ul>
+<p>什么叫任意对象？就是说列表里放字符，数字，甚至再放列表都是可以的。有序就是可以通过索引的方式提取。通过操作来感受一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list = [<span class="string">'cisco'</span>,<span class="number">123</span>,[<span class="string">'H3C'</span>,<span class="string">'BSD'</span>,<span class="string">'Linux'</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list</span><br><span class="line">[<span class="string">'cisco'</span>, <span class="number">123</span>, [<span class="string">'H3C'</span>, <span class="string">'BSD'</span>, <span class="string">'Linux'</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list [<span class="number">2</span>]</span><br><span class="line">[<span class="string">'H3C'</span>, <span class="string">'BSD'</span>, <span class="string">'Linux'</span>]</span><br></pre></td></tr></table></figure>
+<p>又或者把0号位置的cisco改成大写的CISCO</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list[<span class="number">0</span>]=<span class="string">'CISCO'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list</span><br><span class="line">[<span class="string">'CISCO'</span>, <span class="number">123</span>, [<span class="string">'H3C'</span>, <span class="string">'BSD'</span>, <span class="string">'Linux'</span>], <span class="string">'Playstation'</span>]</span><br></pre></td></tr></table></figure>
+<p>如果想要提取列表中的列表，则可以这样</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list[<span class="number">2</span>][<span class="number">0</span>]</span><br><span class="line"><span class="string">'H3C'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list[<span class="number">2</span>][<span class="number">1</span>]</span><br><span class="line"><span class="string">'BSD'</span></span><br></pre></td></tr></table></figure>
+<p>列表也可以直接用+号连接在一起。</p>
+<h4 id="列表的常见操作方法"><a href="#列表的常见操作方法" class="headerlink" title="列表的常见操作方法"></a>列表的常见操作方法</h4><h5 id="len"><a href="#len" class="headerlink" title="len"></a>len</h5><p>使用len()可以提取列表的长度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list</span><br><span class="line">[<span class="string">'CISCO'</span>, <span class="number">123</span>, [<span class="string">'H3C'</span>, <span class="string">'BSD'</span>, <span class="string">'Linux'</span>], <span class="string">'Playstation'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>len(list)</span><br><span class="line"><span class="number">4</span></span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+<p>这里显示list这个列表有4个元素。分别是CISCO 123 一个列表和 Playstation。计算长度是从1开始算的。</p>
+<h5 id="in"><a href="#in" class="headerlink" title="in"></a>in</h5><p>也可以用 in 来判断</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'CISCO'</span> <span class="keyword">in</span> list</span><br><span class="line"><span class="keyword">True</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'Cisco'</span> <span class="keyword">in</span> list</span><br><span class="line"><span class="keyword">False</span></span><br></pre></td></tr></table></figure>
+<p>以及所有序列类型都可以用for循环。这里不再赘述。</p>
+<h5 id="append"><a href="#append" class="headerlink" title="append"></a>append</h5><p>我们可以通过append方法来往列表后面追加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list.append(<span class="string">'Playstation'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list</span><br><span class="line">[<span class="string">'cisco'</span>, <span class="number">123</span>, [<span class="string">'H3C'</span>, <span class="string">'BSD'</span>, <span class="string">'Linux'</span>], <span class="string">'Playstation'</span>]</span><br></pre></td></tr></table></figure>
+<h5 id="insert"><a href="#insert" class="headerlink" title="insert"></a>insert</h5><p>插入操作。可以在列表中指定位置去插入。例如上面的list。在1位置插入。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list = [<span class="number">1</span>,<span class="string">'Cisco'</span>,<span class="string">'H3C'</span>,<span class="string">'Python'</span>] \\创建列表</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list \\显示列表</span><br><span class="line">[<span class="number">1</span>, <span class="string">'Cisco'</span>, <span class="string">'H3C'</span>, <span class="string">'Python'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list.insert(<span class="number">1</span>,<span class="string">'Playstation'</span>) \\在<span class="number">1</span>位置插入Playstation</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list  \\显示列表</span><br><span class="line">[<span class="number">1</span>, <span class="string">'Playstation'</span>, <span class="string">'Cisco'</span>, <span class="string">'H3C'</span>, <span class="string">'Python'</span>] \\<span class="number">1</span>位置变成了Playstation，其他元素往后顺移。</span><br></pre></td></tr></table></figure>
+<h5 id="remove"><a href="#remove" class="headerlink" title="remove"></a>remove</h5><p>remove 可以移除列表中的某个元素。只能填具体的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>list</span><br><span class="line">[<span class="number">1</span>, <span class="string">'Playstation'</span>, <span class="string">'Cisco'</span>, <span class="string">'H3C'</span>, <span class="string">'Python'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list.remove(<span class="string">'Cisco'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>list</span><br><span class="line">[<span class="number">1</span>, <span class="string">'Playstation'</span>, <span class="string">'H3C'</span>, <span class="string">'Python'</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><p>字典是映射类型，是通过“键”来提取“值”。所以不能通过索引提取值。由于不是序列，所以也不能切片了。</p>
+<p>创建字典的方法很简单 如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = &#123;<span class="string">'name'</span>:<span class="string">'leexu'</span>,<span class="string">'age'</span>:<span class="number">23</span>&#125;</span><br><span class="line"> a.get(<span class="string">'name'</span>)</span><br><span class="line"><span class="string">'leexu'</span></span><br></pre></td></tr></table></figure>
+<p>可以通过get()来提取键值.</p>
+<p>也可以用dict()来创建</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">b = dict(name=<span class="string">"leexu"</span>,age=<span class="number">23</span>)</span><br><span class="line">b</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'leexu'</span>, <span class="string">'age'</span>: <span class="number">23</span>&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="字典的增加和修改"><a href="#字典的增加和修改" class="headerlink" title="字典的增加和修改"></a>字典的增加和修改</h4><p>给字典增加键值对，如果键已经存在，则会覆盖，如果不存在，则增加新的键值对</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">b = dict(name=<span class="string">"leexu"</span>,age=<span class="number">23</span>)</span><br><span class="line">b</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'leexu'</span>, <span class="string">'age'</span>: <span class="number">23</span>&#125;</span><br><span class="line">b[<span class="string">'name'</span>]=<span class="string">'lixu'</span></span><br><span class="line">b</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'lixu'</span>, <span class="string">'age'</span>: <span class="number">23</span>&#125;</span><br><span class="line">b[<span class="string">'job'</span>]=<span class="string">'teacher'</span></span><br><span class="line">b</span><br><span class="line">&#123;<span class="string">'name'</span>: <span class="string">'lixu'</span>, <span class="string">'age'</span>: <span class="number">23</span>, <span class="string">'job'</span>: <span class="string">'teacher'</span>&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/17/Spanning-Tree/" rel="next" title="Spanning Tree">
+                <i class="fa fa-chevron-left"></i> Spanning Tree
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/23/iptables-firewalld/" rel="prev" title="iptables&firewalld">
+                iptables&firewalld <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+ <div id="gitalk-container"></div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Remilia" />
+            
+              <p class="site-author-name" itemprop="name">Remilia</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python为何这么火"><span class="nav-number">1.</span> <span class="nav-text">Python为何这么火</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python内置类型"><span class="nav-number">2.</span> <span class="nav-text">Python内置类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python内置类型-数字"><span class="nav-number">3.</span> <span class="nav-text">Python内置类型-数字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内建数学函数"><span class="nav-number">3.1.</span> <span class="nav-text">内建数学函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工具模块"><span class="nav-number">3.2.</span> <span class="nav-text">工具模块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python内置类型-字符串"><span class="nav-number">4.</span> <span class="nav-text">Python内置类型-字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#转意符号"><span class="nav-number">4.1.</span> <span class="nav-text">转意符号\</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原始字符串r"><span class="nav-number">4.2.</span> <span class="nav-text">原始字符串r</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么叫有序或者说序列类型"><span class="nav-number">4.3.</span> <span class="nav-text">什么叫有序或者说序列类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么叫可变类型"><span class="nav-number">4.4.</span> <span class="nav-text">什么叫可变类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多态"><span class="nav-number">4.5.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环迭代"><span class="nav-number">4.6.</span> <span class="nav-text">循环迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引和切片"><span class="nav-number">4.7.</span> <span class="nav-text">索引和切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串的拼接格式问题"><span class="nav-number">4.8.</span> <span class="nav-text">字符串的拼接格式问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串格式化表达式和方法"><span class="nav-number">5.</span> <span class="nav-text">字符串格式化表达式和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#传统方法（表达式）"><span class="nav-number">5.1.</span> <span class="nav-text">传统方法（表达式）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完整表达式语法"><span class="nav-number">5.1.1.</span> <span class="nav-text">完整表达式语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新方法"><span class="nav-number">5.2.</span> <span class="nav-text">新方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#完整语法"><span class="nav-number">5.2.1.</span> <span class="nav-text">完整语法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式"><span class="nav-number">6.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何匹配各种字符"><span class="nav-number">6.1.</span> <span class="nav-text">如何匹配各种字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配多种字符的表达式"><span class="nav-number">6.2.</span> <span class="nav-text">匹配多种字符的表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰匹配次数"><span class="nav-number">6.3.</span> <span class="nav-text">修饰匹配次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表示抽象意义的符号"><span class="nav-number">6.4.</span> <span class="nav-text">表示抽象意义的符号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表和字典"><span class="nav-number">7.</span> <span class="nav-text">列表和字典</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#列表"><span class="nav-number">7.1.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#列表的常见操作方法"><span class="nav-number">7.1.1.</span> <span class="nav-text">列表的常见操作方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#len"><span class="nav-number">7.1.1.1.</span> <span class="nav-text">len</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#in"><span class="nav-number">7.1.1.2.</span> <span class="nav-text">in</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#append"><span class="nav-number">7.1.1.3.</span> <span class="nav-text">append</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#insert"><span class="nav-number">7.1.1.4.</span> <span class="nav-text">insert</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#remove"><span class="nav-number">7.1.1.5.</span> <span class="nav-text">remove</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字典"><span class="nav-number">7.2.</span> <span class="nav-text">字典</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#字典的增加和修改"><span class="nav-number">7.2.1.</span> <span class="nav-text">字典的增加和修改</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Remilia</span>
+
+  
+</div>
+
+
+<!--  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: '0bdc0d6f49bfb51e5834',
+          clientSecret: '9306599f43db3af1e58268b660f8fb11fe4771ec',
+          repo: 'git-comments',
+          owner: 'remil1a',
+          admin: ['remil1a'], 
+          id: window.location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML""></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
