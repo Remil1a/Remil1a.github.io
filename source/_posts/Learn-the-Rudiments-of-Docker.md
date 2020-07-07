@@ -1,5 +1,5 @@
 ---
-title: Learn_the_Rudiments_of_Docker
+title: Learn-the-Rudiments-of-Docker
 date: 2020-05-20 10:24:37
 categories: Docker
 tags: Docker
@@ -187,4 +187,67 @@ For more examples and ideas, visit:
 
 
 
-这里能看到
+这里能看到 Docker run的流程是先在本地查找image 所以才会报错`Unable to find image 'hello-world:latest' locally`之后在远端查找相应的image。如果有的话就下载下来，没有的话就会再次报错。hello-world这个镜像可以说是测试用的初始镜像，所以会将镜像下载下来。镜像默认放在`/var/lib/docker`里。
+
+
+
+```shell
+ls /var/lib/docker/
+builder   containers  network   plugins   swarm  trust
+buildkit  image       overlay2  runtimes  tmp    volume
+```
+
+
+
+# 基本命令
+
+常用命令可以在Docker的官方文档[这里](https://docs.docker.com/reference/)找到。本文摘抄一些基本的，常用的命令（增删改查）进行讲解。
+
+## 镜像命令
+
+**docker images**
+
+可以看到所有的镜像和镜像的tag，可以通过`-a`参数看到所有的镜像，通过`-f`过滤，通过`-q`只显示id等。具体如下：
+
+>| Name, shorthand | Default | Description                                         |
+>| --------------- | ------- | --------------------------------------------------- |
+>| `--all , -a`    |         | Show all images (default hides intermediate images) |
+>| `--digests`     |         | Show digests                                        |
+>| `--filter , -f` |         | Filter output based on conditions provided          |
+>| `--format`      |         | Pretty-print images using a Go template             |
+>| `--no-trunc`    |         | Don’t truncate output                               |
+>| `--quiet , -q`  |         | Only show numeric IDs                               |
+>
+>  https://docs.docker.com/engine/reference/commandline/images/
+
+
+
+```shell
+docker images 
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              bf756fb1ae65        6 months ago        13.3kB
+```
+
+
+
+REPOSITORY  镜像的仓库源，一个名字
+
+TAG				  镜像的标签
+
+IMAGE ID		镜像的id
+
+CREATED		创建时间
+
+SIZE				镜像的大小
+
+
+
+关于可选项：
+
+- -a：列出所有镜像
+- -q：只显示镜像id
+
+
+
+## 容器命令
+
