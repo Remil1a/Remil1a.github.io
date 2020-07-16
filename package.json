@@ -23,7 +23,7 @@
     "hexo-renderer-mathjax": "^0.6.0",
     "hexo-renderer-stylus": "^0.3.1",
     "hexo-server": "^0.2.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "lodash.update": "^4.10.2",
     "md5": "^2.2.1",
     "react": "^16.8.2",
